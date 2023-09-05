@@ -18,6 +18,4 @@ class ExampleFragment @Inject constructor(
 //        TODO("Not yet implemented")
         Log.d("TAG", "observerViewModel: Launch")
     }
-
-
 }

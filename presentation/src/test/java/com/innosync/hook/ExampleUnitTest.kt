@@ -1,5 +1,6 @@
 package com.innosync.hook
 
+import com.innosync.domain.usecase.ExampleGetUseCase
 import org.junit.Test
 
 import org.junit.Assert.*
