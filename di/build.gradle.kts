@@ -57,6 +57,13 @@ dependencies {
     kapt(AndroidX.ROOM_COMPILER)
     implementation(AndroidX.ROOM_KTX)
 
+    // firebase
+    implementation(Google.FIREBASE_ANALYTICS)
+    implementation(platform(Google.FIREBASE_BOM))
+    implementation(Google.FIREBASE_DATABASE)
+    implementation(Google.FIREBASE_MESSAGING)
+    implementation(Google.FIREBSAE_FIRESTORE)
+
     implementation(project(ProjectProperties.PATH_DATA))
     implementation(project(ProjectProperties.PATH_DOMAIN))
 }
