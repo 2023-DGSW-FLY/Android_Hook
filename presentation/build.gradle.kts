@@ -93,12 +93,11 @@ dependencies {
     implementation(project(ProjectProperties.PATH_DI))
 
     // firebase
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
-    implementation("com.google.firebase:firebase-database-ktx")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.google.firebase:firebase-messaging-ktx:23.2.1")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.7.0")
+    implementation(Google.FIREBASE_ANALYTICS)
+    implementation(platform(Google.FIREBASE_BOM))
+    implementation(Google.FIREBASE_DATABASE)
+    implementation(Google.FIREBASE_MESSAGING)
+    implementation(Google.FIREBSAE_FIRESTORE)
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 }
