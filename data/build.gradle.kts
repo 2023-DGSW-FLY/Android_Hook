@@ -50,6 +50,12 @@ dependencies {
     kapt(AndroidX.ROOM_COMPILER)
     implementation(AndroidX.ROOM_KTX)
 
+    // retrofit
+    implementation(Libraries.RETROFIT)
+    implementation(Libraries.RETROFIT_CONVERTER_GSON)
+    implementation(Libraries.OKHTTP)
+    implementation(Libraries.OKHTTP_LOGGING_INTERCEPTOR)
+
     implementation(project(ProjectProperties.PATH_DOMAIN))
 
 }
