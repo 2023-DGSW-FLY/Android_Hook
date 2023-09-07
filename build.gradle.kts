@@ -4,6 +4,7 @@ plugins {
     id ("com.android.library").version(ProjectProperties.ANDROID_VERSION).apply(false)
     id ("org.jetbrains.kotlin.android").version(ProjectProperties.JETBRAINS_KOTLIN).apply(false)
     id("androidx.navigation.safeargs").version("2.5.3").apply(false)
+    id("com.google.gms.google-services") version "4.3.15" apply false
 
 }
 
