@@ -2,10 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    app:startDestination="@id/exampleFragment">
+    app:startDestination="@id/chatFragment">
 
     <fragment
         android:id="@+id/exampleFragment"
         android:name="com.innosync.hook.feature.example.ExampleFragment"
         android:label="ExampleFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.innosync.hook.feature.chat.ChatFragment"
+        android:label="ChatFragment" />
 </navigation>
