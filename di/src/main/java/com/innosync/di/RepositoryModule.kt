@@ -1,7 +1,9 @@
 package com.innosync.di
 
 import com.innosync.data.repository.ExampleGetGetRepositoryImpl
+import com.innosync.data.repository.FirebaseRepositoryImpl
 import com.innosync.domain.repository.ExampleGetRepository
+import com.innosync.domain.repository.FirebaseRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,4 +19,10 @@ abstract class RepositoryModule {
     abstract fun providesExampleRepository(
         exampleGetRepositoryImpl: ExampleGetGetRepositoryImpl
     ): ExampleGetRepository
+
+    @Singleton
+    @Binds
+    abstract fun providesFirebaseRepository(
+        firebaseRepositoryImpl: FirebaseRepositoryImpl
+    ): FirebaseRepository
 }
