@@ -99,6 +99,4 @@ dependencies {
     implementation(Google.FIREBASE_DATABASE)
     implementation(Google.FIREBASE_MESSAGING)
     implementation(Google.FIREBSAE_FIRESTORE)
-
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 }
