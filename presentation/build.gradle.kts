@@ -6,6 +6,7 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.daggerPlugin)
     id(Plugins.navigationSafeArgs)
+    id("com.google.gms.google-services")
 }
 
 android {
