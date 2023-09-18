@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginRight="18dp"
-        android:background="@drawable/shape_message_blue"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/text_message_date">
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_message_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+        android:layout_marginHorizontal="18dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right">
 
-            android:text="qweqeqeqeqwqweqwewqeqweqwqweqweqeqweqweqwe"
-            android:src="@drawable/ic_launcher_foreground"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/text_message_date"
-            app:layout_constraintTop_toBottomOf="@id/ic_user"/>
-    </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_message_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:text="오전 10:57"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_message_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="오전 10:57"
+                android:layout_gravity="bottom" />
+            <RelativeLayout
+                android:id="@+id/layout_textBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:gravity="right"
+
+                android:background="@drawable/shape_message_blue">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_message_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    android:text="qqeqweqwqqewrrwwqeqweqwqeqwqweqweqweqeqweqqqeqeweqwwqwewqeqweqwqweeqwweqeqweqeqweqweqwe" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
