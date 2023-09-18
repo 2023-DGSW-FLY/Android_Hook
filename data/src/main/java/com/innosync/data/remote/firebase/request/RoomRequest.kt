@@ -1,10 +1,13 @@
-package com.innosync.data.remote.firebase.response
+package com.innosync.data.remote.firebase.request
 
+import com.google.firebase.firestore.ServerTimestamp
 import com.google.gson.annotations.SerializedName
+import com.google.firebase.Timestamp
 
-data class RoomInfo(
+internal data class RoomRequest(
     @field:SerializedName("timestamp")
-    val timestamp: Long = 0,
+    @ServerTimestamp
+    val timestamp: Timestamp? = Timestamp.now(),
     @field:SerializedName("roomName")
     val roomName: String = "ee",
     @field:SerializedName("chatRoomUid")
@@ -14,9 +17,5 @@ data class RoomInfo(
     @field:SerializedName("lastMessage")
     val lastMessage: String = "하이",
     @field:SerializedName("users")
-    val users: Map<String, Boolean>? = emptyMap(),
-    @field:SerializedName("thumbnail")
-    val thumbnail: Map<String, String> = emptyMap(),
-    @field:SerializedName("key")
-    val key: String = ""
+    val users: Map<String, Boolean>? = emptyMap()
 )

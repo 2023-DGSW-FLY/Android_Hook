@@ -1,16 +1,14 @@
 package com.innosync.data.remote.firebase.mapper
 
-import com.innosync.data.remote.firebase.response.RoomInfo
+import com.innosync.data.remote.firebase.response.RoomResponse
 import com.innosync.domain.model.RoomData
 
-internal fun RoomInfo.toModel() =
+internal fun RoomResponse.toModel() =
     RoomData(
-        timestamp = timestamp,
+        timestamp = timestamp.seconds,
         roomName = roomName,
         chatRoomUid = chatRoomUid,
         check = check,
         lastMessage = lastMessage,
-        users = users,
-        thumbnail = thumbnail,
-        key = key
+        users = users
     )
