@@ -6,7 +6,5 @@ data class RoomData(
     val chatRoomUid: String = "33",
     val check: Boolean = false,
     val lastMessage: String = "하이",
-    val users: Map<String, Boolean>? = emptyMap(),
-    val thumbnail: Map<String, String> = emptyMap(),
-    val key: String = ""
+    val users: Map<String, Boolean>? = emptyMap()
 )

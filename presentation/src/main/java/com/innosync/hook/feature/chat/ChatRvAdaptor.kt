@@ -1,14 +1,16 @@
 package com.innosync.hook.feature.chat
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.innosync.data.remote.firebase.response.RoomInfo
 import com.innosync.domain.model.RoomData
 import com.innosync.hook.R
 import com.innosync.hook.databinding.ItemChatBinding
+import com.innosync.hook.util.getYour
+import com.innosync.hook.util.toImageUrl
 
 class ChatRvAdaptor constructor(
     private val my: String,
@@ -38,8 +40,10 @@ class ChatRvAdaptor constructor(
         val item = rooms[position]
         holder.message.text = item.lastMessage
         holder.name.text = my
+        val your = item.getYour(my)
+        Log.d("TAG", "onBindViewHolder: $your")
         Glide.with(context)
-            .load(item.thumbnail[my])
+            .load(your.toImageUrl())
             .placeholder(R.drawable.ic_launcher_foreground)
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.thumbnail)

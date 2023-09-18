@@ -2,12 +2,13 @@ package com.innosync.hook.feature.chat
 
 import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.FirebaseFirestore
-import com.innosync.data.remote.firebase.response.RoomInfo
 import com.innosync.domain.model.RoomData
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentChatBinding
+import com.innosync.hook.feature.chat.ChatViewModel.Companion.ON_CLICK_DUMMY
+import com.innosync.hook.util.getYour
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -15,18 +16,27 @@ import dagger.hilt.android.AndroidEntryPoint
 class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
     override val viewModel: ChatViewModel by viewModels()
 
-    private var my = "11"
+    private var my = "33"
     override fun observerViewModel() {
         initRv()
+        bindingViewEvent { event ->
+            when(event) {
+                ON_CLICK_DUMMY -> {
+                    viewModel.createRoom(
+                        my,
+                        "33"
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getUserList(
             my
         ) {
             setRv(it)
-        }
-        bindingViewEvent { event ->
-            when(event) {
-
-            }
         }
     }
 
@@ -37,6 +47,10 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
             requireContext()
         ) { data ->
             Log.d(TAG, "setRv: $data")
+            val navigate = ChatFragmentDirections.actionChatFragmentToMessageFragment(
+                data.chatRoomUid, data.roomName, my, data.getYour(my)
+            )
+            findNavController().navigate(navigate)
         }
         with(mBinding) {
             rvUsers.adapter = adaptor
