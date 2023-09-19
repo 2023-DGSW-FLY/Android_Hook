@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">hook</string>
+    <string name="home">홈</string>
+    <string name="competition_message">새로운 도전으로 \n달려가 보시겠어요?</string>
+    <string name="competition_name">대회명</string>
+    <string name="technology">필요 기술</string>
+    <string name="situation">상태</string>
+    <string name="user_name">유저 이름</string>
+    <string name="really_competition_name">진짜 대회 이름</string>
+    <string name="really_technology">진짜 필요 기술</string>
+    <string name="really_situation">매칭중</string>
+    <string name="time">11:11</string>
+    <string name="jop_offer_message">새로운 멤버를 \n찾아보세!</string>
+    <string name="about_me">제가 원하는 안드 아키텍쳐을 사용할 수 있는 프로젝트에 참여하고 싶어요.</string>
 </resources>
