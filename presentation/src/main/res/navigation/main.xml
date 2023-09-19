@@ -44,4 +44,8 @@
         android:id="@+id/nav_item_home"
         android:name="com.innosync.hook.feature.home.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/jopOfferFragment"
+        android:name="com.innosync.hook.feature.jopoffer.JopOfferFragment"
+        android:label="JopOfferFragment" />
 </navigation>

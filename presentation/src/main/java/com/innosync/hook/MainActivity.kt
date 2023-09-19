@@ -1,17 +1,15 @@
 package com.innosync.hook
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.innosync.hook.base.BaseActivity
-import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.databinding.ActivityMainBinding
 import com.innosync.hook.feature.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {

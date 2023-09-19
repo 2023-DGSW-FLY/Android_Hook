@@ -86,4 +86,6 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: BaseViewModel>: AppCompatAc
         return 0
     }
 
+
+
 }

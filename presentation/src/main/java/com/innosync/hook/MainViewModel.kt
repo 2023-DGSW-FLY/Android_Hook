@@ -12,12 +12,14 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val exampleGetUseCase: ExampleGetUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     fun getLog() = viewModelScope.launch(Dispatchers.IO) {
-        exampleGetUseCase(param = ExampleGetUseCase.Param(
-            "밥먹고싶다"
-        )).onSuccess {
+        exampleGetUseCase(
+            param = ExampleGetUseCase.Param(
+                "밥먹고싶다"
+            )
+        ).onSuccess {
             Log.d("TAG", "getLog: $it")
         }.onFailure {
             Log.d("TAG", "getLog: $it")
