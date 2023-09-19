@@ -6,6 +6,7 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.daggerPlugin)
     id(Plugins.navigationSafeArgs)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -91,4 +92,11 @@ dependencies {
     implementation(project(ProjectProperties.PATH_DOMAIN))
     implementation(project(ProjectProperties.PATH_DATA))
     implementation(project(ProjectProperties.PATH_DI))
+
+    // firebase
+    implementation(Google.FIREBASE_ANALYTICS)
+    implementation(platform(Google.FIREBASE_BOM))
+    implementation(Google.FIREBASE_DATABASE)
+    implementation(Google.FIREBASE_MESSAGING)
+    implementation(Google.FIREBSAE_FIRESTORE)
 }

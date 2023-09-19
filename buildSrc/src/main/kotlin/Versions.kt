@@ -9,6 +9,12 @@ object Versions {
     const val ROOM = "2.4.3"
     const val NAVIGATION = "2.5.3"
 
+    const val FIREBASE_BOM = "32.2.2"
+    const val FIREBASE_MESSAGING = "23.2.1"
+    const val FIREBASE_ANALYTICS = "21.3.0"
+    const val FIREBASE_FIRESTORE = "24.7.0"
+    const val FIREBASE_DATABASE = "20.2.2"
+
     const val HILT = "2.44.2"
     const val JUNIT = "4.13.2"
     const val MOCKITO = "4.2.0"
@@ -17,6 +23,6 @@ object Versions {
 
     const val RETROFIT = "2.9.0"
     const val OKHTTP = "4.9.0"
-    const val GLIDE = "4.13.0"
+    const val GLIDE = "4.16.0"
 
 }

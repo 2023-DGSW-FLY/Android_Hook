@@ -50,4 +50,5 @@ dependencies {
     implementation(AndroidX.ROOM_RUNTIME)
     kapt(AndroidX.ROOM_COMPILER)
     implementation(AndroidX.ROOM_KTX)
+
 }
