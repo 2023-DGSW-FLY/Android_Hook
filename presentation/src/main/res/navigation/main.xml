@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    app:startDestination="@id/chatFragment">
+    app:startDestination="@id/congressFragment">
 
     <fragment
         android:id="@+id/exampleFragment"
@@ -36,4 +36,8 @@
             android:id="@+id/action_messageFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/congressFragment"
+        android:name="com.innosync.hook.feature.congress.CongressFragment"
+        android:label="CongressFragment" />
 </navigation>
