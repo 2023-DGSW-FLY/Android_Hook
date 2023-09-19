@@ -1,14 +1,14 @@
 package com.innosync.domain.repository
 
 
-import com.innosync.domain.model.ChatData
-import com.innosync.domain.model.RoomData
+import com.innosync.domain.model.ChatModel
+import com.innosync.domain.model.RoomModel
 
 interface FirebaseRepository {
 
     suspend fun getRoomList(
         userId: String,
-        action: (List<RoomData>) -> Unit
+        action: (List<RoomModel>) -> Unit
     )
 
     suspend fun insertRoom(
@@ -18,7 +18,7 @@ interface FirebaseRepository {
 
     suspend fun eventChatLister(
         chatUid: String,
-        action: (List<ChatData>) -> Unit
+        action: (List<ChatModel>) -> Unit
     )
 
     suspend fun sendMessage(

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.innosync.domain.model.RoomData
+import com.innosync.domain.model.RoomModel
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentChatBinding
 import com.innosync.hook.feature.chat.ChatViewModel.Companion.ON_CLICK_DUMMY
@@ -40,7 +40,7 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
         }
     }
 
-    private fun setRv(list: List<RoomData>) {
+    private fun setRv(list: List<RoomModel>) {
         val adaptor = ChatRvAdaptor(
             my,
             list,

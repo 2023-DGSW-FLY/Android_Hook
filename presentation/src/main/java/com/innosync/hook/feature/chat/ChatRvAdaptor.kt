@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.innosync.domain.model.RoomData
+import com.innosync.domain.model.RoomModel
 import com.innosync.hook.R
 import com.innosync.hook.databinding.ItemChatBinding
 import com.innosync.hook.util.getYour
@@ -14,9 +14,9 @@ import com.innosync.hook.util.toImageUrl
 
 class ChatRvAdaptor constructor(
     private val my: String,
-    private val rooms: List<RoomData>,
+    private val rooms: List<RoomModel>,
     private val context: Context,
-    private val action: (RoomData) -> Unit
+    private val action: (RoomModel) -> Unit
 ): RecyclerView.Adapter<ChatRvAdaptor.ViewHolder>() {
 
     inner class ViewHolder(binding: ItemChatBinding): RecyclerView.ViewHolder(binding.root) {

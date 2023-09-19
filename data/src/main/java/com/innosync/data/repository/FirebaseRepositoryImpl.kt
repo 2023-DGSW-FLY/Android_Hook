@@ -2,9 +2,7 @@ package com.innosync.data.repository
 
 import android.util.Log
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.innosync.data.remote.firebase.mapper.toModel
 import com.innosync.data.remote.firebase.request.ChatRequest
 import com.innosync.data.remote.firebase.request.RoomRequest
@@ -12,8 +10,8 @@ import com.innosync.data.remote.firebase.response.ChatResponse
 import com.innosync.data.remote.firebase.response.RoomResponse
 import com.innosync.data.util.FIreStoreEnv
 import com.innosync.domain.exception.FirebaseInsertException
-import com.innosync.domain.model.ChatData
-import com.innosync.domain.model.RoomData
+import com.innosync.domain.model.ChatModel
+import com.innosync.domain.model.RoomModel
 import com.innosync.domain.repository.FirebaseRepository
 import javax.inject.Inject
 
@@ -23,7 +21,7 @@ class FirebaseRepositoryImpl @Inject constructor(
 ): FirebaseRepository {
 
 
-    override suspend fun getRoomList(userId: String, action: (List<RoomData>) -> Unit) {
+    override suspend fun getRoomList(userId: String, action: (List<RoomModel>) -> Unit) {
         database.collection(FIreStoreEnv.ROOM)
             .whereIn("users.$userId", listOf(true, false))
             .get()
@@ -62,7 +60,7 @@ class FirebaseRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun eventChatLister(chatUid: String, action: (List<ChatData>) -> Unit): Unit {
+    override suspend fun eventChatLister(chatUid: String, action: (List<ChatModel>) -> Unit): Unit {
         database.collection("room/${chatUid}/messages")
             .addSnapshotListener { snapshot, exception ->
                 if (exception != null) {
