@@ -8,6 +8,7 @@ plugins {
     id(Plugins.navigationSafeArgs)
 }
 
+
 android {
     namespace = ProjectProperties.APPLIACATION_ID
     compileSdk = ProjectProperties.COMPLIDE_SDK_VERSION
@@ -42,6 +43,7 @@ android {
     buildFeatures {
         dataBinding = ProjectProperties.DATABINDING
     }
+
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -55,6 +57,9 @@ dependencies {
     implementation(AndroidX.LIFECYCLE_KTX)
     implementation(AndroidX.APP_COMPAT)
     implementation(AndroidX.CONSTRAINTLAYOUT)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
 
     testImplementation(UnitTest.JUNIT)
@@ -91,4 +96,7 @@ dependencies {
     implementation(project(ProjectProperties.PATH_DOMAIN))
     implementation(project(ProjectProperties.PATH_DATA))
     implementation(project(ProjectProperties.PATH_DI))
+
+    //Circle ImageView
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }
