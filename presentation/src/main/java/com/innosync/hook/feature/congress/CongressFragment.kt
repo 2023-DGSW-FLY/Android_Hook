@@ -5,7 +5,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentCongressBinding
+import com.innosync.hook.feature.congress.CongressViewModel.Companion.ON_ERROR_LOAD
 import com.innosync.hook.util.RecyclerViewDecoration
+import com.innosync.hook.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -16,6 +18,14 @@ class CongressFragment: BaseFragment<FragmentCongressBinding, CongressViewModel>
     override fun observerViewModel() {
         observerLiveData()
         viewModel.loadData()
+
+        bindingViewEvent {  event ->
+            when(event) {
+                ON_ERROR_LOAD -> {
+                    context?.shortToast("대회 정보 로딩에 실패하였습니다.")
+                }
+            }
+        }
     }
 
     private fun observerLiveData() {

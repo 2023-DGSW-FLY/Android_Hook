@@ -20,12 +20,20 @@ class CongressViewModel @Inject constructor(
     val congressData: LiveData<List<CongressModel>> = _congressData
 
     fun loadData() = viewModelScope.launch(Dispatchers.IO) {
-        congressUseCase.invoke().onSuccess {
-            viewModelScope.launch(Dispatchers.Main) {
-                _congressData.value = it
+        congressUseCase.invoke().onSuccess {data ->
+            launchMain {
+                _congressData.value = data
             }
         }.onFailure {
-            viewEvent(ON_ERROR_LOAD)
+            launchMain {
+                viewEvent(ON_ERROR_LOAD)
+            }
+        }
+    }
+
+    private fun launchMain(action: () -> Unit) {
+        viewModelScope.launch(Dispatchers.Main) {
+            action()
         }
     }
 
