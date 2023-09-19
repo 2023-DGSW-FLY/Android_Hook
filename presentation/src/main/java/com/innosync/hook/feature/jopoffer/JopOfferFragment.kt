@@ -1,6 +1,7 @@
 package com.innosync.hook.feature.jopoffer
 
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
@@ -20,19 +21,22 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
                 ON_CLICK_COMPETITION ->{
                     Log.d(TAG, "observerViewModel: 대회")
                     changeColor(0)
+                    visibleText()
                 }
                 ON_CLICK_FOOD -> {
                     Log.d(TAG, "observerViewModel: 음식")
                     changeColor(1)
+                    invisibleText()
                 }
                 ON_CLICK_HEALTH -> {
                     Log.d(TAG, "observerViewModel: 운동")
                     changeColor(2)
+                    invisibleText()
                 }
             }
         }
     }
-    fun changeColor(
+    private fun changeColor(
         btn: Int
     ){
         with(mBinding) {
@@ -40,6 +44,12 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
             foodCategoryBtn.setImageDrawable(getDrawable(if (btn == 1) R.drawable.ic_food_btn_on else R.drawable.ic_food_btn_off))
             healthCategoryBtn.setImageDrawable(getDrawable(if (btn == 2) R.drawable.ic_health_btn_on else R.drawable.ic_health_btn_off))
         }
+    }
+    private fun invisibleText(){
+        mBinding.CTSTextLine.visibility = View.INVISIBLE
+    }
+    private fun visibleText(){
+        mBinding.CTSTextLine.visibility = View.VISIBLE
     }
 
     private fun getDrawable(id: Int) =
