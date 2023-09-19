@@ -1,7 +1,9 @@
 package com.innosync.di
 
+import com.innosync.data.repository.CongressRepositoryImpl
 import com.innosync.data.repository.ExampleGetGetRepositoryImpl
 import com.innosync.data.repository.FirebaseRepositoryImpl
+import com.innosync.domain.repository.CongressRepository
 import com.innosync.domain.repository.ExampleGetRepository
 import com.innosync.domain.repository.FirebaseRepository
 import dagger.Binds
@@ -25,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun providesFirebaseRepository(
         firebaseRepositoryImpl: FirebaseRepositoryImpl
     ): FirebaseRepository
+
+    @Singleton
+    @Binds
+    abstract fun providesCongressRepository(
+        congressRepositoryImpl: CongressRepositoryImpl
+    ): CongressRepository
 }

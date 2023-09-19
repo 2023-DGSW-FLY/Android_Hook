@@ -1,11 +1,11 @@
 package com.innosync.hook.util
 
 import android.icu.text.SimpleDateFormat
-import com.innosync.domain.model.RoomData
+import com.innosync.domain.model.RoomModel
 import java.util.Date
 import java.util.Locale
 
-internal fun RoomData.getYour(my: String): String =
+internal fun RoomModel.getYour(my: String): String =
     this.users?.keys?.toList()?.minus(my)?.get(0)!!
 
 
