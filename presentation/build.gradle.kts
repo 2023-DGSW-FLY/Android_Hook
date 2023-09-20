@@ -103,4 +103,7 @@ dependencies {
     implementation(Google.FIREBASE_DATABASE)
     implementation(Google.FIREBASE_MESSAGING)
     implementation(Google.FIREBSAE_FIRESTORE)
+
+    // kakao
+    implementation ("com.kakao.sdk:v2-user:2.15.0") // 카카오 로그인
 }
