@@ -20,9 +20,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding,LoginViewModel>() {
     override val viewModel: LoginViewModel by viewModels()
     override fun observerViewModel() {
         val keyHash = Utility.getKeyHash(this)
-        Log.e("Key", `"keyHash: ${keyHash}")
+        Log.e("Key", "keyHash: ${keyHash}")
 
-        KakaoSdk.init(this, this.getString(R.string.kakao_native_app_key))
+        KakaoSdk.init(this, BuildConfig.KAKAO_KEY)
 
         mBinding.buttonKakaoLogin.setOnClickListener {
             kakaoLogin(applicationContext) //로그인
