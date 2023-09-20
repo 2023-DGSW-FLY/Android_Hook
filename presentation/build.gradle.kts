@@ -1,4 +1,4 @@
-
+import java.util.Properties
 
 plugins {
     id(Plugins.androidApplication)
@@ -8,6 +8,9 @@ plugins {
     id(Plugins.navigationSafeArgs)
     id("com.google.gms.google-services")
 }
+
+val prperties = Properties()
+prperties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = ProjectProperties.APPLIACATION_ID
@@ -19,6 +22,7 @@ android {
         targetSdk = ProjectProperties.TAGETSDK_VERSION
         versionCode = ProjectProperties.VERSION_CODE
         versionName = ProjectProperties.VERSION_NAME
+        buildConfigField("String", "KAKAO_KEY", prperties["kakao_api_key"].toString())
 
         testInstrumentationRunner = ProjectProperties.TEST_RUNER
         vectorDrawables {
