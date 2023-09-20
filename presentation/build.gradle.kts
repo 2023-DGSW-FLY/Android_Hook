@@ -22,7 +22,8 @@ android {
         targetSdk = ProjectProperties.TAGETSDK_VERSION
         versionCode = ProjectProperties.VERSION_CODE
         versionName = ProjectProperties.VERSION_NAME
-        buildConfigField("String", "KAKAO_KEY", prperties["kakao_api_key"].toString())
+        buildConfigField("String", "KAKAO_KEY", "${prperties["kakao_api_key"]}")
+        manifestPlaceholders["KAKAO_KEY"] = prperties["kakao_api_key"].toString()
 
         testInstrumentationRunner = ProjectProperties.TEST_RUNER
         vectorDrawables {
