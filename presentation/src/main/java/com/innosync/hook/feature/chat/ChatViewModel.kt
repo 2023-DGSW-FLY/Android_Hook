@@ -1,7 +1,7 @@
 package com.innosync.hook.feature.chat
 
 import androidx.lifecycle.viewModelScope
-import com.innosync.domain.model.RoomData
+import com.innosync.domain.model.RoomModel
 import com.innosync.domain.usecase.FirebaseGetListUseCase
 import com.innosync.domain.usecase.FirebaseInsertUseCase
 import com.innosync.hook.base.BaseViewModel
@@ -22,7 +22,7 @@ class ChatViewModel @Inject constructor(
 
     fun getUserList(
         userId: String,
-        action: (List<RoomData>) -> Unit
+        action: (List<RoomModel>) -> Unit
     ) = viewModelScope.launch(Dispatchers.IO) {
             firebaseGetListUseCase.invoke(
                 userId = userId,

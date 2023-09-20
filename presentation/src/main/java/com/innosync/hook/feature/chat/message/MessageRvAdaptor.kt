@@ -1,9 +1,6 @@
 package com.innosync.hook.feature.chat.message
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.icu.text.SimpleDateFormat
-import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,33 +8,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import com.innosync.domain.model.ChatData
+import com.innosync.domain.model.ChatModel
 import com.innosync.hook.R
-import com.innosync.hook.databinding.ItemChatBinding
 import com.innosync.hook.databinding.ItemLeftBinding
 import com.innosync.hook.databinding.ItemRightBinding
 import com.innosync.hook.util.toStringDate
-import com.squareup.picasso.Picasso
-import java.util.Date
-import java.util.Locale
 
 
 class MessageRvAdaptor constructor(
     private val context: Context,
-    private val item: List<ChatData>,
+    private val item: List<ChatModel>,
     private val my: String,
     private val targetThumbnail: String
 ): RecyclerView.Adapter<MessageRvAdaptor.ViewHolder>() {
     sealed class ViewHolder(
         binding: ViewBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        abstract fun bind(context: Context, checkSame: Boolean, item: ChatData, thumbnail: String)
+        abstract fun bind(context: Context, checkSame: Boolean, item: ChatModel, thumbnail: String)
 
         class MultiMyViewHolder(
             private val binding: ItemRightBinding
         ): ViewHolder(binding) {
 
-            override fun bind(context: Context, checkSame: Boolean, item: ChatData, thumbnail: String) {
+            override fun bind(context: Context, checkSame: Boolean, item: ChatModel, thumbnail: String) {
                 binding.textMessageContent.text = item.content
                 binding.textMessageDate.text = item.timestamp.toStringDate()
             }
@@ -47,7 +40,7 @@ class MessageRvAdaptor constructor(
             private val binding: ItemLeftBinding
         ): ViewHolder(binding) {
 //            TODO("glide -> piccasso 로 모듈 변경하기 로딩 이슈있음")
-            override fun bind(context: Context, checkSame: Boolean, item: ChatData, thumbnail: String) {
+            override fun bind(context: Context, checkSame: Boolean, item: ChatModel, thumbnail: String) {
                 Log.d("TAG", "bind: $checkSame")
                 with(binding) {
                     if (checkSame.not()) {
@@ -58,6 +51,8 @@ class MessageRvAdaptor constructor(
                             .error(R.drawable.ic_launcher_background)
                             .into(icUser)
 
+                    } else {
+                        icUser.visibility = View.GONE
                     }
                     binding.textMessageContent.text = item.content
                     binding.textMessageDate.text = item.timestamp.toStringDate()

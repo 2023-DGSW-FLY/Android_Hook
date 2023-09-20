@@ -3,7 +3,7 @@ package com.innosync.hook.feature.chat.message
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.innosync.domain.model.ChatData
+import com.innosync.domain.model.ChatModel
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMessageBinding
 import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_SEND
@@ -47,7 +47,7 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
         mBinding.textTopbar.text = data.roomName
     }
 
-    private fun setRv(item: List<ChatData>) {
+    private fun setRv(item: List<ChatModel>) {
         val adaptor = MessageRvAdaptor(
             requireContext(),
             item,
