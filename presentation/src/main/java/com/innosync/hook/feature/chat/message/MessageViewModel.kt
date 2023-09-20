@@ -1,7 +1,7 @@
 package com.innosync.hook.feature.chat.message
 
 import androidx.lifecycle.viewModelScope
-import com.innosync.domain.model.ChatData
+import com.innosync.domain.model.ChatModel
 import com.innosync.domain.usecase.FirebaseChatListenerUseCase
 import com.innosync.domain.usecase.FirebaseSendMessageUseCase
 import com.innosync.hook.base.BaseViewModel
@@ -18,7 +18,7 @@ class MessageViewModel @Inject constructor(
 
     fun addChatEventListener(
         chatUid: String,
-        action: (List<ChatData>) -> Unit
+        action: (List<ChatModel>) -> Unit
     ) = viewModelScope.launch(Dispatchers.IO) {
         firebaseChatListenerUseCase.invoke(
             chatUid = chatUid,

@@ -1,6 +1,6 @@
 package com.innosync.domain.usecase
 
-import com.innosync.domain.model.ChatData
+import com.innosync.domain.model.ChatModel
 import com.innosync.domain.repository.FirebaseRepository
 import javax.inject.Inject
 
@@ -10,7 +10,7 @@ class FirebaseChatListenerUseCase @Inject constructor(
 
     suspend operator fun invoke(
         chatUid: String,
-        action: (List<ChatData>) -> Unit
+        action: (List<ChatModel>) -> Unit
     ) {
         firebaseRepository.eventChatLister(
             chatUid = chatUid,

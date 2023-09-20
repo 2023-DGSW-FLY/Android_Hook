@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">hook</string>
     <string name="chat_title">채팅</string>
+    <string name="congress_hint">클릭시 홈페이지로 이동합니다</string>
+    <string name="congress_image_title">대회이름 짓기 대회</string>
+    <string name="congress_image_date">2023.8.29</string>
 </resources>

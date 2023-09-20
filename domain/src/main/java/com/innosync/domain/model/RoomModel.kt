@@ -1,6 +1,6 @@
 package com.innosync.domain.model
 
-data class RoomData(
+data class RoomModel(
     val timestamp: Long = 0,
     val roomName: String = "ee",
     val chatRoomUid: String = "33",
