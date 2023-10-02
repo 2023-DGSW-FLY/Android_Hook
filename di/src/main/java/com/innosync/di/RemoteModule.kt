@@ -2,6 +2,10 @@ package com.innosync.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.innosync.data.remote.service.CongressService
+import com.innosync.data.remote.service.JobOpeningService
+import com.innosync.data.remote.service.JobSearchService
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,8 +14,10 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
+import java.time.LocalDateTime
 import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
@@ -25,7 +31,9 @@ class RemoteModule {
     @Provides
     @Singleton
     fun provideGson(): Gson {
-        return GsonBuilder().create()
+        return GsonBuilder()
+            .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeDeserializer())
+            .create()
     }
 
     @Singleton
@@ -55,10 +63,25 @@ class RemoteModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://10.0.0.6")
+            .baseUrl(BuildConfig.SERVER)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideCongressService(retrofit: Retrofit): CongressService =
+        retrofit.create(CongressService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideJobOpeningService(retrofit: Retrofit): JobOpeningService =
+        retrofit.create(JobOpeningService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideJobSearchService(retrofit: Retrofit): JobSearchService =
+        retrofit.create(JobSearchService::class.java)
 
 }
