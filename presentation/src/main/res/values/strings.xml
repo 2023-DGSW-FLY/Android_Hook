@@ -4,4 +4,11 @@
     <string name="congress_hint">클릭시 홈페이지로 이동합니다</string>
     <string name="congress_image_title">대회이름 짓기 대회</string>
     <string name="congress_image_date">2023.8.29</string>
+    <string name="job_opening">구인</string>
+    <string name="job_search">구직</string>
+    <string name="home_text">최근에 올라왔어요</string>
+    <string name="about_me">제가 원하는 안드 아키텍쳐을 사용할 수 있는 프로젝트에 참여하고 싶어요.</string>
+    <string name="user_name">박병준</string>
+    <string name="time">13:20</string>
+    <string name="user_id">8954sood</string>
 </resources>
