@@ -99,4 +99,7 @@ dependencies {
     implementation(Google.FIREBASE_DATABASE)
     implementation(Google.FIREBASE_MESSAGING)
     implementation(Google.FIREBSAE_FIRESTORE)
+
+    // cricle imageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

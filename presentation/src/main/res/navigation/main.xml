@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    app:startDestination="@id/congressFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/exampleFragment"
@@ -40,4 +40,8 @@
         android:id="@+id/congressFragment"
         android:name="com.innosync.hook.feature.congress.CongressFragment"
         android:label="CongressFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.innosync.hook.feature.home.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>

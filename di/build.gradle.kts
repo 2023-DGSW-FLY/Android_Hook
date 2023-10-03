@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     id(Plugins.androidLibrary)
@@ -6,6 +7,8 @@ plugins {
     id(Plugins.daggerPlugin)
 }
 
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
 android {
     namespace = ProjectProperties.NAME_SPACE_DI
     compileSdk = ProjectProperties.COMPLIDE_SDK_VERSION
@@ -14,6 +17,7 @@ android {
         minSdk = ProjectProperties.MINSDK_VERSION
         targetSdk = ProjectProperties.TAGETSDK_VERSION
 
+        buildConfigField("String", "SERVER", "${properties["SERVER_URL"]}")
         testInstrumentationRunner = ProjectProperties.TEST_RUNER
     }
 

@@ -11,7 +11,7 @@
             android:layout_height="224dp"
             android:clipToOutline="true"
             android:scaleType="fitXY"
-            android:src="@drawable/shape_message_gray"
+            android:background="@drawable/shape_message_gray"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView

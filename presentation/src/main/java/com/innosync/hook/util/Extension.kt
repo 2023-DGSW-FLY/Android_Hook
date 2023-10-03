@@ -3,7 +3,19 @@ package com.innosync.hook.util
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
 import com.innosync.domain.model.RoomModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.Locale
 
@@ -29,3 +41,31 @@ internal fun Context.shortToast(text: String) =
 
 internal fun Context.longToast(text: String) =
     Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+fun <T> AppCompatActivity.collectStateFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collect(collect)
+        }
+    }
+}
+
+internal fun <T> Fragment.collectLatestStateFlow(flow: Flow<T>, collector: suspend (T) -> Unit) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collectLatest(collector)
+        }
+    }
+}
+
+internal fun ViewModel.launchMain(action: () -> Unit) {
+    viewModelScope.launch(Dispatchers.Main) {
+        action()
+    }
+}
+
+internal fun ViewModel.launchIO(action: suspend () -> Unit) {
+    viewModelScope.launch(Dispatchers.IO) {
+        action()
+    }
+}
