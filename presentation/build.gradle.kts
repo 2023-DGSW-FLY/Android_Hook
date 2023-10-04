@@ -61,6 +61,9 @@ dependencies {
     implementation(AndroidX.LIFECYCLE_KTX)
     implementation(AndroidX.APP_COMPAT)
     implementation(AndroidX.CONSTRAINTLAYOUT)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
 
     testImplementation(UnitTest.JUNIT)

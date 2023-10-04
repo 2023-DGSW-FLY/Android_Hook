@@ -15,4 +15,6 @@
     <color name="gradationLightBlue">#27D5FF</color>
     <color name="darkGray">#FFE0E0E0</color>
     <color name="homeTextGray">#B8B8B8</color>
+    <color name="logoBlue">#0A6ADA</color>
+    <color name="signitureBlue">#267DFF</color>
 </resources>
