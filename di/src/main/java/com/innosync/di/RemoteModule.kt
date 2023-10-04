@@ -89,7 +89,7 @@ class RemoteModule {
     @Singleton
     fun provideRetrofit(@BasicOkhttpClient okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://hoolc.me")
+            .baseUrl("https://10.0.0.6")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -100,7 +100,7 @@ class RemoteModule {
     @Singleton
     fun provideTokenRetrofit(@TokenOkhttpClient okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://hoolc.me")
+            .baseUrl("https://10.0.0.6")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
