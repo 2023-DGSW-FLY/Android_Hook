@@ -17,6 +17,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://devrepo.kakao.com/nexus/content/groups/public/") }
     }
 }
 
@@ -25,3 +26,7 @@ include(":presentation")
 include(":data")
 include(":domain")
 include(":di")
+include(":lib")
+include(":mylibrary")
+include(":myapplication")
+include(":lib")

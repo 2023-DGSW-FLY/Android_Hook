@@ -1,4 +1,4 @@
-
+import java.util.Properties
 
 plugins {
     id(Plugins.androidApplication)
@@ -8,6 +8,9 @@ plugins {
     id(Plugins.navigationSafeArgs)
     id("com.google.gms.google-services")
 }
+
+val prperties = Properties()
+prperties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = ProjectProperties.APPLIACATION_ID
@@ -19,6 +22,8 @@ android {
         targetSdk = ProjectProperties.TAGETSDK_VERSION
         versionCode = ProjectProperties.VERSION_CODE
         versionName = ProjectProperties.VERSION_NAME
+        buildConfigField("String", "KAKAO_KEY", "${prperties["kakao_api_key"]}")
+        manifestPlaceholders["KAKAO_KEY"] = prperties["kakao_api_key"].toString()
 
         testInstrumentationRunner = ProjectProperties.TEST_RUNER
         vectorDrawables {
@@ -56,6 +61,9 @@ dependencies {
     implementation(AndroidX.LIFECYCLE_KTX)
     implementation(AndroidX.APP_COMPAT)
     implementation(AndroidX.CONSTRAINTLAYOUT)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
 
     testImplementation(UnitTest.JUNIT)
@@ -99,6 +107,8 @@ dependencies {
     implementation(Google.FIREBASE_DATABASE)
     implementation(Google.FIREBASE_MESSAGING)
     implementation(Google.FIREBSAE_FIRESTORE)
+    // kakao
+    implementation ("com.kakao.sdk:v2-user:2.15.0") // 카카오 로그인
 
     // cricle imageView
     implementation("de.hdodenhof:circleimageview:3.1.0")
