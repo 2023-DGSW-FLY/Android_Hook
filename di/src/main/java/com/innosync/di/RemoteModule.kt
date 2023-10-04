@@ -5,8 +5,7 @@ import com.google.gson.GsonBuilder
 import com.innosync.data.remote.service.CongressService
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
-import dagger.Binds
-import com.innosync.data.remote.Interceptor.LoggingInterceptor
+import com.innosync.data.remote.interceptor.LoggingInterceptor
 import com.innosync.data.remote.service.LoginService
 import com.innosync.data.remote.service.TokenService
 import com.innosync.di.qualifier.BasicOkhttpClient
@@ -21,7 +20,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.time.LocalDateTime
@@ -66,9 +64,10 @@ class RemoteModule {
         okhttpBuilder.hostnameVerifier { hostname, session -> true }
         return okhttpBuilder.build()
     }
+
     @TokenOkhttpClient
-    @Singleton
     @Provides
+    @Singleton
     fun provideTokenHttpClient(loggingInterceptor: LoggingInterceptor): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -102,31 +101,31 @@ class RemoteModule {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideCongressService(retrofit: Retrofit): CongressService =
-        retrofit.create(CongressService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideJobOpeningService(retrofit: Retrofit): JobOpeningService =
-        retrofit.create(JobOpeningService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideJobSearchService(retrofit: Retrofit): JobSearchService =
-        retrofit.create(JobSearchService::class.java)
- 
     @TokenRetrofit
     @Provides
     @Singleton
     fun provideTokenRetrofit(@TokenOkhttpClient okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://10.0.0.6")
+            .baseUrl(BuildConfig.SERVER)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideCongressService(@TokenRetrofit retrofit: Retrofit): CongressService =
+        retrofit.create(CongressService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideJobOpeningService(@TokenRetrofit retrofit: Retrofit): JobOpeningService =
+        retrofit.create(JobOpeningService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideJobSearchService(@TokenRetrofit retrofit: Retrofit): JobSearchService =
+        retrofit.create(JobSearchService::class.java)
 
     @Provides
     @Singleton

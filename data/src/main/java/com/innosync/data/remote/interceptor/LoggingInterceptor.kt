@@ -1,6 +1,5 @@
-package com.innosync.data.remote.Interceptor
+package com.innosync.data.remote.interceptor
 
-import android.util.Log
 import com.innosync.domain.exception.ExpiredRefreshTokenException
 import com.innosync.domain.usecase.token.DeleteTokenUseCase
 import com.innosync.domain.usecase.token.FetchTokenUseCase
