@@ -1,4 +1,5 @@
 <resources>
+    <string name="post">게시글</string>
     <string name="app_name">hook</string>
     <string name="home">홈</string>
     <string name="competition_message">새로운 도전으로 \n달려가 보시겠어요?</string>
@@ -12,4 +13,38 @@
     <string name="time">11:11</string>
     <string name="jop_offer_message">새로운 멤버를 \n찾아보세!</string>
     <string name="about_me">제가 원하는 안드 아키텍쳐을 사용할 수 있는 프로젝트에 참여하고 싶어요.</string>
+    <string name="job_opening_title">구인 글</string>
+    <string name="nickname">Yajin 1234</string>
+    <string name="title">마소 해커톤 4명 구합니다.</string>
+    <string name="detail">실력을 키우기 위해 꼭 가고 싶었던 해커톤에 저와 함께 하실분을 구합니다! 마소해커톤을 최근에 신경쓰면서 보고 있는데 같이 하실분!!! 안드로이드 서버 디자인 구합니다. 연락주세요.</string>
+    <string name="link">https://event-us.kr/aifactory/event/43078</string>
+    <string name="job_search_title">구직 글</string>
+    <string name="name">이름</string>
+    <string name="name_edit_text">이름을 입력하세요</string>
+    <string name="student_id">학번</string>
+    <string name="student_id_edit_text">학번을 입력하세요</string>
+    <string name="contact">연락처</string>
+    <string name="contact_edit_text">-을 제외한 연락처를 입력해주세요</string>
+    <string name="self_introduction">자기소개</string>
+    <string name="self_introduction_edit_text">자신의 기술, 실력등 자유롭게 자신을 표현해 보아요.</string>
+    <string name="portfolio">포트폴리오 (선택사항)</string>
+    <string name="portfolio_edit_text">\t 자신을 표현할 링크를 첨부해 주세요.</string>
+    <string name="my_technology">나의 기술</string>
+    <string name="competition">대회명을 입력해주세요</string>
+    <string name="explanation">설명</string>
+    <string name="explanation_edit_text">팀원 모집에 대해 자세히 서술해 주세요.</string>
+    <string name="competition_link">대회 링크</string>
+    <string name="competition_link_edit_text">\t 대회 관련 링크를 첨부해 주세요</string>
+    <string name="chiffonier">서랍장</string>
+    <string name="chiffonier_message">이런 글을\n 작성하셨군요!</string>
+    <string name="edit">수정하기</string>
+    <string name="setting">설정</string>
+    <string name="profile_setting">프로필 설정</string>
+    <string name="log_out">로그아웃</string>
+    <string name="clock">알람</string>
+    <string name="announcement">공지사항</string>
+    <string name="android_hook">Android Hook</string>
+    <string name="profile">프로필</string>
+    <string name="age">17세</string>
+    <string name="email">이메일</string>
 </resources>
