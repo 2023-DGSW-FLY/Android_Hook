@@ -116,7 +116,7 @@ class RemoteModule {
     @Singleton
     fun provideJobSearchService(retrofit: Retrofit): JobSearchService =
         retrofit.create(JobSearchService::class.java)
-
+ 
     @TokenRetrofit
     @Provides
     @Singleton
