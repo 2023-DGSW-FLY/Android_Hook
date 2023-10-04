@@ -1,11 +1,11 @@
-package com.innosync.hook
+package com.innosync.hook.feature.auth
 
 import com.innosync.hook.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class AuthViewModel @Inject constructor(
 
 ): BaseViewModel() {
 }

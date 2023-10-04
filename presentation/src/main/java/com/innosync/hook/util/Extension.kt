@@ -1,8 +1,11 @@
 package com.innosync.hook.util
 
 import android.content.Context
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.innosync.domain.model.RoomModel
 import java.util.Date
 import java.util.Locale
@@ -29,3 +32,16 @@ internal fun Context.shortToast(text: String) =
 
 internal fun Context.longToast(text: String) =
     Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+fun AppCompatActivity.startActivityWithFinishAll(activity: Class<*>) {
+    val intent = Intent(applicationContext, activity)
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(intent)
+    this.finishAffinity()
+}
+fun Fragment.startActivityWithFinishAll(activity: Class<*>) {
+    val intent = Intent(context!!.applicationContext, activity)
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(intent)
+    this.requireActivity().finishAffinity()
+}
