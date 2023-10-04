@@ -4,4 +4,6 @@
     <string name="congress_hint">클릭시 홈페이지로 이동합니다</string>
     <string name="congress_image_title">대회이름 짓기 대회</string>
     <string name="congress_image_date">2023.8.29</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

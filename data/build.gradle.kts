@@ -56,6 +56,9 @@ dependencies {
     implementation(Libraries.OKHTTP)
     implementation(Libraries.OKHTTP_LOGGING_INTERCEPTOR)
 
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
     // firebase
     implementation(Google.FIREBASE_ANALYTICS)
     implementation(platform(Google.FIREBASE_BOM))

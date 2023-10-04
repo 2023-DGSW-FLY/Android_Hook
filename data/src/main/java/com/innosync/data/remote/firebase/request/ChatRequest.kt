@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ChatRequest(
     @field:SerializedName("author")
-    val author: String = "밥먹고싶다",
+    val author: String,
     @field:SerializedName("content")
-    val content: String = "리얼크크",
+    val content: String = "테스트로 기본값 설정했음",
     @ServerTimestamp
     @field:SerializedName("timestamp")
     val timestamp: Timestamp? = null//FieldValue.serverTimestamp()
