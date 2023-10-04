@@ -3,7 +3,6 @@ package com.innosync.data.remote.service
 import com.innosync.data.remote.request.UserJoinRequest
 import com.innosync.data.remote.request.UserLoginRequest
 import com.innosync.data.remote.response.BaseResponse
-import com.innosync.data.remote.response.login.JoinResoponse
 import com.innosync.data.remote.response.login.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -13,13 +12,13 @@ interface LoginService {
 
 
     @POST("api/v1/users/login")
-    fun login (
+    suspend fun login (
         @Body body : UserLoginRequest
-    ) : Call<LoginResponse>
+    ) : BaseResponse<LoginResponse>
 
     @POST("api/v1/users/join")
-    fun join (
+    suspend fun join (
         @Body body : UserJoinRequest
-    ) : BaseResponse<JoinResoponse>
+    ): Call<Unit>
 
 }

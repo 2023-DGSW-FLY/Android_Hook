@@ -1,6 +1,7 @@
 package com.innosync.hook.util
 
 import android.content.Context
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -68,4 +69,16 @@ internal fun ViewModel.launchIO(action: suspend () -> Unit) {
     viewModelScope.launch(Dispatchers.IO) {
         action()
     }
+}
+fun AppCompatActivity.startActivityWithFinishAll(activity: Class<*>) {
+    val intent = Intent(applicationContext, activity)
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(intent)
+    this.finishAffinity()
+}
+fun Fragment.startActivityWithFinishAll(activity: Class<*>) {
+    val intent = Intent(context!!.applicationContext, activity)
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(intent)
+    this.requireActivity().finishAffinity()
 }
