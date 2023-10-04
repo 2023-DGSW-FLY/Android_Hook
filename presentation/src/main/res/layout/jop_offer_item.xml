@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.innosync.hook.feature.jopoffer.JopOfferAdapter" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,15 +28,16 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_img"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/white" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_launcher_background" />
 
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_name"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textColor="#0066FF"/>
         </LinearLayout>
 
@@ -41,21 +47,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user_profile">
             <TextView
+                android:id="@+id/competition_name"
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/really_competition_name"
                 android:textStyle="bold"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 />
             <TextView
+                android:id="@+id/technology"
                 android:layout_marginStart="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/really_technology"
                 android:textStyle="bold"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 android:layout_gravity="center"/>
 
             <TextView
@@ -71,11 +79,12 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/time"
                 android:layout_marginTop="5dp"
-                android:textSize="10dp"/>
+                android:textSize="10sp"/>
 
         </LinearLayout>
 
@@ -84,3 +93,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
