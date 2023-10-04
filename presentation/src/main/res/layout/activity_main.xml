@@ -39,6 +39,7 @@
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/main_nav_menu"/>
 
+        </androidx.fragment.app.FragmentContainerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
