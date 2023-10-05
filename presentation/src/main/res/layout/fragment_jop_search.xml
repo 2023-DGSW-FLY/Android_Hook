@@ -130,11 +130,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"/>
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_write_btn"
-            android:background="@color/white"
+            android:onClick="@{() -> vm.onClickMakeBtn()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
