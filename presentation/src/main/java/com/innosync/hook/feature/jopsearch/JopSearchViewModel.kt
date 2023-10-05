@@ -17,5 +17,11 @@ class JopSearchViewModel @Inject constructor(
 
     }
 
+    fun onClickMakeBtn() =
+        viewEvent(ON_CLICK_MAKE_BTN)
+
+    companion object {
+        const val ON_CLICK_MAKE_BTN = 4
+    }
 
 }

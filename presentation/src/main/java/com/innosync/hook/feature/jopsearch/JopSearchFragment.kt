@@ -8,6 +8,7 @@ import com.innosync.data.repository.model.JobSearchModel
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJopSearchBinding
+import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_MAKE_BTN
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,8 +22,8 @@ class JopSearchFragment: BaseFragment<FragmentJopSearchBinding, JopSearchViewMod
         addData()
         bindingViewEvent { event ->
             when(event){
-                 event-> {
-                    Log.d(TAG, "observerViewModel: ${event}")
+                ON_CLICK_MAKE_BTN -> {
+                    Log.d(TAG, "observerViewModel: onClick")
                 }
             }
         }
