@@ -8,6 +8,7 @@ import com.innosync.data.remote.service.JobSearchService
 import com.innosync.data.remote.interceptor.LoggingInterceptor
 import com.innosync.data.remote.service.LoginService
 import com.innosync.data.remote.service.TokenService
+import com.innosync.data.remote.service.UserService
 import com.innosync.di.qualifier.BasicOkhttpClient
 import com.innosync.di.qualifier.BasicRetrofit
 import com.innosync.di.qualifier.TokenOkhttpClient
@@ -20,6 +21,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.time.LocalDateTime
@@ -136,5 +138,10 @@ class RemoteModule {
     @Singleton
     fun provideTokenService(@BasicRetrofit retrofit: Retrofit): TokenService =
         retrofit.create(TokenService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(@TokenRetrofit retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
 
 }

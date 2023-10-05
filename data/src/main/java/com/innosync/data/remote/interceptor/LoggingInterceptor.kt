@@ -35,7 +35,7 @@ class LoggingInterceptor @Inject constructor(
         }
 
         val request: Request = chain.request().newBuilder()
-            .addHeader(TOKEN_HEADER, "bearer $token")
+            .addHeader(TOKEN_HEADER, "Bearer $token")
             .build()
         var response = chain.proceed(request)
         if (response.code == TOKEN_ERROR) {
