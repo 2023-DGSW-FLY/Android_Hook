@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     app:startDestination="@id/nav_item_home">
 
@@ -47,5 +48,19 @@
     <fragment
         android:id="@+id/jopOfferFragment"
         android:name="com.innosync.hook.feature.jopoffer.JopOfferFragment"
-        android:label="JopOfferFragment" />
+        android:label="JopOfferFragment">
+
+        <action
+            android:id="@+id/actionJobOfferFragmentToJobOfferMakeFragment"
+            app:destination="@+id/jobOfferMakeFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/jobOfferMakeFragment"
+        android:name="com.innosync.hook.feature.joboffermake.JobOfferMakeFragment"
+        tools:label="JobOfferMakeFragment">
+        <action
+            android:id="@+id/actionJobOfferMakeFragmentToJobOfferFragment"
+            app:destination="@id/jobOfferFragment"/>
+    </fragment>
 </navigation>

@@ -65,6 +65,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(project(mapOf("path" to ":data")))
+
 
 
     testImplementation(UnitTest.JUNIT)
@@ -97,6 +99,7 @@ dependencies {
     // glide
     implementation(Libraries.GLIDE)
     kapt(Libraries.GLIDE_COMPILER)
+
 //    implementation("com.google.android.material:material:1.6.0")
     implementation(project(ProjectProperties.PATH_DOMAIN))
     implementation(project(ProjectProperties.PATH_DATA))
