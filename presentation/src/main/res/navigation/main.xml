@@ -2,18 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    app:startDestination="@id/chatFragment">
+    app:startDestination="@id/nav_item_home">
 
     <fragment
         android:id="@+id/exampleFragment"
         android:name="com.innosync.hook.feature.example.ExampleFragment"
         android:label="ExampleFragment" />
     <fragment
-        android:id="@+id/chatFragment"
+        android:id="@+id/nav_item_message"
         android:name="com.innosync.hook.feature.chat.ChatFragment"
         android:label="ChatFragment" >
         <action
-            android:id="@+id/action_chatFragment_to_messageFragment"
+            android:id="@+id/action_nav_item_message_to_messageFragment"
             app:destination="@id/messageFragment" />
     </fragment>
     <fragment
@@ -33,15 +33,15 @@
             android:name="your"
             app:argType="string" />
         <action
-            android:id="@+id/action_messageFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            android:id="@+id/action_messageFragment_to_nav_item_message"
+            app:destination="@id/nav_item_message" />
     </fragment>
     <fragment
-        android:id="@+id/congressFragment"
+        android:id="@+id/nav_item_calendar"
         android:name="com.innosync.hook.feature.congress.CongressFragment"
         android:label="CongressFragment" />
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_item_home"
         android:name="com.innosync.hook.feature.home.HomeFragment"
         android:label="HomeFragment" />
 </navigation>
