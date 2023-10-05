@@ -16,14 +16,16 @@ import dagger.hilt.android.AndroidEntryPoint
 class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
     override val viewModel: ChatViewModel by viewModels()
 
-    private var my = "33"
+
     override fun observerViewModel() {
+        viewModel.loadInfo()
         initRv()
+        observeData()
         bindingViewEvent { event ->
             when(event) {
                 ON_CLICK_DUMMY -> {
                     viewModel.createRoom(
-                        my,
+                        "4",
                         "33"
                     )
                 }
@@ -31,16 +33,17 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getUserList(
-            my
-        ) {
-            setRv(it)
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.getUserList(
+//            viewModel.myData.value?.id.toString()
+//        ) {
+//            setRv(it)
+//        }
+//    }
 
     private fun setRv(list: List<RoomModel>) {
+        val my = viewModel.myData.value?.id.toString()
         val adaptor = ChatRvAdaptor(
             my,
             list,
@@ -60,14 +63,25 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
     }
 
     private fun initRv() {
-        val adaptor = ChatRvAdaptor(
-            my,
-            emptyList(),
-            requireContext()
-        ) {}
+//        val adaptor = ChatRvAdaptor(
+//            viewModel.myData.value?.id.toString(),
+//            emptyList(),
+//            requireContext()
+//        ) {}
         with(mBinding) {
-            rvUsers.adapter = adaptor
+//            rvUsers.adapter = adaptor
             rvUsers.layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun observeData() {
+        viewModel.myData.observe(this@ChatFragment) {
+            viewModel.getUserList(
+                it.id.toString()
+            ) { data ->
+                Log.d(TAG, "observeData: $data")
+                setRv(data)
+            }
         }
     }
 

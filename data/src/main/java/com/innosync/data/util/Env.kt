@@ -1,6 +1,6 @@
 package com.innosync.data.util
 
-object Env {
+internal object Env {
     object JobOpening {
         private const val hackathon = "/hackathon"
         const val hackathonGet = "${hackathon}/get"
@@ -15,5 +15,11 @@ object Env {
     object JobSearch {
         private const val jobSearch = "/access"
         const val get = "${jobSearch}/get"
+    }
+
+    object My {
+        private const val user = "/api/v1/users"
+        const val get = "${user}/user"
+
     }
 }
