@@ -23,7 +23,7 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
     override val viewModel: JopOfferViewModel by viewModels()
     val mData = mutableListOf<JobOfferModel>()
     val TAG : String = "로그"
-
+ 
 
     override fun observerViewModel() {
         Log.d(TAG, "observerViewModel: qweqweqweqwe")
