@@ -29,7 +29,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val viewModel: HomeViewModel by viewModels()
 
     override fun observerViewModel() {
-        observeData()
+        Log.d(TAG, "observerViewModel: on observer")
         initRv()
         viewModel.loadCongress()
         bindingViewEvent {  event ->
@@ -63,7 +63,13 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeData()
         viewModel.onClickHackathon()
+
     }
 
     private fun initRv() {
