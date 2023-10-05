@@ -13,30 +13,9 @@ import javax.inject.Inject
 class JopSearchViewModel @Inject constructor(
 
 ): BaseViewModel() {
-    private val _selectLivedata = MutableLiveData<MutableMap<String, Boolean>>()
-    val selectLivedata: LiveData<MutableMap<String, Boolean>> = _selectLivedata
-
     fun onClick(view: View) {
 
     }
 
-    fun onClickAndroid() {
-        addSelectData("android")
-    }
-
-
-
-
-    private fun addSelectData(id: String) {
-        if (_selectLivedata.value!!.containsKey(id)) {
-            _selectLivedata.value!![id] = _selectLivedata.value!![id]?.not()!!
-        } else {
-            _selectLivedata.value!![id] = true
-        }
-    }
-
-    companion object {
-        const val
-    }
 
 }

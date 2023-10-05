@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:background="@drawable/check_box_android"
-                    android:button="@color/transparent"/>
+                    android:button="@color/white"/>
 
                 <CheckBox
                     android:id="@+id/serverBtn"
@@ -87,7 +87,7 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/check_box_server"
-                    android:button="@color/transparent"/>
+                    android:button="@color/white"/>
 
                 <CheckBox
                     android:id="@+id/gameBtn"
@@ -95,7 +95,7 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/check_box_game"
-                    android:button="@color/transparent"/>
+                    android:button="@color/white"/>
 
                 <CheckBox
                     android:id="@+id/embeddedBtn"
@@ -103,7 +103,7 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/check_box_embedded"
-                    android:button="@color/transparent"/>
+                    android:button="@color/white"/>
 
                 <CheckBox
                     android:id="@+id/etcBtn"
@@ -111,7 +111,7 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/check_box_etc"
-                    android:button="@color/transparent"/>
+                    android:button="@color/white"/>
             </LinearLayout>
 
 
