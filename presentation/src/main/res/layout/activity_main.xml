@@ -14,14 +14,30 @@
         tools:context=".MainActivity">
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_main"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_width="match_parent"
-
             android:name="androidx.navigation.fragment.NavHostFragment"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/main">
+            app:navGraph="@navigation/main"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/divider_line">
 
         </androidx.fragment.app.FragmentContainerView>
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E4E4E4"
+            app:layout_constraintBottom_toTopOf="@id/nav_bottom"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/menu_item_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/main_nav_menu"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

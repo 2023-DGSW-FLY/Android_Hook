@@ -50,7 +50,7 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
             requireContext()
         ) { data ->
             Log.d(TAG, "setRv: $data")
-            val navigate = ChatFragmentDirections.actionChatFragmentToMessageFragment(
+            val navigate = ChatFragmentDirections.actionNavItemMessageToMessageFragment(
                 data.chatRoomUid, data.roomName, my, data.getYour(my)
             )
             findNavController().navigate(navigate)
