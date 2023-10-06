@@ -14,12 +14,12 @@
 
 
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="130dp"
-            android:layout_marginLeft="24dp"
+            android:layout_marginHorizontal="24dp"
             android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint= "비밀번호"
+                android:inputType="textPassword"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:textSize="13dp"
                 android:layout_marginTop="30dp"/>
@@ -65,7 +66,7 @@
                 android:id="@+id/edit_github"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="깃허브 url"
+                android:hint="깃허브 URL 예) https://github.com/8954sood"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:textSize="13dp"
                 android:layout_marginTop="30dp"/>
@@ -73,7 +74,7 @@
                 android:id="@+id/edit_portfolio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="포트폴리오 url"
+                android:hint="포트폴리오 url 예) https://notion.com/test"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:textSize="13dp"
                 android:layout_marginTop="30dp"/>

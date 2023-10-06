@@ -9,6 +9,7 @@ data class ExerciseModel(
     val place: String,
     val dateTime: String,
     val username: String,
+    val writer: String,
     val userId: String,
     val status: String,
     val exercise: String,

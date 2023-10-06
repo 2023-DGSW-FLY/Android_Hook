@@ -18,4 +18,9 @@ interface JobSearchService {
     suspend fun get(
         @Query("cnt") cnt: Int
     ): BaseResponse<List<JobSearchResponse>>
+
+    @GET(Env.JobSearch.getStack)
+    suspend fun getStack(
+        @Query("job") job: String
+    ): BaseResponse<List<JobSearchResponse>>
 }

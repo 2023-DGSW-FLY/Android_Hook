@@ -9,6 +9,7 @@ data class HackathonModel(
     val stack: List<String>,
     val url: String,
     val status: String,
+    val username: String,
     val writer: String,
     val regDate: LocalDateTime,
     val modDate: LocalDateTime

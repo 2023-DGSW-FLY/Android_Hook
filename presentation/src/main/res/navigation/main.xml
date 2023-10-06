@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     app:startDestination="@id/nav_item_home">
 
@@ -43,5 +44,98 @@
     <fragment
         android:id="@+id/nav_item_home"
         android:name="com.innosync.hook.feature.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_nav_item_home_to_jopSearchFragment"
+            app:destination="@id/jopSearchFragment" />
+        <action
+            android:id="@+id/action_nav_item_home_to_jopOfferFragment"
+            app:destination="@id/jopOfferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jopOfferFragment"
+        android:name="com.innosync.hook.feature.jopoffer.JopOfferFragment"
+        android:label="JopOfferFragment">
+
+        <action
+            android:id="@+id/actionJobOfferFragmentToJobOfferMakeFragment"
+            app:destination="@+id/jobOfferMakeFragment"/>
+        <action
+            android:id="@+id/action_jopOfferFragment_to_jobOfferMakeExerciseFragment"
+            app:destination="@id/jobOfferMakeExerciseFragment" />
+        <action
+            android:id="@+id/action_jopOfferFragment_to_jobOfferMakeFoodFragment"
+            app:destination="@id/jobOfferMakeFoodFragment" />
+        <action
+            android:id="@+id/action_jopOfferFragment_to_jobOfferInfoExerciseFragment"
+            app:destination="@id/jobOfferInfoExerciseFragment" />
+        <action
+            android:id="@+id/action_jopOfferFragment_to_jobOfferInfoHackathonFragment"
+            app:destination="@id/jobOfferInfoHackathonFragment" />
+        <action
+            android:id="@+id/action_jopOfferFragment_to_jobOfferInfoFoodFragment"
+            app:destination="@id/jobOfferInfoFoodFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/jobOfferMakeFragment"
+        android:name="com.innosync.hook.feature.joboffermake.JobOfferMakeFragment"
+        tools:label="JobOfferMakeFragment">
+        <action
+            android:id="@+id/actionJobOfferMakeFragmentToJobOfferFragment"
+            app:destination="@id/jopOfferFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/jopSearchFragment"
+        android:name="com.innosync.hook.feature.jopsearch.JopSearchFragment"
+        android:label="JopSearchFragment" />
+    <fragment
+        android:id="@+id/jobOfferMakeFoodFragment"
+        android:name="com.innosync.hook.feature.joboffermake.food.JobOfferMakeFoodFragment"
+        android:label="JobOfferMakeFoodFragment" />
+    <fragment
+        android:id="@+id/jobOfferMakeExerciseFragment"
+        android:name="com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseFragment"
+        android:label="JobOfferMakeExerciseFragment" />
+    <fragment
+        android:id="@+id/jobOfferInfoExerciseFragment"
+        android:name="com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseFragment"
+        android:label="JobOfferInfoExerciseFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_jobOfferInfoExerciseFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobOfferInfoFoodFragment"
+        android:name="com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodFragment"
+        android:label="JobOfferInfoFoodFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_jobOfferInfoFoodFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobOfferInfoHackathonFragment"
+        android:name="com.innosync.hook.feature.jopoffer.info.hackathon.JobOfferInfoHackathonFragment"
+        android:label="JobOfferInfoHackathonFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_jobOfferInfoHackathonFragment_to_jobOfferInfoHackathonSupportFragment"
+            app:destination="@id/jobOfferInfoHackathonSupportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobOfferInfoHackathonSupportFragment"
+        android:name="com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportFragment"
+        android:label="JobOfferInfoHackathonSupportFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

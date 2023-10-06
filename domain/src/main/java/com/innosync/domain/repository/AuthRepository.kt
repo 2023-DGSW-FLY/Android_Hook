@@ -15,5 +15,5 @@ interface AuthRepository  {
         userInfo: String,
         githubURL: String,
         portfolioURL: String
-    )
+    ): String
 }

@@ -3,7 +3,7 @@ package com.innosync.domain.usecase
 import com.innosync.domain.repository.JobSearchRepository
 import javax.inject.Inject
 
-class JobSearchGetRepository @Inject constructor(
+class JobSearchGetUseCase @Inject constructor(
     private val jobSearchRepository: JobSearchRepository
 ) {
 

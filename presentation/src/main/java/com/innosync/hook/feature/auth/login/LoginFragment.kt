@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     )
                 }
                 ON_CLICK_KAKAO -> {
-
+                    requireContext().shortToast("미구현된 기능입니다.")
                 }
                 ON_SUCCESS_LOGIN -> {
                     startActivityWithFinishAll(MainActivity::class.java)

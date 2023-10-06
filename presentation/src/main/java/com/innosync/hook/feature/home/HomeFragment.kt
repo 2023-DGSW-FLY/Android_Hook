@@ -1,10 +1,14 @@
 package com.innosync.hook.feature.home
 
+import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColor
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.innosync.hook.R
@@ -30,7 +34,6 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun observerViewModel() {
         Log.d(TAG, "observerViewModel: on observer")
-        initRv()
         viewModel.loadCongress()
         bindingViewEvent {  event ->
             when(event) {
@@ -43,21 +46,49 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 ON_CLICK_EXERCISE -> {
                     setBtnColor("운동")
                 }
-                ON_CLICK_SEE_ALL -> {}
+                ON_CLICK_SEE_ALL -> {
+                    when(viewModel.nowView.value) {
+                        "구직" -> {
+                            findNavController().navigate(
+                                R.id.action_nav_item_home_to_jopSearchFragment
+                            )
+                        }
+                        else -> {
+                            findNavController().navigate(
+                                R.id.action_nav_item_home_to_jopOfferFragment
+                            )
+                        }
+
+                    }
+                }
                 ON_CLICK_ALARM -> {}
                 ON_CLICK_JOB_SEARCH -> {
+                    val context = requireContext()
                     mBinding.layoutCategory.visibility = View.INVISIBLE
+                    mBinding.textJobSearch.setTextColor(ContextCompat.getColor(context, R.color.black))
+                    mBinding.textJobOpening.setTextColor(ContextCompat.getColor(context, R.color.darkGray))
                 }
                 ON_CLICK_JOB_OPENING -> {
+                    val context = requireContext()
                     mBinding.layoutCategory.visibility = View.VISIBLE
                     // 구인은 눌러도 바로 반응이 없기 떄문에 기존 데이터 로드
-                    mBinding.rvJob.adapter = HomeRvAdaptor(viewModel.jobRvData.value)
+                    mBinding.rvJob.adapter = HomeRvAdaptor(viewModel.jobRvData.value) {
+                        findNavController().navigate(
+                            R.id.action_nav_item_home_to_jopOfferFragment
+                        )
+                    }
                     mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
+                    mBinding.textJobSearch.setTextColor(ContextCompat.getColor(context, R.color.darkGray))
+                    mBinding.textJobOpening.setTextColor(ContextCompat.getColor(context, R.color.black))
 //                    mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))
                 }
 
                 ON_CHANGE_JOB_OPENING_DATA -> {
-                    val adaptor = HomeRvAdaptor(viewModel.jobSearchRvData.value)
+                    val adaptor = HomeRvAdaptor(viewModel.jobSearchRvData.value) {
+                        findNavController().navigate(
+                            R.id.action_nav_item_home_to_jopSearchFragment
+                        )
+                    }
                     mBinding.rvJob.adapter = adaptor
                     mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
                 }
@@ -67,6 +98,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onResume() {
         super.onResume()
+        initRv()
         observeData()
         viewModel.onClickHackathon()
 
@@ -80,7 +112,11 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun observeData() {
         collectLatestStateFlow(viewModel.jobRvData) {
             Log.d(TAG, "observeData: $it")
-            val adaptor = HomeRvAdaptor(it)
+            val adaptor = HomeRvAdaptor(it) {
+                findNavController().navigate(
+                    R.id.action_nav_item_home_to_jopOfferFragment
+                )
+            }
             mBinding.rvJob.adapter = adaptor
             mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
 //            mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))

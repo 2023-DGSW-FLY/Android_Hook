@@ -4,6 +4,7 @@ import com.innosync.data.remote.mapper.toModels
 import com.innosync.data.remote.response.jobopening.HackathonResponse
 import com.innosync.data.remote.response.jobsearch.JobSearchResponse
 import com.innosync.data.remote.service.JobSearchService
+import com.innosync.data.remote.utiles.hookApiCall
 import com.innosync.domain.model.JobSearchModel
 import com.innosync.domain.repository.JobSearchRepository
 import java.time.LocalDateTime
@@ -12,11 +13,16 @@ import javax.inject.Inject
 class JobSearchRepositoryImpl @Inject constructor(
     private val jobSearchService: JobSearchService
 ): JobSearchRepository {
-    override suspend fun get(): List<JobSearchModel> =
+    override suspend fun get(): List<JobSearchModel> = hookApiCall {
         jobSearchService.get().data.toModels()
+    }
 
-    override suspend fun get(cnt: Int): List<JobSearchModel> =
+    override suspend fun get(cnt: Int): List<JobSearchModel> = hookApiCall {
         jobSearchService.get(cnt).data.toModels()
+    }
+    override suspend fun getStack(category: String): List<JobSearchModel> = hookApiCall {
+        jobSearchService.getStack(category).data.toModels()
+    }
 //        dummyData(cnt).toModels()
 
 
@@ -26,9 +32,8 @@ class JobSearchRepositoryImpl @Inject constructor(
             dummy.add(
                 JobSearchResponse(
                     id = i,
-                    title = "테스트",
                     content = "내용",
-                    stack = listOf("서버개발자"),
+                    stack = "서버개발자",
                     url = "https://rqwe",
                     status = "matching",
                     writer = "yeseon12dd31$i",

@@ -8,8 +8,7 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".feature.auth.join.LoginActivity">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/text_hook"
@@ -36,8 +35,9 @@
             android:layout_marginLeft="24dp" />
         <LinearLayout
             android:id="@+id/linear"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="19dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/text_hook2"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -57,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호"
+            android:inputType="textPassword"
             android:fontFamily="@font/nanumgothic_bold"
             android:textSize="13dp"
             app:layout_constraintLeft_toLeftOf="parent"
