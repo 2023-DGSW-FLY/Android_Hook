@@ -1,4 +1,4 @@
-
+import java.util.Properties
 
 plugins {
     id(Plugins.androidApplication)
@@ -6,7 +6,11 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.daggerPlugin)
     id(Plugins.navigationSafeArgs)
+    id("com.google.gms.google-services")
 }
+
+val prperties = Properties()
+prperties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = ProjectProperties.APPLIACATION_ID
@@ -18,6 +22,8 @@ android {
         targetSdk = ProjectProperties.TAGETSDK_VERSION
         versionCode = ProjectProperties.VERSION_CODE
         versionName = ProjectProperties.VERSION_NAME
+        buildConfigField("String", "KAKAO_KEY", "${prperties["kakao_api_key"]}")
+        manifestPlaceholders["KAKAO_KEY"] = prperties["kakao_api_key"].toString()
 
         testInstrumentationRunner = ProjectProperties.TEST_RUNER
         vectorDrawables {
@@ -42,6 +48,7 @@ android {
     buildFeatures {
         dataBinding = ProjectProperties.DATABINDING
     }
+
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -55,6 +62,11 @@ dependencies {
     implementation(AndroidX.LIFECYCLE_KTX)
     implementation(AndroidX.APP_COMPAT)
     implementation(AndroidX.CONSTRAINTLAYOUT)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(project(mapOf("path" to ":data")))
+
 
 
     testImplementation(UnitTest.JUNIT)
@@ -87,8 +99,21 @@ dependencies {
     // glide
     implementation(Libraries.GLIDE)
     kapt(Libraries.GLIDE_COMPILER)
+
 //    implementation("com.google.android.material:material:1.6.0")
     implementation(project(ProjectProperties.PATH_DOMAIN))
     implementation(project(ProjectProperties.PATH_DATA))
     implementation(project(ProjectProperties.PATH_DI))
+
+    // firebase
+    implementation(Google.FIREBASE_ANALYTICS)
+    implementation(platform(Google.FIREBASE_BOM))
+    implementation(Google.FIREBASE_DATABASE)
+    implementation(Google.FIREBASE_MESSAGING)
+    implementation(Google.FIREBSAE_FIRESTORE)
+    // kakao
+    implementation ("com.kakao.sdk:v2-user:2.15.0") // 카카오 로그인
+
+    // cricle imageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

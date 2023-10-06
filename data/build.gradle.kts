@@ -50,6 +50,22 @@ dependencies {
     kapt(AndroidX.ROOM_COMPILER)
     implementation(AndroidX.ROOM_KTX)
 
+    // retrofit
+    implementation(Libraries.RETROFIT)
+    implementation(Libraries.RETROFIT_CONVERTER_GSON)
+    implementation(Libraries.OKHTTP)
+    implementation(Libraries.OKHTTP_LOGGING_INTERCEPTOR)
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // firebase
+    implementation(Google.FIREBASE_ANALYTICS)
+    implementation(platform(Google.FIREBASE_BOM))
+    implementation(Google.FIREBASE_DATABASE)
+    implementation(Google.FIREBASE_MESSAGING)
+    implementation(Google.FIREBSAE_FIRESTORE)
+
     implementation(project(ProjectProperties.PATH_DOMAIN))
 
 }

@@ -11,6 +11,10 @@ import androidx.fragment.app.Fragment
 import com.innosync.hook.base.BaseViewModel
 import androidx.databinding.library.baseAdapters.BR
 import com.innosync.hook.R
+import com.innosync.hook.feature.auth.AuthActivity
+import com.innosync.hook.util.Utils
+import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.startActivityWithFinishAll
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
@@ -55,6 +59,12 @@ abstract class BaseFragment<VB: ViewDataBinding, VM: BaseViewModel> : Fragment()
             isLoad = true
             viewModel.viewEvent.observe(this) { event ->
                 action.invoke(event)
+            }
+            viewModel.tokenErrorEvent.observe(viewLifecycleOwner) {
+                if (it == Utils.TOKEN_EXCEPTION) {
+                    requireContext().shortToast("세션이 만료되었습니다.")
+                    startActivityWithFinishAll(AuthActivity::class.java)
+                }
             }
         }
     }

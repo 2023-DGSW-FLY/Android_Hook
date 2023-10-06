@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.innosync.hook.feature.home.HomeViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="56dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_hook_ic"
+                    android:layout_marginTop="22dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_profile"
+                    android:src="@drawable/shape_message_gray"
+                    android:scaleType="fitXY"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginRight="15dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_tap"
+                    android:layout_width="36dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginRight="12dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/image_profile">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_alarm"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_alarm"
+                        app:layout_constraintRight_toRightOf="parent"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_alarm_new"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:src="@drawable/ic_ellipse"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_congress_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="101dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/layout_tap"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_job_opening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="75dp"
+                    android:onClick="@{() -> vm.onClickJobOpening()}"
+                    android:text="@string/job_opening"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/rv_congress_info"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_job_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="75dp"
+                    android:onClick="@{() -> vm.onClickJobSearch()}"
+                    android:text="@string/job_search"
+                    android:textColor="@color/darkGray"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/rv_congress_info"
+                    app:layout_constraintLeft_toRightOf="@id/text_job_opening"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/layout_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="30dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_job_search">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_hackathon"
+                        android:layout_width="62dp"
+                        android:layout_height="match_parent"
+                        android:onClick="@{() -> vm.onClickHackathon()}"
+                        android:text="대회"
+                        android:textColor="@color/textBlue"
+                        android:background="@drawable/shape_sky_blue"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_eat"
+                        android:layout_width="62dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="13dp"
+                        android:onClick="@{() -> vm.onClickEat()}"
+                        android:text="식사"
+                        android:textColor="@color/textBlue"
+                        android:background="@drawable/shape_sky_blue"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_exercise"
+                        android:layout_width="62dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="13dp"
+                        android:onClick="@{() -> vm.onClickExercise()}"
+                        android:text="운동"
+                        android:textColor="@color/textBlue"
+                        android:background="@drawable/shape_sky_blue"/>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="43dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/home_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_category"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/layout_see"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:onClick="@{() -> vm.onClickSeeAll()}"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_category">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="See All"
+                        android:textColor="@color/textHint" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/text_home_see"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="41dp"
+                        android:src="@drawable/ic_arrow_right" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginHorizontal="30dp"
+                    app:layout_constraintTop_toBottomOf="@id/layout_see"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

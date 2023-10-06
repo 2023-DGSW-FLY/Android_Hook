@@ -8,6 +8,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.R
+import com.innosync.hook.feature.auth.AuthActivity
+import com.innosync.hook.util.Utils
+import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.startActivityWithFinishAll
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
@@ -37,6 +41,13 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: BaseViewModel>: AppCompatAc
     protected fun bindingViewEvent(action: (event: Any) -> Unit) {
         viewModel.viewEvent.observe(this) { event ->
             action.invoke(event)
+        }
+
+        viewModel.tokenErrorEvent.observe(this) {
+            if (it == Utils.TOKEN_EXCEPTION) {
+                shortToast("세션이 만료되었습니다.")
+                startActivityWithFinishAll(AuthActivity::class.java)
+            }
         }
     }
 
@@ -74,5 +85,7 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: BaseViewModel>: AppCompatAc
 
         return 0
     }
+
+
 
 }

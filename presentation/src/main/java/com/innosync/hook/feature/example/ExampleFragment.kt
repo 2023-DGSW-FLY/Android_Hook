@@ -13,11 +13,9 @@ class ExampleFragment @Inject constructor(
 ): BaseFragment<FragmentExampleBinding, ExampleViewModel>() {
 
     override val viewModel: ExampleViewModel by viewModels()
-
+    private lateinit var binding: FragmentExampleBinding
     override fun observerViewModel() {
 //        TODO("Not yet implemented")
         Log.d("TAG", "observerViewModel: Launch")
     }
-
-
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_message_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="오전 10:57"
+                android:layout_gravity="bottom" />
+            <RelativeLayout
+                android:id="@+id/layout_textBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:gravity="right"
+
+                android:background="@drawable/shape_message_blue">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_message_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    android:text="qqeqweqwqqewrrwwqeqweqwqeqwqweqweqweqeqweqqqeqeweqwwqwewqeqweqwqweeqwweqeqweqeqweqweqwe" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
