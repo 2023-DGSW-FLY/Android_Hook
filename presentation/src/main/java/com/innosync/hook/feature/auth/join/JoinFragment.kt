@@ -1,9 +1,12 @@
 package com.innosync.hook.feature.auth.join
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJoinBinding
 import com.innosync.hook.feature.auth.join.JoinViewModel.Companion.ON_CLICK_JOIN
+import com.innosync.hook.feature.auth.join.JoinViewModel.Companion.ON_FAILURE
+import com.innosync.hook.feature.auth.join.JoinViewModel.Companion.ON_SUCCESS
 import com.innosync.hook.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -57,6 +60,14 @@ class JoinFragment : BaseFragment<FragmentJoinBinding, JoinViewModel>() {
 
                     }
                 }
+                ON_SUCCESS -> {
+                    requireContext().shortToast("회원가입에 성공하였습니다.")
+                    findNavController().popBackStack()
+                }
+                ON_FAILURE -> {
+                    requireContext().shortToast("회원가입에 실패하였습니다.")
+                }
+
             }
         }
     }

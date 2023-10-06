@@ -8,7 +8,7 @@ import com.innosync.domain.model.JobSearchModel
 internal fun HackathonModel.toHomeRvModel() =
     HomeRvData(
         status = status,
-        writer =  writer,
+        writer = writer,
         title = title
     )
 
@@ -22,7 +22,7 @@ internal fun JobSearchModel.toHomeRvModel() =
     HomeRvData(
         status = status,
         writer =  writer,
-        title = title,
+        title = content.substring(0, 9),
         type = 0
     )
 @JvmName("jobSearchModelToHomeRvModels")

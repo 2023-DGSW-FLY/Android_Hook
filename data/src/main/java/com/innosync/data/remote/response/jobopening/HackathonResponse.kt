@@ -16,6 +16,8 @@ data class HackathonResponse(
     val url: String,
     @field:SerializedName("status")
     val status: String,
+    @field:SerializedName("userName")
+    val username: String,
     @field:SerializedName("writer")
     val writer: String,
     @field:SerializedName("regDate")

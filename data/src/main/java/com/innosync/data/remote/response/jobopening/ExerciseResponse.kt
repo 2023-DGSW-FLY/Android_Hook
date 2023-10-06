@@ -14,8 +14,10 @@ data class ExerciseResponse(
     val place: String,
     @field:SerializedName("dateTime")
     val dateTime: String,
-    @field:SerializedName("username")
+    @field:SerializedName("userName")
     val username: String,
+    @field:SerializedName("writer")
+    val writer: String,
     @field:SerializedName("userId")
     val userId: String,
     @field:SerializedName("status")

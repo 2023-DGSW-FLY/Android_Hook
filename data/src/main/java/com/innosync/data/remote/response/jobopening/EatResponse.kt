@@ -12,10 +12,12 @@ data class EatResponse(
     val content: String,
     @field:SerializedName("place")
     val place: String,
-    @field:SerializedName("dateTime")
-    val dateTime: String,
+    @field:SerializedName("foodName")
+    val dateTime: String?,
     @field:SerializedName("status")
     val status: String,
+    @field:SerializedName("userName")
+    val username: String,
     @field:SerializedName("writer")
     val writer: String,
     @field:SerializedName("userId")

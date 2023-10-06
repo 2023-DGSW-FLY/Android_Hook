@@ -9,7 +9,8 @@ import com.innosync.hook.databinding.ItemJobOpeningBinding
 import com.innosync.hook.databinding.ItemJobSearchBinding
 
 class HomeRvAdaptor constructor(
-    private val item: List<HomeRvData>
+    private val item: List<HomeRvData>,
+    private val action: () -> Unit
 ): RecyclerView.Adapter<HomeRvAdaptor.ViewHolder>() {
     sealed class ViewHolder(
         binding: ViewBinding
@@ -39,9 +40,17 @@ class HomeRvAdaptor constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return if (viewType == 0) {
-            ViewHolder.JobSearchHolder(ItemJobSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ViewHolder.JobSearchHolder(ItemJobSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
+                itemView.setOnClickListener {
+                    action()
+                }
+            }
         } else {
-            ViewHolder.JobOpeningHolder(ItemJobOpeningBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ViewHolder.JobOpeningHolder(ItemJobOpeningBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
+                itemView.setOnClickListener {
+                    action()
+                }
+            }
         }
     }
 

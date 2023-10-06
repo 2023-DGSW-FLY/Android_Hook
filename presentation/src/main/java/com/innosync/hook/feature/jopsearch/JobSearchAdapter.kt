@@ -3,20 +3,17 @@ package com.innosync.hook.feature.jopsearch
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
-import com.innosync.data.repository.model.JobSearchModel
-import com.innosync.hook.databinding.JopOfferItemBinding
 import com.innosync.hook.databinding.JopSearchItemBinding
 
 class JobSearchAdapter constructor(
-    private val itemList: List<JobSearchModel>
+    private val itemList: List<JobSearchRvModel>
 ): RecyclerView.Adapter<JobSearchAdapter.viewHolder>() {
 
     inner class viewHolder(private val binding: JopSearchItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(JobSearchModel: JobSearchModel){
-            binding.textJobComment.text = JobSearchModel.detail
-            binding.textUserName.text = JobSearchModel.userName
-            binding.textTime.text = JobSearchModel.time
+        fun bind(JobSearchRvModel: JobSearchRvModel){
+            binding.textJobComment.text = JobSearchRvModel.detail
+            binding.textUserName.text = JobSearchRvModel.userName
+            binding.textTime.text = JobSearchRvModel.time
         }
 
     }

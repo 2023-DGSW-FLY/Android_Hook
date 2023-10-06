@@ -2,6 +2,7 @@ package com.innosync.hook
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.NavHostFragment
@@ -24,14 +25,32 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val navController = navHostFragment.navController
         mBinding.navBottom
             .setupWithNavController(navController)
-//        mBinding.navBottom.setOnItemSelectedListener {
-//            when(it.itemId) {
+        mBinding.navBottom.setOnClickListener {
+            Log.d("TAG", "observerViewModel: ${mBinding.navBottom.selectedItemId}")
+            when(mBinding.navBottom.selectedItemId) {
+                R.id.nav_item_home -> {
+                    mBinding.navBottom.selectedItemId = R.id.nav_item_home
+                }
+                R.id.nav_item_calendar -> {
+                    mBinding.navBottom.selectedItemId = R.id.nav_item_calendar
+                }
+                R.id.nav_item_message -> {
+                    mBinding.navBottom.selectedItemId = R.id.nav_item_message
+                }
+//                R.id.nav_item_myBox -> {
+//                    mBinding.navBottom.selectedItemId = R.id.nav_item_home
+//                }
+            }
+        }
+//        mBinding.navBottom.setOnItemSelectedListener { event ->
+//            when(event.itemId) {
 //                R.id.nav_item_home -> {
-//                    supportFragmentManager.beginTransaction().replace(R.id.nav_bottom, HomeFragment()).be
+//                    moveHomeToCalendar()
 //                }
 //                R.id.nav_item_calendar -> {}
 //                R.id.nav_item_message -> {}
 //                R.id.nav_item_myBox -> {}
+//                else -> {}
 //            }
 //        }
     }

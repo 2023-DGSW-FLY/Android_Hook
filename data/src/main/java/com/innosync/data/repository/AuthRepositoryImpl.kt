@@ -41,8 +41,7 @@ class AuthRepositoryImpl @Inject constructor(
         userInfo: String,
         githubURL: String,
         portfolioURL: String,
-    ) {
-        hookApiCall {
+    ) = hookApiCall {
             loginService.join(
                 UserJoinRequest(
                     userAccount = userAccount,
@@ -53,8 +52,8 @@ class AuthRepositoryImpl @Inject constructor(
                     githubURL = githubURL,
                     portfolioURL = portfolioURL
                 )
-            )
+            ).success
         }
-    }
+
 
 }

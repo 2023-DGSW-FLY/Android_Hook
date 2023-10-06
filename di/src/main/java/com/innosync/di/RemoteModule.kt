@@ -43,6 +43,11 @@ class RemoteModule {
             .create()
     }
 
+    @Provides
+    @Singleton
+    fun provideNullSafe(): NullOnEmptyConverterFactory =
+        NullOnEmptyConverterFactory()
+
     @BasicOkhttpClient
     @Singleton
     @Provides
@@ -95,22 +100,24 @@ class RemoteModule {
     @BasicRetrofit
     @Provides
     @Singleton
-    fun provideRetrofit(@BasicOkhttpClient okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun provideRetrofit(@BasicOkhttpClient okHttpClient: OkHttpClient, gson: Gson, nullSafe :NullOnEmptyConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.SERVER)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
+//            .addConverterFactory(nullSafe)
             .build()
     }
 
     @TokenRetrofit
     @Provides
     @Singleton
-    fun provideTokenRetrofit(@TokenOkhttpClient okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun provideTokenRetrofit(@TokenOkhttpClient okHttpClient: OkHttpClient, gson: Gson, nullSafe :NullOnEmptyConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.SERVER)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
+//            .addConverterFactory(nullSafe)
             .build()
     }
 

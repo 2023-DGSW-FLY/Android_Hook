@@ -6,7 +6,6 @@ import com.innosync.domain.model.JobSearchModel
 internal fun JobSearchResponse.toModel() =
     JobSearchModel(
         id = id,
-        title = title,
         content = content,
         stack = stack,
         url = url,
