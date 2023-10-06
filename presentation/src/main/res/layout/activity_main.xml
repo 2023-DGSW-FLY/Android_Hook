@@ -34,12 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:background="@color/white"
+            app:itemBackground="@color/white"
             app:itemIconTint="@drawable/menu_item_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/main_nav_menu"/>
-
-        </androidx.fragment.app.FragmentContainerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

@@ -39,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:onClick="@{() -> vm.onClickBackBtn()}"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,43 +75,48 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <CheckBox
+                            <ImageButton
                                 android:id="@+id/androidBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
+                                android:onClick="@{() -> vm.onClickAndroidBtn()}"
                                 android:background="@drawable/check_box_android"
                                 android:button="@color/white"/>
 
-                            <CheckBox
+                            <ImageButton
                                 android:id="@+id/serverBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
                                 android:layout_marginStart="20dp"
+                                android:onClick="@{() -> vm.onClickServerBtn()}"
                                 android:background="@drawable/check_box_server"
                                 android:button="@color/white"/>
 
-                            <CheckBox
+                            <ImageButton
                                 android:id="@+id/gameBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
                                 android:layout_marginStart="20dp"
                                 android:background="@drawable/check_box_game"
+                                android:onClick="@{() -> vm.onClickGameBtn()}"
                                 android:button="@color/white"/>
 
-                            <CheckBox
+                            <ImageButton
                                 android:id="@+id/embeddedBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
                                 android:layout_marginStart="20dp"
                                 android:background="@drawable/check_box_embedded"
+                                android:onClick="@{() -> vm.onClickEmbeddedBtn()}"
                                 android:button="@color/white"/>
 
-                            <CheckBox
+                            <ImageButton
                                 android:id="@+id/etcBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
                                 android:layout_marginStart="20dp"
                                 android:background="@drawable/check_box_etc"
+                                android:onClick="@{() -> vm.onClickEtcBtn()}"
                                 android:button="@color/white"/>
                         </LinearLayout>
 
