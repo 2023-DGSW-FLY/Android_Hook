@@ -7,6 +7,7 @@ import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
 import com.innosync.data.remote.interceptor.LoggingInterceptor
 import com.innosync.data.remote.service.LoginService
+import com.innosync.data.remote.service.MyBoxService
 import com.innosync.data.remote.service.TokenService
 import com.innosync.data.remote.service.UserService
 import com.innosync.di.qualifier.BasicOkhttpClient
@@ -150,5 +151,10 @@ class RemoteModule {
     @Singleton
     fun provideUserService(@TokenRetrofit retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMyBoxService(@TokenRetrofit retrofit: Retrofit): MyBoxService =
+        retrofit.create(MyBoxService::class.java)
 
 }
