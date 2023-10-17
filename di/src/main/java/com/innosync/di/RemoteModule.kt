@@ -10,6 +10,7 @@ import com.innosync.data.remote.service.AlarmService
 import com.innosync.data.remote.service.ChatService
 import com.innosync.data.remote.service.LoginService
 import com.innosync.data.remote.service.ProfileFixService
+import com.innosync.data.remote.service.MyBoxService
 import com.innosync.data.remote.service.TokenService
 import com.innosync.data.remote.service.UserService
 import com.innosync.di.qualifier.BasicOkhttpClient
@@ -173,5 +174,10 @@ class RemoteModule {
 
 
 
+
+    @Provides
+    @Singleton
+    fun provideMyBoxService(@TokenRetrofit retrofit: Retrofit): MyBoxService =
+        retrofit.create(MyBoxService::class.java)
 
 }
