@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.innosync.domain.model.ChatModel
+import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMessageBinding
 import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_SEND
@@ -41,6 +42,16 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as? MainActivity)?.bottomVisible(false)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as? MainActivity)?.bottomVisible(true)
     }
 
     private fun initRoomName() {

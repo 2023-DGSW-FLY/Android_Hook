@@ -3,6 +3,7 @@ package com.innosync.hook
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.NavHostFragment
@@ -52,5 +53,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
     fun moveMyBox() {
         mBinding.navBottom.selectedItemId = R.id.nav_item_myBox
+    }
+
+    fun bottomVisible(state: Boolean) {
+        mBinding.navBottom.visibility = if (state) View.VISIBLE else View.GONE
     }
 }
