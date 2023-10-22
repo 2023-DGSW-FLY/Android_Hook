@@ -1,8 +1,7 @@
 package com.innosync.hook.feature.joboffermake.food
 
 import android.util.Log
-import com.innosync.data.remote.request.jobopening.JobOpeningEatInsertRequest
-import com.innosync.domain.usecase.JobOpeningInsertEatUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningInsertEatUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.feature.joboffermake.JobOfferMakeViewModel
 import com.innosync.hook.util.launchIO

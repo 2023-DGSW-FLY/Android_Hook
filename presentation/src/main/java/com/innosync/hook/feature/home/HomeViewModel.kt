@@ -2,10 +2,10 @@ package com.innosync.hook.feature.home
 
 import android.util.Log
 import com.innosync.domain.usecase.CongressUseCase
-import com.innosync.domain.usecase.JobOpeningGetEatUseCase
-import com.innosync.domain.usecase.JobOpeningGetExerciseUseCase
-import com.innosync.domain.usecase.JobOpeningGetHackathonUseCase
-import com.innosync.domain.usecase.JobSearchGetUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetEatUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetExerciseUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetHackathonUseCase
+import com.innosync.domain.usecase.jobsearch.JobSearchGetUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.util.launchIO

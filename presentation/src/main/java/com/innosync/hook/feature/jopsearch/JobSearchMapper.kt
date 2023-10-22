@@ -7,7 +7,7 @@ internal fun JobSearchModel.toRvModel() =
     JobSearchRvModel(
         userName = writer,
         time = regDate.second.toLong().toStringDate(),
-        detail = content.substring(0, 8)
+        detail = content.substring(0, if(content.length > 8) 8 else content.length)
     )
 
 internal fun List<JobSearchModel>.toRvModels() =

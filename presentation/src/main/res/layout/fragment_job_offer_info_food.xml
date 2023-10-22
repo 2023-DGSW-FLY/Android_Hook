@@ -161,6 +161,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_chat"
+                android:onClick="@{() -> vm.onClickChat()}"
                 android:background="@color/blue"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

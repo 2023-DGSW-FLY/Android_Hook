@@ -1,17 +1,17 @@
-package com.innosync.domain.usecase
+package com.innosync.domain.usecase.jobopening
 
 import com.innosync.domain.repository.JobOpeningRepository
 import javax.inject.Inject
 
-class JobOpeningGetExerciseUseCase @Inject constructor(
+class JobOpeningGetHackathonUseCase @Inject constructor(
     private val jobOpeningRepository: JobOpeningRepository
 ) {
 
     suspend operator fun invoke() = kotlin.runCatching {
-        jobOpeningRepository.getExercise()
+        jobOpeningRepository.getHackathon()
     }
 
     suspend operator fun invoke(cnt: Int) = kotlin.runCatching {
-        jobOpeningRepository.getExercise(cnt = cnt)
+        jobOpeningRepository.getHackathon(cnt = cnt)
     }
 }

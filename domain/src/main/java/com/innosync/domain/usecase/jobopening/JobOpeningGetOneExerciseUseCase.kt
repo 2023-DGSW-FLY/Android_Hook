@@ -1,4 +1,4 @@
-package com.innosync.domain.usecase
+package com.innosync.domain.usecase.jobopening
 
 import com.innosync.domain.repository.JobOpeningRepository
 import javax.inject.Inject

@@ -19,45 +19,46 @@ import javax.inject.Inject
 class JobOpeningRepositoryImpl @Inject constructor(
     private val jobOpeningService: JobOpeningService
 ): JobOpeningRepository {
-    override suspend fun getHackathon(): List<HackathonModel> =
+    override suspend fun getHackathon(): List<HackathonModel> = hookApiCall {
         jobOpeningService.getHackathon().data.toModels()
+    }
 
-    override suspend fun getHackathon(cnt: Int): List<HackathonModel> =
+    override suspend fun getHackathon(cnt: Int): List<HackathonModel> = hookApiCall {
         jobOpeningService.getHackathon(cnt = cnt).data.toModels()
 //        dummyData(cnt).toModels()
-
-    override suspend fun getEat(): List<EatModel> =
+    }
+    override suspend fun getEat(): List<EatModel> = hookApiCall {
         jobOpeningService.getEat().data.toModels()
-
-    override suspend fun getEat(cnt: Int): List<EatModel> {
+    }
+    override suspend fun getEat(cnt: Int): List<EatModel> = hookApiCall {
         jobOpeningService.getEat(cnt).data.let {
             println(it)
-            return it.toModels()
+            it.toModels()
         }
     }
 
-    override suspend fun getExercise(): List<ExerciseModel> =
+    override suspend fun getExercise(): List<ExerciseModel> = hookApiCall {
         jobOpeningService.getExercise().data.toModels()
-
-    override suspend fun getExercise(cnt: Int): List<ExerciseModel> =
+    }
+    override suspend fun getExercise(cnt: Int): List<ExerciseModel> = hookApiCall {
         jobOpeningService.getExercise(cnt).data.toModels()
-
-    override suspend fun getOneEat(id: Int): EatModel =
+    }
+    override suspend fun getOneEat(id: Int): EatModel = hookApiCall {
         jobOpeningService.getOneEat(id).data.toModel()
-
-    override suspend fun getOneExercise(id: Int): ExerciseModel =
+    }
+    override suspend fun getOneExercise(id: Int): ExerciseModel = hookApiCall {
         jobOpeningService.getOneExercise(id).data.toModel()
-
-    override suspend fun getOneHackathon(id: Int): HackathonModel =
+    }
+    override suspend fun getOneHackathon(id: Int): HackathonModel = hookApiCall {
         jobOpeningService.getOneHackathon(id).data.toModel()
-
+    }
 
     override suspend fun insertHackathon(
         title: String,
         content: String,
         stack: List<String>,
         url: String,
-    ) {
+    ): Unit = hookApiCall {
         jobOpeningService.insertHackathon(
             JobOpeningHackathonInsertRequest(
                 title = title,
@@ -73,7 +74,7 @@ class JobOpeningRepositoryImpl @Inject constructor(
         title: String,
         content: String,
         place: String,
-    ) {
+    ): Unit = hookApiCall {
         jobOpeningService.insertEat(
             JobOpeningEatInsertRequest(
                 foodName = foodName,
@@ -90,7 +91,7 @@ class JobOpeningRepositoryImpl @Inject constructor(
         place: String,
         exercise: String,
         dateTime: String,
-    ) {
+    ): Unit = hookApiCall {
         jobOpeningService.insertExercise(
             JobOpeningExerciseInsertRequest(
                 title = title,
@@ -108,8 +109,7 @@ class JobOpeningRepositoryImpl @Inject constructor(
         contact: String,
         introduction: String,
         portfolioLink: String?,
-    ) {
-        hookApiCall {
+    ): Unit = hookApiCall {
             jobOpeningService.supportHackathon(
                 id = id,
                 body = JobOpeningHackathonSupportRequest(
@@ -119,7 +119,6 @@ class JobOpeningRepositoryImpl @Inject constructor(
                     portfolioLink = portfolioLink
                 )
             )
-        }
     }
 //        jobOpeningService.getHackathon(cnt = cnt).data.toModels()
 

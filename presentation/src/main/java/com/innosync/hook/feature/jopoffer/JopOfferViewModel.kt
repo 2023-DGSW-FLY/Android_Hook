@@ -1,11 +1,10 @@
 package com.innosync.hook.feature.jopoffer
 
 import android.util.Log
-import com.innosync.domain.usecase.JobOpeningGetEatUseCase
-import com.innosync.domain.usecase.JobOpeningGetExerciseUseCase
-import com.innosync.domain.usecase.JobOpeningGetHackathonUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetEatUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetExerciseUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetHackathonUseCase
 import com.innosync.hook.base.BaseViewModel
-import com.innosync.hook.feature.home.toHomeRvModels
 import com.innosync.hook.feature.jopoffer.mapper.toJobOfferModels
 import com.innosync.hook.feature.jopoffer.mapper.tooJobOfferModels
 import com.innosync.hook.feature.jopoffer.model.JobOfferModel

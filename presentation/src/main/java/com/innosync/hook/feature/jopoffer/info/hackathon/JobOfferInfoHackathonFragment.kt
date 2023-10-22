@@ -1,13 +1,16 @@
 package com.innosync.hook.feature.jopoffer.info.hackathon
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferInfoExerciseBinding
 import com.innosync.hook.databinding.FragmentJobOfferInfoHackathonBinding
 import com.innosync.hook.databinding.FragmentJobOfferMakeFoodBinding
+import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseFragmentArgs
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel
@@ -49,6 +52,7 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
                 userName.text = it.username
                 nickname.text = it.writer
                 reallyTechnology.text = it.stack.toStacks()
+                textLink.text = it.url
             }
         }
     }
@@ -59,5 +63,10 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
             result += i
         }
         return result
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: gg")
     }
 }

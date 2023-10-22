@@ -18,8 +18,6 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
 
 
     override fun observerViewModel() {
-        viewModel.loadInfo()
-        initRv()
         observeData()
         bindingViewEvent { event ->
             when(event) {
@@ -41,6 +39,12 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
 //            setRv(it)
 //        }
 //    }
+    override fun onResume() {
+        super.onResume()
+        initRv()
+        viewModel.loadInfo()
+
+    }
 
     private fun setRv(list: List<RoomModel>) {
         val my = viewModel.myData.value?.id.toString()

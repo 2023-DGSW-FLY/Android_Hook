@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
-import com.innosync.hook.databinding.FragmentJopSearchBinding
+import com.innosync.hook.databinding.FragmentJobSearchBinding
 import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_ANDROID
 import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_BACK_BTN
 import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_EMBEDDED
@@ -20,19 +20,19 @@ import com.innosync.hook.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class JopSearchFragment: BaseFragment<FragmentJopSearchBinding, JopSearchViewModel>() {
+class JopSearchFragment: BaseFragment<FragmentJobSearchBinding, JopSearchViewModel>() {
     override val viewModel: JopSearchViewModel by viewModels()
     val mData = mutableListOf<JobSearchRvModel>()
 
     val TAG : String = "태그"
 
     override fun observerViewModel() {
-        viewModel.loadData()
-        observeState()
         bindingViewEvent { event ->
             when(event){
                 ON_CLICK_MAKE_BTN -> {
-                    requireContext().shortToast("아직 미구현 기능입니다.")
+                    findNavController().navigate(
+                        R.id.action_jopSearchFragment_to_jobSearchMakeFragment
+                    )
                 }
                 ON_CLICK_BACK_BTN -> {
                     findNavController().popBackStack()
@@ -56,7 +56,6 @@ class JopSearchFragment: BaseFragment<FragmentJopSearchBinding, JopSearchViewMod
             }
         }
 //        mBinding.jobSearchRv.adapter = JobSearchAdapter(mData)
-        mBinding.jobSearchRv.addItemDecoration(ItemSpacingDecoration(7))
     }
 
     private fun observeState() {
@@ -64,11 +63,21 @@ class JopSearchFragment: BaseFragment<FragmentJopSearchBinding, JopSearchViewMod
             val adaptor = JobSearchAdapter(it)
             mBinding.jobSearchRv.adapter = adaptor
         }
+        collectLatestStateFlow(viewModel.nowButtonData) {
+            if (it == "") {
+                viewModel.loadData()
+            } else {
+                viewModel.loadStackData(it)
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        observeState()
         mBinding.jobSearchRv.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.jobSearchRv.addItemDecoration(ItemSpacingDecoration(7))
+        viewModel.loadData()
     }
 
 //    fun addData(){
@@ -85,11 +94,12 @@ class JopSearchFragment: BaseFragment<FragmentJopSearchBinding, JopSearchViewMod
 
     private fun setButtonColor(button: String) {
         with(mBinding) {
-            androidBtn.setBackgroundResource(if (button == "안드로이드") R.drawable.ic_android_on else R.drawable.ic_android_off )
-            serverBtn.setBackgroundResource(if (button == "서버") R.drawable.ic_server_on else R.drawable.ic_server_off )
-            gameBtn.setBackgroundResource(if (button == "게임") R.drawable.ic_game_on else R.drawable.ic_game_off )
-            etcBtn.setBackgroundResource(if (button == "기타") R.drawable.ic_etc_on else R.drawable.ic_etc_off )
-            embeddedBtn.setBackgroundResource(if (button == "임베디드") R.drawable.ic_embedded_on else R.drawable.ic_embedded_off )
+            val nowButton = viewModel.nowButtonData.value
+            androidBtn.setBackgroundResource(if (button == "안드로이드" && nowButton != button) R.drawable.ic_android_on else R.drawable.ic_android_off )
+            serverBtn.setBackgroundResource(if (button == "서버"&& nowButton != button) R.drawable.ic_server_on else R.drawable.ic_server_off )
+            gameBtn.setBackgroundResource(if (button == "게임"&& nowButton != button) R.drawable.ic_game_on else R.drawable.ic_game_off )
+            etcBtn.setBackgroundResource(if (button == "기타"&& nowButton != button) R.drawable.ic_etc_on else R.drawable.ic_etc_off )
+            embeddedBtn.setBackgroundResource(if (button == "임베디드"&& nowButton != button) R.drawable.ic_embedded_on else R.drawable.ic_embedded_off )
         }
     }
 

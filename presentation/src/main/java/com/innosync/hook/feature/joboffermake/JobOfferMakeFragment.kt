@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferMakeBinding
 import com.innosync.hook.feature.joboffermake.JobOfferMakeViewModel.Companion.ON_CLICK_BACK
@@ -71,6 +72,11 @@ class JobOfferMakeFragment :BaseFragment<FragmentJobOfferMakeBinding, JobOfferMa
             }
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as MainActivity).moveHome()
     }
 
     fun checkedList(): MutableList<String> {

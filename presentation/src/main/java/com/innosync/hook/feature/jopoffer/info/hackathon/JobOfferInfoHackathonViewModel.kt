@@ -4,9 +4,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.innosync.domain.model.EatModel
 import com.innosync.domain.model.HackathonModel
-import com.innosync.domain.usecase.JobOpeningGetOneHackathonUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetOneHackathonUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain

@@ -5,10 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.innosync.hook.MainActivity
 import com.innosync.hook.feature.jopoffer.model.JobOfferModel
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
-import com.innosync.hook.databinding.FragmentJopOfferBinding
+import com.innosync.hook.databinding.FragmentJobOfferBinding
 import com.innosync.hook.feature.chat.ChatFragmentDirections
 import com.innosync.hook.feature.joboffermake.JobOfferMakeFragmentDirections
 import com.innosync.hook.feature.jopoffer.JopOfferViewModel.Companion.ON_CLICK_BACK_BTN
@@ -22,7 +23,7 @@ import com.innosync.hook.util.getYour
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>(){
+class JopOfferFragment :BaseFragment<FragmentJobOfferBinding, JopOfferViewModel>(){
 
     override val viewModel: JopOfferViewModel by viewModels()
 
@@ -80,6 +81,7 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
 
     override fun onResume() {
         super.onResume()
+        (requireActivity() as MainActivity).moveHome()
         observeState()
         initRv()
         when(viewModel.nowView.value) {
