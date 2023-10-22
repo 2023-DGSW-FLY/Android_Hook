@@ -98,6 +98,7 @@ dependencies {
 
     // glide
     implementation(Libraries.GLIDE)
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.16.0")
     kapt(Libraries.GLIDE_COMPILER)
 
 //    implementation("com.google.android.material:material:1.6.0")

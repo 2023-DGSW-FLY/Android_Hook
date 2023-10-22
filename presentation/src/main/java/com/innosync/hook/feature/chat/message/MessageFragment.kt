@@ -8,6 +8,7 @@ import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMessageBinding
 import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_SEND
+import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,7 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
     override fun observerViewModel() {
         setRv(emptyList())
         initRoomName()
+        initObserver()
         viewModel.addChatEventListener(
             data.chatUid
         ) {
@@ -44,6 +46,12 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
         }
     }
 
+    private fun initObserver() {
+        collectLatestStateFlow(viewModel.userIdState) {
+            mBinding.textTopbar.text = it
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         (requireActivity() as? MainActivity)?.bottomVisible(false)
@@ -55,7 +63,7 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
     }
 
     private fun initRoomName() {
-        mBinding.textTopbar.text = data.roomName
+        viewModel.loadUserName(data.your)
     }
 
     private fun setRv(item: List<ChatModel>) {

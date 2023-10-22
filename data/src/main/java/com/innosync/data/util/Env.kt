@@ -27,9 +27,11 @@ internal object Env {
         const val insert = jobSearch
     }
 
-    object My {
+    object User {
         private const val user = "/api/v1/users"
         const val get = "${user}/user"
+
+        const val getThese = "${user}/user/all"
 
     }
 }

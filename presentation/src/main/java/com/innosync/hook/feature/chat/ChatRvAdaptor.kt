@@ -16,7 +16,8 @@ class ChatRvAdaptor constructor(
     private val my: String,
     private val rooms: List<RoomModel>,
     private val context: Context,
-    private val action: (RoomModel) -> Unit
+    private val users: Map<String, String>?,
+    private val action: (RoomModel) -> Unit,
 ): RecyclerView.Adapter<ChatRvAdaptor.ViewHolder>() {
 
     inner class ViewHolder(binding: ItemChatBinding): RecyclerView.ViewHolder(binding.root) {
@@ -39,8 +40,13 @@ class ChatRvAdaptor constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = rooms[position]
         holder.message.text = item.lastMessage
-        holder.name.text = my
+//        holder.name.text = my
         val your = item.getYour(my)
+        if (users == null) {
+            holder.name.text = your
+        } else {
+            holder.name.text = users[your] ?: ""
+        }
         Log.d("TAG", "onBindViewHolder: $your")
         Glide.with(context)
             .load(your.toImageUrl())

@@ -8,12 +8,15 @@ import com.innosync.domain.model.RoomModel
 import com.innosync.domain.model.UserModel
 import com.innosync.domain.usecase.FirebaseGetListUseCase
 import com.innosync.domain.usecase.FirebaseInsertUseCase
+import com.innosync.domain.usecase.chat.ChatGetTheseInfoUseCase
 import com.innosync.domain.usecase.user.UserGetInfoUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +24,15 @@ import javax.inject.Inject
 class ChatViewModel @Inject constructor(
     private val firebaseGetListUseCase: FirebaseGetListUseCase,
     private val firebaseInsertUseCase: FirebaseInsertUseCase,
-    private val userGetInfoUseCase: UserGetInfoUseCase
+    private val userGetInfoUseCase: UserGetInfoUseCase,
+    private val chatGetTheseInfoUseCase: ChatGetTheseInfoUseCase
 ): BaseViewModel() {
 
     private val _myData = MutableLiveData<UserModel>()
     val myData: LiveData<UserModel> = _myData
+
+    private val _usersData = MutableStateFlow<Map<String, String>>(emptyMap())
+    val usersData = _usersData.asStateFlow()
 
     fun onClickDummy() =
         viewEvent(ON_CLICK_DUMMY)
@@ -59,6 +66,18 @@ class ChatViewModel @Inject constructor(
             userId = userId,
             targetId = targetId
         )
+    }
+
+    fun getThese(
+        users: List<String>
+    ) = launchIO {
+        chatGetTheseInfoUseCase.invoke(
+            users
+        ).onSuccess {
+            _usersData.value = it
+        }.onFailures {
+
+        }
     }
 
     companion object {

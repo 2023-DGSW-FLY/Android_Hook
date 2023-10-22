@@ -8,6 +8,7 @@ import com.innosync.domain.model.RoomModel
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentChatBinding
 import com.innosync.hook.feature.chat.ChatViewModel.Companion.ON_CLICK_DUMMY
+import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.getYour
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
     override val viewModel: ChatViewModel by viewModels()
 
+    private var chats: List<RoomModel>? = null
 
     override fun observerViewModel() {
         observeData()
@@ -46,12 +48,16 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
 
     }
 
-    private fun setRv(list: List<RoomModel>) {
+    private fun setRv(list: List<RoomModel>, users: Map<String, String>?) {
         val my = viewModel.myData.value?.id.toString()
+        val there = list.map {
+            it.getYour(my)
+        }
         val adaptor = ChatRvAdaptor(
             my,
             list,
-            requireContext()
+            requireContext(),
+            users,
         ) { data ->
             Log.d(TAG, "setRv: $data")
             val navigate = ChatFragmentDirections.actionNavItemMessageToMessageFragment(
@@ -80,13 +86,29 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
 
     private fun observeData() {
         viewModel.myData.observe(this@ChatFragment) {
+            val userId = it.id.toString()
             viewModel.getUserList(
                 it.id.toString()
             ) { data ->
+                chats = data
                 Log.d(TAG, "observeData: $data")
-                setRv(data)
+                setRv(data, null)
+                val users = data.map { chat ->
+                    chat.getYour(userId)
+                }
+                viewModel.getThese(users)
             }
         }
+
+        collectLatestStateFlow(viewModel.usersData) {
+            if (chats != null) {
+                setRv(this.chats!!, it)
+            }
+        }
+
+//        val there = list.map {
+//            it.getYour(my)
+//        }
     }
 
     companion object {
