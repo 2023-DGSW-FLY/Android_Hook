@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
+import com.innosync.di.BuildConfig
 import com.innosync.domain.model.RoomModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,7 +26,8 @@ internal fun RoomModel.getYour(my: String): String =
 
 
 internal fun String.toImageUrl(): String =
-    "https://image.bugsm.co.kr/artist/images/1000/800491/80049126.jpg"
+    "${BuildConfig.SERVER}/api/v1/users/image/$this"
+//    "https://image.bugsm.co.kr/artist/images/1000/800491/80049126.jpg"
 //    "https://exmaple.com/images/user/$this"
 
 internal fun Long.toStringDate(): String {

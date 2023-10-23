@@ -1,6 +1,7 @@
 package com.innosync.data.repository
 
 import com.innosync.data.remote.mapper.toModels
+import com.innosync.data.remote.request.jobsearch.JobSearchInsertRequest
 import com.innosync.data.remote.response.jobopening.HackathonResponse
 import com.innosync.data.remote.response.jobsearch.JobSearchResponse
 import com.innosync.data.remote.service.JobSearchService
@@ -22,6 +23,16 @@ class JobSearchRepositoryImpl @Inject constructor(
     }
     override suspend fun getStack(category: String): List<JobSearchModel> = hookApiCall {
         jobSearchService.getStack(category).data.toModels()
+    }
+
+    override suspend fun insert(stack: String, content: String, url: String): Unit = hookApiCall {
+        jobSearchService.insert(
+            JobSearchInsertRequest(
+                stack = stack,
+                content = content,
+                url = url
+            )
+        )
     }
 //        dummyData(cnt).toModels()
 

@@ -1,4 +1,4 @@
-package com.innosync.domain.usecase
+package com.innosync.domain.usecase.jobsearch
 
 import com.innosync.domain.repository.JobSearchRepository
 import javax.inject.Inject

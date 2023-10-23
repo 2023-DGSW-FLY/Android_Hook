@@ -3,6 +3,7 @@ package com.innosync.hook.feature.joboffermake.food
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferMakeFoodBinding
@@ -74,5 +75,9 @@ class JobOfferMakeFoodFragment: BaseFragment<FragmentJobOfferMakeFoodBinding, Jo
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as MainActivity).moveHome()
+    }
 
 }

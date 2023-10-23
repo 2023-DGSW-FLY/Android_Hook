@@ -2,6 +2,7 @@ package com.innosync.hook.feature.joboffermake.exercise
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferMakeExerciseBinding
@@ -67,6 +68,11 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as MainActivity).moveHome()
     }
 
 

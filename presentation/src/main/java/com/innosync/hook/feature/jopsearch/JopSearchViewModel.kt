@@ -1,10 +1,15 @@
 package com.innosync.hook.feature.jopsearch
 
-import com.innosync.domain.usecase.JobSearchGetStackUseCase
-import com.innosync.domain.usecase.JobSearchGetUseCase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.innosync.domain.usecase.jobsearch.JobSearchGetStackUseCase
+import com.innosync.domain.usecase.jobsearch.JobSearchGetUseCase
 import com.innosync.hook.base.BaseViewModel
-import com.innosync.hook.feature.jopoffer.JopOfferViewModel.Companion.ON_CLICK_BACK_BTN
-import com.innosync.hook.feature.jopoffer.JopOfferViewModel.Companion.ON_CLICK_MAKE_BTN
+import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_ANDROID
+import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_EMBEDDED
+import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_ETC
+import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_GAME
+import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_SERVER
 import com.innosync.hook.util.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +24,9 @@ class JopSearchViewModel @Inject constructor(
 
     private val _rvData = MutableStateFlow<List<JobSearchRvModel>>(emptyList())
     val rvData = _rvData.asStateFlow()
+
+    private val _nowButtonData =  MutableStateFlow("")
+    val nowButtonData = _nowButtonData.asStateFlow()
 
     fun loadData() =
         launchIO {
@@ -43,17 +51,17 @@ class JopSearchViewModel @Inject constructor(
     }
     fun onClickAndroidBtn() {
         viewEvent(ON_CLICK_ANDROID)
-        loadStackData("안드로이드")
+        changeData("안드로이드")
     }
 
     fun onClickServerBtn() {
         viewEvent(ON_CLICK_SERVER)
-        loadStackData("서버")
+        changeData("서버")
     }
 
     fun onClickGameBtn() {
         viewEvent(ON_CLICK_GAME)
-        loadStackData("게임")
+        changeData("게임")
     }
 
     fun onClickMakeBtn() =
@@ -64,12 +72,20 @@ class JopSearchViewModel @Inject constructor(
 
     fun onClickEmbeddedBtn() {
         viewEvent(ON_CLICK_EMBEDDED)
-        loadStackData("임베디드")
+        changeData("임베디드")
     }
 
     fun onClickEtcBtn() {
         viewEvent(ON_CLICK_ETC)
-        loadStackData("기타")
+        changeData("기타")
+    }
+
+    private fun changeData(stack: String) {
+        if (_nowButtonData.value == stack) {
+            _nowButtonData.value = ""
+        } else {
+            _nowButtonData.value = stack
+        }
     }
 
     companion object {

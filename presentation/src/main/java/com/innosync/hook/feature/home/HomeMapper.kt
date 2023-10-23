@@ -22,7 +22,7 @@ internal fun JobSearchModel.toHomeRvModel() =
     HomeRvData(
         status = status,
         writer =  writer,
-        title = content.substring(0, 9),
+        title = content.substring(0, if(content.length > 9) 9 else content.length),
         type = 0
     )
 @JvmName("jobSearchModelToHomeRvModels")

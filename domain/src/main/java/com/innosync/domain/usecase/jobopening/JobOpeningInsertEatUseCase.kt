@@ -1,22 +1,23 @@
-package com.innosync.domain.usecase
+package com.innosync.domain.usecase.jobopening
 
 import com.innosync.domain.repository.JobOpeningRepository
 import javax.inject.Inject
 
-class JobOpeningInsertHackathonUseCase @Inject constructor(
+class JobOpeningInsertEatUseCase @Inject constructor(
     private val jobOpeningRepository: JobOpeningRepository
 ) {
+
     suspend operator fun invoke(
+        foodName: String?,
         title: String,
         content: String,
-        stack: List<String>,
-        url: String
+        place: String,
     ) = kotlin.runCatching {
-        jobOpeningRepository.insertHackathon(
+        jobOpeningRepository.insertEat(
+            foodName = foodName,
             title = title,
             content = content,
-            stack = stack,
-            url = url
+            place = place
         )
     }
 }

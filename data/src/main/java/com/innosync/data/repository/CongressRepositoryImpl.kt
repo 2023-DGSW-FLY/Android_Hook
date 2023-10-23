@@ -3,6 +3,7 @@ package com.innosync.data.repository
 import com.innosync.data.remote.mapper.toModels
 import com.innosync.data.remote.response.congress.CongressResponse
 import com.innosync.data.remote.service.CongressService
+import com.innosync.data.remote.utiles.hookApiCall
 import com.innosync.domain.model.CongressModel
 import com.innosync.domain.repository.CongressRepository
 import javax.inject.Inject
@@ -11,9 +12,9 @@ class CongressRepositoryImpl @Inject constructor(
     private val congressService: CongressService
 ): CongressRepository {
 
-    override suspend fun getCongressInfo(): List<CongressModel> =
+    override suspend fun getCongressInfo(): List<CongressModel> = hookApiCall {
         congressService.getContest().data.toModels()
-
+    }
 
     private fun dummyData(
         cnt: Int

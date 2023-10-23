@@ -1,14 +1,10 @@
 package com.innosync.hook.feature.joboffermake.exercise
 
-import android.util.Log
-import com.innosync.domain.usecase.JobOpeningInsertExerciseUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningInsertExerciseUseCase
 import com.innosync.hook.base.BaseViewModel
-import com.innosync.hook.feature.joboffermake.food.JobOfferMakeFoodViewModel
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel

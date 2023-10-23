@@ -1,6 +1,6 @@
 package com.innosync.hook.feature.jopoffer.info.hackathon.support
 
-import com.innosync.domain.usecase.JobOpeningSupportHackathonUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningSupportHackathonUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain

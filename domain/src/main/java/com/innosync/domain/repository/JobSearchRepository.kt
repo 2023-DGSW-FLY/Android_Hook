@@ -10,4 +10,6 @@ interface JobSearchRepository {
 
     suspend fun getStack(category: String): List<JobSearchModel>
 
+    suspend fun insert(stack: String, content: String, url: String)
+
 }
