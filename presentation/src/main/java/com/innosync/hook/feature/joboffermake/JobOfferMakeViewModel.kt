@@ -25,6 +25,10 @@ class JobOfferMakeViewModel @Inject constructor(
     fun onClickBack() =
         viewEvent(ON_CLICK_BACK)
 
+    fun failedComplete() {
+        _completeState.value = false
+    }
+
     fun insertData(
         title: String,
         content: String,

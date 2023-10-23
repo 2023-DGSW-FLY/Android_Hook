@@ -44,6 +44,10 @@ class JobOfferMakeFoodViewModel @Inject constructor(
         }
     }
 
+    fun failedComplete() {
+        _completeState.value = false
+    }
+
     fun onClickCheckBox() {
         Log.d("TAG", "onClickCheckBox: ${checkState.value}")
         _checkState.value = _checkState.value.not()

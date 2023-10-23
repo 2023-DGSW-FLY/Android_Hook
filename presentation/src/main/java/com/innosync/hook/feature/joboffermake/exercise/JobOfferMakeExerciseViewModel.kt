@@ -41,6 +41,10 @@ class JobOfferMakeExerciseViewModel @Inject constructor(
         }
     }
 
+    fun failedComplete() {
+        _completeState.value = false
+    }
+
     fun onClickComplete() {
         if(_completeState.value.not()) {
             _completeState.value = true

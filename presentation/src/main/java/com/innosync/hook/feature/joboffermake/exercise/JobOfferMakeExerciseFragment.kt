@@ -28,22 +28,27 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
                         val context = requireContext()
                         if (explanationDetail.text.isNullOrBlank()) {
                             context.shortToast("진행할 운동을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (datetimeDetail.text.isNullOrBlank()) {
                             context.shortToast("시간을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (locationDetail.text.isNullOrBlank()) {
                             context.shortToast("장소를 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (titleDetail.text.isNullOrBlank()) {
                             context.shortToast("제목을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (explanationDetail.text.isNullOrBlank()) {
                             context.shortToast("설명을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         viewModel.createExercise(
