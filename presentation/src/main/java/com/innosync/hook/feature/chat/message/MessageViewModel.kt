@@ -52,7 +52,7 @@ class MessageViewModel @Inject constructor(
         userGetUserNameUseCase.invoke(
             userId
         ).onSuccess {
-
+            _userIdState.value = it
         }.onFailures {
 
         }
