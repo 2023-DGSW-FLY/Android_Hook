@@ -1,16 +1,14 @@
 package com.innosync.hook.feature.home
 
-import android.graphics.Color
-import android.graphics.Rect
+import android.app.ActionBar
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
+import android.view.Window
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentHomeBinding
@@ -22,10 +20,12 @@ import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_HACKATHON
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_JOB_OPENING
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_JOB_SEARCH
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_SEE_ALL
+import com.innosync.hook.feature.loading.ImageDialog
 import com.innosync.hook.util.ItemRightSpacingDecoration
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -135,7 +135,13 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             val adaptor = HomeCongressRvAdaptor(
                 it,
                 requireContext()
-            ) {}
+            ) { url ->
+                val myDialog = ImageDialog(requireContext(), url)
+                myDialog.show()
+                myDialog.setCancelable(true)
+                val window: Window = myDialog.window!!
+                window.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
+            }
             mBinding.rvCongressInfo.adapter = adaptor
             mBinding.rvCongressInfo.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             mBinding.rvCongressInfo.addItemDecoration(ItemRightSpacingDecoration(16))
