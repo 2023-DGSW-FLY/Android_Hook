@@ -7,9 +7,9 @@ import com.innosync.hook.databinding.JopSearchItemBinding
 
 class JobSearchAdapter constructor(
     private val itemList: List<JobSearchRvModel>
-): RecyclerView.Adapter<JobSearchAdapter.viewHolder>() {
+): RecyclerView.Adapter<JobSearchAdapter.ViewHolder>() {
 
-    inner class viewHolder(private val binding: JopSearchItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: JopSearchItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(JobSearchRvModel: JobSearchRvModel){
             binding.textJobComment.text = JobSearchRvModel.detail
             binding.textUserName.text = JobSearchRvModel.userName
@@ -17,15 +17,15 @@ class JobSearchAdapter constructor(
         }
 
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        return viewHolder(JopSearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)).apply {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(JopSearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)).apply {
 
         }
     }
 
     override fun getItemCount(): Int = itemList.size
 
-    override fun onBindViewHolder(holder: viewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemList[position]
         holder.bind(item)
     }

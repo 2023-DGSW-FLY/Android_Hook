@@ -1,5 +1,7 @@
 package com.innosync.domain.repository
 
+import android.graphics.Bitmap
+
 interface AuthRepository  {
 
     suspend fun login(
@@ -14,6 +16,7 @@ interface AuthRepository  {
         email: String,
         userInfo: String,
         githubURL: String,
-        portfolioURL: String
+        portfolioURL: String,
+        profileImage: Bitmap
     ): String
 }

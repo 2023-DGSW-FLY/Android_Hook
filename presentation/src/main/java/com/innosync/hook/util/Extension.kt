@@ -3,6 +3,7 @@ package com.innosync.hook.util
 import android.content.Context
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.io.File
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -105,4 +107,13 @@ fun Fragment.startActivityWithFinishAll(activity: Class<*>) {
     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
     startActivity(intent)
     this.requireActivity().finishAffinity()
+}
+
+fun Uri.getRealPathFromURI(context: Context): Uri {
+    val cursor = context.contentResolver?.query(this, null, null, null, null)
+    cursor?.moveToNext()
+    val columnIndex = cursor?.getColumnIndex("_data")
+    val picturePath = columnIndex?.let { cursor.getString(it) }
+    cursor?.close()
+    return Uri.fromFile(File(picturePath ?: ""))
 }
