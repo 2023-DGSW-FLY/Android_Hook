@@ -14,7 +14,7 @@ internal fun HackathonModel.toJobOfferModel() =
         userName = writer,
         competitionName = title,
         technology = stack.toTechnology(),
-        time = regDate.second.toLong().toStringDate(),
+        time = modDate.toStringDate(),
         img = "https://i.discogs.com/YCopd9B5j4KEu0_mA-L8GirzXpRoHKAFJjDEkntsRTM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTIyMjYz/MDYtMTU5NzMzMjM5/Mi03MzMwLmpwZWc.jpeg",
         id = id
     )
@@ -30,7 +30,7 @@ internal fun EatModel.toJobOfferModel() =
         userName = writer,
         competitionName = title,
         technology = "",
-        time = regDate.second.toLong().toStringDate(),
+        time = modDate.toStringDate(),
         img = "https://i.discogs.com/YCopd9B5j4KEu0_mA-L8GirzXpRoHKAFJjDEkntsRTM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTIyMjYz/MDYtMTU5NzMzMjM5/Mi03MzMwLmpwZWc.jpeg",
         id = id
     )
@@ -45,7 +45,7 @@ internal fun ExerciseModel.tooJobOfferModel() =
         userName = username,
         competitionName = exercise,
         technology = "",
-        time = regDate.second.toLong().toStringDate(),
+        time = modDate.toStringDate(),
         img = "https://i.discogs.com/YCopd9B5j4KEu0_mA-L8GirzXpRoHKAFJjDEkntsRTM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTIyMjYz/MDYtMTU5NzMzMjM5/Mi03MzMwLmpwZWc.jpeg",
         id = id
     )

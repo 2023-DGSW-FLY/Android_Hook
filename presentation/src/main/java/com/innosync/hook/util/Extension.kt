@@ -18,6 +18,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
@@ -30,6 +33,10 @@ internal fun String.toImageUrl(): String =
 //    "https://image.bugsm.co.kr/artist/images/1000/800491/80049126.jpg"
 //    "https://exmaple.com/images/user/$this"
 
+internal fun String.toSlice(length: Int): String =
+    this.substring(0, if(this.length > length) length else this.length)
+
+
 internal fun Long.toStringDate(): String {
     val date = if (android.text.format.DateUtils.isToday(this * 1000L)) {
         SimpleDateFormat("a hh:mm", Locale.getDefault())
@@ -37,6 +44,21 @@ internal fun Long.toStringDate(): String {
         SimpleDateFormat("MM-dd", Locale.getDefault())
     }
     return date.format(Date(this * 1000L)).toString().replace("PM", "오후").replace("AM", "오전")
+}
+
+internal fun LocalDateTime.toStringDate(): String {
+    val now = LocalDateTime.now()
+
+    // 현재 날짜와 비교하여 오늘인지 확인
+    val isToday = this.toLocalDate() == now.toLocalDate()
+
+    return if (isToday) {
+        // 오늘인 경우
+        this.format(DateTimeFormatter.ofPattern("HH:mm"))
+    } else {
+        // 오늘이 아닌 경우
+        this.format(DateTimeFormatter.ofPattern("MM/dd"))
+    }
 }
 
 internal fun Context.shortToast(text: String) =

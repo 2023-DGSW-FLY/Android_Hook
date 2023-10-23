@@ -29,5 +29,4 @@ class JobSearchAdapter constructor(
         val item = itemList[position]
         holder.bind(item)
     }
-
 }
