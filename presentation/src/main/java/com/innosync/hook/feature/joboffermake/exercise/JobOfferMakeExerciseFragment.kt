@@ -51,9 +51,8 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
                             content = explanationDetail.text.toString(),
                             place = locationDetail.text.toString(),
                             dateTime = datetimeDetail.text.toString(),
-                            exercise = exercise.text.toString()
+                            exercise = exerciseDetail.text.toString()
                         )
-
                     }
                 }
                 ON_CLICK_BACK -> {
