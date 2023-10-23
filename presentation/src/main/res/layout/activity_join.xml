@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="회원가입"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:textColor="@color/signitureBlue"/>
 
@@ -34,42 +34,45 @@
                 android:layout_height="match_parent"
                 android:hint="아이디"
                 android:fontFamily="@font/nanumgothic_bold"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:layout_marginTop="30dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint= "비밀번호"
                 android:fontFamily="@font/nanumgothic_bold"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:layout_marginTop="30dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="이름"
                 android:fontFamily="@font/nanumgothic_bold"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:layout_marginTop="30dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="이메일"
                 android:fontFamily="@font/nanumgothic_bold"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="30dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="깃허브 url"
                 android:fontFamily="@font/nanumgothic_bold"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                android:inputType="textWebEmailAddress"
                 android:layout_marginTop="30dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="포트폴리오 url"
                 android:fontFamily="@font/nanumgothic_bold"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                android:inputType="textWebEmailAddress"
                 android:layout_marginTop="30dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -78,7 +81,7 @@
                 android:layout_height="40dp"
                 android:background="@color/signitureBlue"
                 android:text="가입하기"
-                android:textSize="17dp"
+                android:textSize="17sp"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:textColor="@color/white"
                 android:layout_marginTop="35dp" />
