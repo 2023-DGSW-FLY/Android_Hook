@@ -59,8 +59,11 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
 
     private fun List<String>.toStacks(): String {
         var result = ""
-        for (i in this) {
+        for ((cnt, i) in this.withIndex()) {
             result += i
+            if (cnt != this.size-1) {
+                result += " / "
+            }
         }
         return result
     }
