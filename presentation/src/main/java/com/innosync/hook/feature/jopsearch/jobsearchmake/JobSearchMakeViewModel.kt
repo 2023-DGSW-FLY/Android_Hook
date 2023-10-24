@@ -2,6 +2,7 @@ package com.innosync.hook.feature.jopsearch.jobsearchmake
 
 import com.innosync.domain.usecase.jobsearch.JobSearchInsertUseCase
 import com.innosync.hook.base.BaseViewModel
+import com.innosync.hook.feature.joboffermake.JobOfferMakeViewModel
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +18,8 @@ class JobSearchMakeViewModel @Inject constructor(
     private val _categoryData = MutableStateFlow("")
     val categoryData = _categoryData.asStateFlow()
 
+    private val _completeState = MutableStateFlow<Boolean>(false)
+
     fun insertJobSearch(
         stack: String,
         content: String,
@@ -31,6 +34,7 @@ class JobSearchMakeViewModel @Inject constructor(
                 viewEvent(ON_SUCCESS)
             }
         }.onFailures {
+            _completeState.value = false
             launchMain {
                 viewEvent(ON_FAILED)
             }
@@ -52,8 +56,12 @@ class JobSearchMakeViewModel @Inject constructor(
         _categoryData.value = "게임"
     }
 
-    fun onClickMakeBtn() =
-        viewEvent(ON_CLICK_MAKE_BTN)
+    fun onClickMakeBtn() {
+        if (_completeState.value.not()) {
+            _completeState.value = true
+            viewEvent(ON_CLICK_MAKE_BTN)
+        }
+    }
 
 
     fun onClickBackBtn() =

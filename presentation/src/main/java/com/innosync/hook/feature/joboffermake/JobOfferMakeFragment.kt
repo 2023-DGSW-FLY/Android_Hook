@@ -30,22 +30,27 @@ class JobOfferMakeFragment :BaseFragment<FragmentJobOfferMakeBinding, JobOfferMa
                     val context = requireContext()
                     if (check.size == 0) {
                         context.shortToast("모집하는 관련 기술을 선택하세요")
+                        viewModel.failedComplete()
                         return@bindingViewEvent
                     }
                     if (mBinding.competitionEditText.text.isNullOrBlank()) {
                         context.shortToast("대회 제목을 서술해주세요. ")
+                        viewModel.failedComplete()
                         return@bindingViewEvent
                     }
                     if (mBinding.explanationEditText.text.isNullOrBlank()) {
                         context.shortToast("대회에 대한 내용을 서술해주세요")
+                        viewModel.failedComplete()
                         return@bindingViewEvent
                     }
                     if (mBinding.competitionLinkEditText.text.isNullOrBlank()) {
                         context.shortToast("대회와 관련된 링크를 적어주세요")
+                        viewModel.failedComplete()
                         return@bindingViewEvent
                     }
                     if (mBinding.competitionLinkEditText.text.toString().contains("https://").not()) {
                         context.shortToast("대회와 관련된 유효한 링크를 적어주세요")
+                        viewModel.failedComplete()
                         return@bindingViewEvent
                     }
                     viewModel.insertData(

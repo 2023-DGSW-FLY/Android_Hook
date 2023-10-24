@@ -29,18 +29,22 @@ class JobOfferMakeFoodFragment: BaseFragment<FragmentJobOfferMakeFoodBinding, Jo
                     with(mBinding) {
                         if (foodNameDetail.text.isNullOrBlank() && viewModel.checkState.value.not()) {
                             context.shortToast("음식을 입력해주세요")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (locationDetail.text.isNullOrBlank()) {
                             context.shortToast("음식을 먹을 장소를 입력해주세요")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (titleDetail.text.isNullOrBlank()) {
                             context.shortToast("제목을 입력해주세요")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (explanationDetail.text.isNullOrBlank()) {
                             context.shortToast("설명을 입력해주세요")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         viewModel.createFood(

@@ -122,24 +122,24 @@ class JobOpeningRepositoryImpl @Inject constructor(
     }
 //        jobOpeningService.getHackathon(cnt = cnt).data.toModels()
 
-    private fun dummyData(cnt: Int): MutableList<HackathonResponse> {
-        var dummy = mutableListOf<HackathonResponse>()
-        for (i in 1..cnt) {
-            dummy.add(
-                HackathonResponse(
-                    id = i,
-                    title = "테스트",
-                    content = "내용",
-                    stack = listOf("서버개발자"),
-                    url = "https://rqwe",
-                    status = "matching",
-                    username = "q",
-                    writer = "yeseon12dd31$i",
-                    regDate = LocalDateTime.now(),
-                    modDate = LocalDateTime.now(),
-                )
-            )
-        }
-        return dummy
-    }
+//    private fun dummyData(cnt: Int): MutableList<HackathonResponse> {
+//        var dummy = mutableListOf<HackathonResponse>()
+//        for (i in 1..cnt) {
+//            dummy.add(
+//                HackathonResponse(
+//                    id = i,
+//                    title = "테스트",
+//                    content = "내용",
+//                    stack = listOf("서버개발자"),
+//                    url = "https://rqwe",
+//                    status = "matching",
+//                    username = "q",
+//                    writer = "yeseon12dd31$i",
+//                    regDate = LocalDateTime.now(),
+//                    modDate = LocalDateTime.now(),
+//                )
+//            )
+//        }
+//        return dummy
+//    }
 }

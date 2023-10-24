@@ -4,5 +4,6 @@ data class HomeRvData(
     val status: String = "",
     val writer: String = "",
     val title: String = "",
-    var type: Int = 1
+    var type: Int = 1,
+    val time: String = "",
 )

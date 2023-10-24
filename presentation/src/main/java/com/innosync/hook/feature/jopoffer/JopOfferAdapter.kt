@@ -26,7 +26,6 @@ class JopOfferAdapter constructor(
             if (position%2 == 1) {
                 binding.layoutItem.setBackgroundColor(Color.parseColor("#F3F3F3"))
             }
-
             // 이미지
             Glide.with(binding.profileImg)
                 .load(JobOfferModel.img)

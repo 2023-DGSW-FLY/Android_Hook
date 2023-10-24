@@ -6,6 +6,8 @@ import java.time.LocalDateTime
 data class HackathonResponse(
     @field:SerializedName("id")
     val id: Int,
+    @field:SerializedName("userId")
+    val userId: Int?,
     @field:SerializedName("title")
     val title: String,
     @field:SerializedName("content")

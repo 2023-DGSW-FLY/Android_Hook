@@ -19,6 +19,8 @@ class JobOfferMakeFoodViewModel @Inject constructor(
     private val _checkState = MutableStateFlow(false)
     val checkState = _checkState.asStateFlow()
 
+    private val _completeState = MutableStateFlow<Boolean>(false)
+
     fun createFood(
         foodName: String?,
         title: String,
@@ -36,9 +38,14 @@ class JobOfferMakeFoodViewModel @Inject constructor(
             }
         }.onFailures {
             launchMain {
+                _completeState.value = false
                 viewEvent(ON_FAILED)
             }
         }
+    }
+
+    fun failedComplete() {
+        _completeState.value = false
     }
 
     fun onClickCheckBox() {
@@ -47,8 +54,12 @@ class JobOfferMakeFoodViewModel @Inject constructor(
         viewEvent(ON_CLICK_CHECKBOX)
     }
 
-    fun onClickComplete() =
-        viewEvent(ON_CLICK_COMPLETE)
+    fun onClickComplete() {
+        if(_completeState.value.not()) {
+            _completeState.value = true
+            viewEvent(JobOfferMakeViewModel.ON_CLICK_COMPLETE)
+        }
+    }
 
     fun onClickBack() =
         viewEvent(JobOfferMakeViewModel.ON_CLICK_BACK)

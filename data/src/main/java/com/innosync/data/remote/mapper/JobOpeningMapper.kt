@@ -10,6 +10,7 @@ import com.innosync.domain.model.HackathonModel
 internal fun HackathonResponse.toModel() =
     HackathonModel(
         id = id,
+        userId = userId?: 1, // test
         title = title,
         content = content,
         stack = stack,

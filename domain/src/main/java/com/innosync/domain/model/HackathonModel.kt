@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 
 data class HackathonModel(
     val id: Int,
+    val userId: Int,
     val title: String,
     val content: String,
     val stack: List<String>,

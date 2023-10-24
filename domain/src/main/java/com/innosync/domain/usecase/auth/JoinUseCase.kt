@@ -1,5 +1,6 @@
 package com.innosync.domain.usecase.auth
 
+import android.graphics.Bitmap
 import com.innosync.domain.repository.AuthRepository
 import javax.inject.Inject
 
@@ -14,7 +15,8 @@ class JoinUseCase @Inject constructor(
         email: String,
         userInfo: String,
         githubURL: String,
-        portfolioURL: String
+        portfolioURL: String,
+        profileImage: Bitmap
     ) = kotlin.runCatching {
         authRepository.join(
             userAccount = userAccount,
@@ -23,7 +25,8 @@ class JoinUseCase @Inject constructor(
             email = email,
             userInfo = userInfo,
             githubURL = githubURL,
-            portfolioURL = portfolioURL
+            portfolioURL = portfolioURL,
+            profileImage = profileImage
         )
     }
 }
