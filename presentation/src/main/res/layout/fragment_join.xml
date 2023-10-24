@@ -63,6 +63,7 @@
                     android:hint="이메일"
                     android:fontFamily="@font/nanumgothic_bold"
                     android:textSize="13sp"
+                    android:inputType="textEmailAddress"
                     android:layout_marginTop="30dp"/>
                 <EditText
                     android:id="@+id/edit_github"
@@ -71,6 +72,7 @@
                     android:hint="깃허브 URL 예) https://github.com/8954sood"
                     android:fontFamily="@font/nanumgothic_bold"
                     android:textSize="13sp"
+                    android:inputType="textWebEmailAddress"
                     android:layout_marginTop="30dp"/>
                 <EditText
                     android:id="@+id/edit_portfolio"
@@ -79,6 +81,7 @@
                     android:hint="포트폴리오 url 예) https://notion.com/test"
                     android:fontFamily="@font/nanumgothic_bold"
                     android:textSize="13sp"
+                    android:inputType="textWebEmailAddress"
                     android:layout_marginTop="30dp"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
