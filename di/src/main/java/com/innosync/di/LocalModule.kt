@@ -1,7 +1,9 @@
 package com.innosync.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
+import com.innosync.data.local.dao.FirebaseTokenDao
 import com.innosync.data.local.dao.TokenDao
 import com.innosync.data.local.database.HookDataBase
 import com.innosync.data.util.TableEnv
@@ -30,7 +32,20 @@ object LocalModule {
 
     @Provides
     @Singleton
+    fun provideSharedPreferences(
+        @ApplicationContext context: Context
+    ): SharedPreferences = context
+        .getSharedPreferences("hook_prefs", Context.MODE_PRIVATE)
+
+    @Provides
+    @Singleton
     fun provideTokenDao(
         hookDataBase: HookDataBase
     ): TokenDao = hookDataBase.tokenDao()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseTokenDao(
+        hookDataBase: HookDataBase
+    ): FirebaseTokenDao = hookDataBase.firebaseTokenDao()
 }

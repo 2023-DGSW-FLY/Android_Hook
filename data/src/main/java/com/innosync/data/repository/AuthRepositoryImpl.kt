@@ -2,6 +2,7 @@ package com.innosync.data.repository
 
 import android.graphics.Bitmap
 import android.util.Log
+import com.innosync.data.local.dao.FirebaseTokenDao
 import com.innosync.data.local.dao.TokenDao
 import com.innosync.data.local.entity.token.TokenEntity
 import com.innosync.data.remote.request.UserJoinRequest
@@ -15,24 +16,28 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val loginService: LoginService,
-    private val tokenDao: TokenDao
+    private val tokenDao: TokenDao,
+    private val firebaseTokenDao: FirebaseTokenDao
 ): AuthRepository {
 
     override suspend fun login(userAccount: String, password: String) {
         Log.d("TAG", "login: qweqwqwe")
-        loginService.login(
-            UserLoginRequest(
-                userAccount = userAccount,
-                password = password
-            )
-        ).data.let {
-            Log.d("TAG", "login: $it")
-            tokenDao.insert(
-                TokenEntity(
-                    token = it.accessToken,
-                    refreshToken = it.refreshToken
+        firebaseTokenDao.getToken().let { token ->
+            loginService.login(
+                UserLoginRequest(
+                    userAccount = userAccount,
+                    password = password,
+                    fireBaseToken = token.token
                 )
-            )
+            ).data.let {
+                Log.d("TAG", "login: $it")
+                tokenDao.insert(
+                    TokenEntity(
+                        token = it.accessToken,
+                        refreshToken = it.refreshToken
+                    )
+                )
+            }
         }
     }
 

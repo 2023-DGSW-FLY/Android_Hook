@@ -1,7 +1,9 @@
 package com.innosync.data.remote.service
 
 import com.innosync.data.remote.request.UserGetTheseRequest
+import com.innosync.data.remote.request.UserSendNotificationRequest
 import com.innosync.data.remote.response.BaseResponse
+import com.innosync.data.remote.response.TestResponse
 import com.innosync.data.remote.response.user.UserNameResponse
 import com.innosync.data.util.Env
 import retrofit2.http.Body
@@ -20,5 +22,10 @@ interface ChatService{
     suspend fun getUserName(
         @Path("id") userId: String
     ): BaseResponse<UserNameResponse>
+
+    @POST(Env.User.notification)
+    suspend fun sendNotification(
+        @Body body: UserSendNotificationRequest
+    ): TestResponse
 
 }

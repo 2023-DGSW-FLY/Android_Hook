@@ -7,6 +7,8 @@ import com.innosync.data.repository.JobOpeningRepositoryImpl
 import com.innosync.data.repository.JobSearchRepositoryImpl
 import com.innosync.data.repository.AuthRepositoryImpl
 import com.innosync.data.repository.ChatRepositoryImpl
+import com.innosync.data.repository.FirebaseTokenRepositoryImpl
+import com.innosync.data.repository.SharedPreferencesRepositoryImpl
 import com.innosync.data.repository.TokenRepositoryImpl
 import com.innosync.data.repository.UserRepositoryImpl
 import com.innosync.domain.repository.CongressRepository
@@ -16,6 +18,8 @@ import com.innosync.domain.repository.JobOpeningRepository
 import com.innosync.domain.repository.JobSearchRepository
 import com.innosync.domain.repository.AuthRepository
 import com.innosync.domain.repository.ChatRepository
+import com.innosync.domain.repository.FirebaseTokenRepository
+import com.innosync.domain.repository.SharedPreferencesRepository
 import com.innosync.domain.repository.TokenRepository
 import com.innosync.domain.repository.UserRepository
 import dagger.Binds
@@ -81,4 +85,16 @@ abstract class RepositoryModule {
     abstract fun providesChatRepository(
         chatRepositoryImpl: ChatRepositoryImpl
     ): ChatRepository
+
+    @Singleton
+    @Binds
+    abstract fun providesFirebaseTokenRepository(
+        firebaseTokenRepositoryImpl: FirebaseTokenRepositoryImpl
+    ): FirebaseTokenRepository
+
+    @Singleton
+    @Binds
+    abstract fun providesSharedPreferencesRepository(
+        sharedPreferencesRepositoryImpl: SharedPreferencesRepositoryImpl
+    ): SharedPreferencesRepository
 }

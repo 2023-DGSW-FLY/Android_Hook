@@ -2,6 +2,7 @@ package com.innosync.data.repository
 
 import com.innosync.data.remote.mapper.toModel
 import com.innosync.data.remote.request.UserGetTheseRequest
+import com.innosync.data.remote.request.UserSendNotificationRequest
 import com.innosync.data.remote.response.BaseResponse
 import com.innosync.data.remote.service.ChatService
 import com.innosync.data.remote.service.UserService
@@ -20,6 +21,16 @@ class ChatRepositoryImpl @Inject constructor(
 
     override suspend fun getUserName(userId: String): String = hookApiCall {
         chatService.getUserName(userId).data.name
+    }
+
+    override suspend fun sendNotification(title: String, content: String, targetId: String): Unit = hookApiCall {
+        chatService.sendNotification(
+            UserSendNotificationRequest(
+                targetId = targetId.toInt(),
+                title = title,
+                body = content
+            )
+        )
     }
 
 

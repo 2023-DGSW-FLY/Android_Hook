@@ -1,5 +1,6 @@
 package com.innosync.hook.feature.chat.message
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,9 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
         setRv(emptyList())
         initRoomName()
         initObserver()
+        val intent = Intent("current_fragment")
+        intent.putExtra("fragment_name", "FragmentB")
+        requireContext().sendBroadcast(intent)
         viewModel.addChatEventListener(
             data.chatUid
         ) {
@@ -37,6 +41,11 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
                         viewModel.sendMessage(
                             userId = data.my,
                             chatUid = data.chatUid,
+                            content = editSendMessage.text.toString()
+                        )
+                        viewModel.sendNotification(
+                            targetId = data.your,
+                            title = "${mBinding.textTopbar.text}",
                             content = editSendMessage.text.toString()
                         )
                         editSendMessage.text?.clear()
@@ -55,11 +64,13 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
     override fun onResume() {
         super.onResume()
         (requireActivity() as? MainActivity)?.bottomVisible(false)
+        viewModel.insertChat(data.your)
     }
 
     override fun onPause() {
         super.onPause()
         (requireActivity() as? MainActivity)?.bottomVisible(true)
+        viewModel.insertChat("")
     }
 
     private fun initRoomName() {

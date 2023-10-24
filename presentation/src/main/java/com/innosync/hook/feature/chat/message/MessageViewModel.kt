@@ -5,6 +5,8 @@ import com.innosync.domain.model.ChatModel
 import com.innosync.domain.usecase.FirebaseChatListenerUseCase
 import com.innosync.domain.usecase.FirebaseSendMessageUseCase
 import com.innosync.domain.usecase.chat.ChatGetUserNameUseCase
+import com.innosync.domain.usecase.chat.ChatSendUserNotificationUseCase
+import com.innosync.domain.usecase.sharedpreferences.SharedPreferencesInsertUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.util.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +20,9 @@ import javax.inject.Inject
 class MessageViewModel @Inject constructor(
     private val firebaseChatListenerUseCase: FirebaseChatListenerUseCase,
     private val firebaseSendMessageUseCase: FirebaseSendMessageUseCase,
-    private val userGetUserNameUseCase: ChatGetUserNameUseCase
+    private val userGetUserNameUseCase: ChatGetUserNameUseCase,
+    private val sharedPreferencesInsertUseCase: SharedPreferencesInsertUseCase,
+    private val chatSendUserNotificationUseCase: ChatSendUserNotificationUseCase
 ): BaseViewModel() {
 
     private val _userIdState = MutableStateFlow<String>("")
@@ -46,6 +50,18 @@ class MessageViewModel @Inject constructor(
         )
     }
 
+    fun sendNotification(
+        title: String,
+        content: String,
+        targetId: String
+    ) = launchIO {
+        chatSendUserNotificationUseCase.invoke(
+            title = title,
+            content = content,
+            targetId = targetId
+        )
+    }
+
     fun loadUserName(
         userId: String
     ) = launchIO {
@@ -56,6 +72,12 @@ class MessageViewModel @Inject constructor(
         }.onFailures {
 
         }
+    }
+
+    fun insertChat(
+        targetId: String
+    ) = launchIO {
+        sharedPreferencesInsertUseCase(targetId)
     }
 
     fun onClickSend() =
