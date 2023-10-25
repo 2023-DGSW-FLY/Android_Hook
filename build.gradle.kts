@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs").version("2.5.3").apply(false)
     id("com.google.gms.google-services") version "4.3.15" apply false
     id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
+    id ("org.jetbrains.kotlin.kapt") version "1.5.21"
 }
 
 task("clean", Delete::class) {

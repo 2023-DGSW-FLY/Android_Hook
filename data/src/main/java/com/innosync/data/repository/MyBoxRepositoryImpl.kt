@@ -2,6 +2,7 @@ package com.innosync.data.repository
 
 import com.innosync.data.remote.mapper.toModels
 import com.innosync.data.remote.service.MyBoxService
+import com.innosync.data.remote.utiles.hookApiCall
 import com.innosync.domain.model.EatModel
 import com.innosync.domain.model.ExerciseModel
 import com.innosync.domain.model.HackathonModel
@@ -12,16 +13,19 @@ import javax.inject.Inject
 class MyBoxRepositoryImpl @Inject constructor(
     private val myBoxService: MyBoxService
 ): MyBoxRepository {
-    override suspend fun getHackathon(): List<HackathonModel> =
+    override suspend fun getHackathon(): List<HackathonModel> = hookApiCall {
         myBoxService.getHackertonHeader().data.toModels()
+    }
 
-    override suspend fun getEat(): List<EatModel> =
-        myBoxService.getEatHeader().data.toModels()
+    override suspend fun getEat(): List<EatModel> = hookApiCall {
+        myBoxService.getMealHeader().data.toModels()
+    }
 
-    override suspend fun getExercise(): List<ExerciseModel> =
+    override suspend fun getExercise(): List<ExerciseModel> = hookApiCall {
         myBoxService.getExerciseHeader().data.toModels()
+    }
 
-
-    override suspend fun getMyWrite(): List<JobSearchModel> =
+    override suspend fun getJobSearch(): List<JobSearchModel> = hookApiCall {
         myBoxService.getJobSerchHeader().data.toModels()
+    }
 }

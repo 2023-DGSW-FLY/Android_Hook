@@ -19,6 +19,7 @@ import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
 
+
 abstract class BaseFragment<VB: ViewDataBinding, VM: BaseViewModel> : Fragment() {
     protected lateinit var mBinding: VB
     protected lateinit var mViewModel: VM

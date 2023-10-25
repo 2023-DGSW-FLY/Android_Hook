@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_job_comment"
+            android:id="@+id/text_job_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -50,11 +50,12 @@
             app:layout_constraintTop_toBottomOf="@+id/text_job_status" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/text_done"
             android:layout_width="50dp"
             android:layout_height="20dp"
             android:layout_marginTop="35dp"
             android:layout_marginRight="12dp"
-            android:background="@drawable/mybox_background"
+            android:background="@drawable/status_blue_background"
             android:text="완료"
             android:textColor="@color/white"
             android:textSize="10dp"
