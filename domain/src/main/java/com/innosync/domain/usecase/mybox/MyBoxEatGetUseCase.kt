@@ -1,4 +1,13 @@
 package com.innosync.domain.usecase.mybox
 
-class MyBoxEatGetUseCase {
+import com.innosync.domain.repository.MyBoxRepository
+import javax.inject.Inject
+
+class MyBoxEatGetUseCase @Inject constructor(
+    private val myBoxRepository: MyBoxRepository
+) {
+
+    suspend operator fun invoke() = kotlin.runCatching {
+        myBoxRepository.getEat()
+    }
 }

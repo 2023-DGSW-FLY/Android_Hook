@@ -2,6 +2,7 @@ package com.innosync.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.innosync.data.remote.interceptor.LoggingInterceptor
 import com.innosync.data.remote.service.CongressService
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
@@ -25,7 +26,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.time.LocalDateTime
