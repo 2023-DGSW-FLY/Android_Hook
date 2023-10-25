@@ -87,11 +87,14 @@
     </fragment>
     <fragment
         android:id="@+id/jopSearchFragment"
-        android:name="com.innosync.hook.feature.jopsearch.JopSearchFragment"
+        android:name="com.innosync.hook.feature.jopsearch.JobSearchFragment"
         android:label="JopSearchFragment" >
         <action
             android:id="@+id/action_jopSearchFragment_to_jobSearchMakeFragment"
             app:destination="@id/jobSearchMakeFragment" />
+        <action
+            android:id="@+id/action_jopSearchFragment_to_jobSearchInfoFragment"
+            app:destination="@id/jobSearchInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/jobOfferMakeFoodFragment"
@@ -146,4 +149,15 @@
         android:id="@+id/jobSearchMakeFragment"
         android:name="com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeFragment"
         android:label="JobSearchMakeFragment" />
+    <fragment
+        android:id="@+id/jobSearchInfoFragment"
+        android:name="com.innosync.hook.feature.jopsearch.info.JobSearchInfoFragment"
+        android:label="JobSearchInfoFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_jobSearchInfoFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
 </navigation>

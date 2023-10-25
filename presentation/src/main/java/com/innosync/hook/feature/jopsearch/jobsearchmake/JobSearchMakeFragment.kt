@@ -5,7 +5,6 @@ import androidx.navigation.fragment.findNavController
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobSearchMakeBinding
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel
 import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_ANDROID
 import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_BACK_BTN
 import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_EMBEDDED

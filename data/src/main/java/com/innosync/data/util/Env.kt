@@ -21,7 +21,7 @@ internal object Env {
     }
 
     object JobSearch {
-        private const val jobSearch = "/access"
+        const val jobSearch = "/access"
         const val get = "${jobSearch}/get"
         const val getStack = "${jobSearch}/stack"
         const val insert = jobSearch

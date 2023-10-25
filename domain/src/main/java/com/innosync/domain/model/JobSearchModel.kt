@@ -9,6 +9,7 @@ data class JobSearchModel(
     val url: String,
     val status: String,
     val writer: String,
+    val userId: String,
     val regDate: LocalDateTime,
     val modDate: LocalDateTime
 )

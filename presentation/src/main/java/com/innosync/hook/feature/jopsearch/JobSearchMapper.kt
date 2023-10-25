@@ -8,7 +8,8 @@ internal fun JobSearchModel.toRvModel() =
     JobSearchRvModel(
         userName = writer,
         time = modDate.toStringDate(),
-        detail = content.toSlice(8)
+        detail = content.toSlice(8),
+        id = id
     )
 
 internal fun List<JobSearchModel>.toRvModels() =
