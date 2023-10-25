@@ -18,6 +18,7 @@ import androidx.lifecycle.LifecycleService
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.innosync.domain.usecase.firebase.FirebaseTokenInsertUseCase
+import com.innosync.domain.usecase.sharedpreferences.SharedPreferencesGetAlarmUseCase
 import com.innosync.domain.usecase.sharedpreferences.SharedPreferencesGetUseCase
 import com.innosync.hook.MainActivity
 import com.innosync.hook.R
@@ -37,6 +38,9 @@ class FirebaseMessageService : FirebaseMessagingService() {
 
     @Inject
     lateinit var sharedPreferencesGetUseCase: SharedPreferencesGetUseCase
+
+    @Inject
+    lateinit var sharedPreferencesGetAlarmUseCase: SharedPreferencesGetAlarmUseCase
 
 
     private val serviceScope = CoroutineScope(Dispatchers.IO)
@@ -60,8 +64,15 @@ class FirebaseMessageService : FirebaseMessagingService() {
 
         Log.d(TAG, "onMessageReceived Data: ${message.data} ")
         Log.d(TAG, "onMessageReceived Noti: ${message.notification} ")
-
-
+        var status: Boolean
+        runBlocking {
+            sharedPreferencesGetAlarmUseCase.invoke().let {
+                status = it
+            }
+        }
+        if (status.not()) {
+            return
+        }
         val title = message.notification?.title
         val body = message.notification?.body
 //        Log.d(TAG, "onMessageReceived: ${message.notification?.tag}")

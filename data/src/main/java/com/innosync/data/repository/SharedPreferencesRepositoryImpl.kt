@@ -12,4 +12,10 @@ class SharedPreferencesRepositoryImpl @Inject constructor(
 
     override suspend fun insert(value: String) =
         sharedPreferences.edit().putString("chat", value).apply()
+
+    override suspend fun getAlarm(): Boolean =
+        sharedPreferences.getBoolean("alarm", true) ?: true
+
+    override suspend fun setAlarm(value: Boolean) =
+        sharedPreferences.edit().putBoolean("alarm", value).apply()
 }
