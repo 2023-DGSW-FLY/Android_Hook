@@ -24,6 +24,7 @@ import com.innosync.hook.feature.loading.ImageDialog
 import com.innosync.hook.util.ItemRightSpacingDecoration
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -106,6 +107,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private fun initRv() {
         mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.rvJob.removeItemDecorations()
         mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))
     }
 
@@ -144,6 +146,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
             mBinding.rvCongressInfo.adapter = adaptor
             mBinding.rvCongressInfo.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            mBinding.rvCongressInfo.removeItemDecorations()
             mBinding.rvCongressInfo.addItemDecoration(ItemRightSpacingDecoration(16))
         }
     }

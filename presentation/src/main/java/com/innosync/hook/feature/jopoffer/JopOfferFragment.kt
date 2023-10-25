@@ -20,6 +20,7 @@ import com.innosync.hook.feature.jopoffer.JopOfferViewModel.Companion.ON_CLICK_M
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.getYour
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -128,6 +129,7 @@ class JopOfferFragment :BaseFragment<FragmentJobOfferBinding, JopOfferViewModel>
 
     private fun initRv() {
         mBinding.jobOfferRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.jobOfferRecyclerview.removeItemDecorations()
         mBinding.jobOfferRecyclerview.addItemDecoration(ItemSpacingDecoration(10))
     }
     private fun changeColor(

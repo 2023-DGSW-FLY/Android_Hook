@@ -15,6 +15,7 @@ import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK
 import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_SERVER
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,6 +80,7 @@ class JobSearchFragment: BaseFragment<FragmentJobSearchBinding, JobSearchViewMod
         super.onResume()
         observeState()
         mBinding.jobSearchRv.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.jobSearchRv.removeItemDecorations()
         mBinding.jobSearchRv.addItemDecoration(ItemSpacingDecoration(7))
         viewModel.loadData()
     }
