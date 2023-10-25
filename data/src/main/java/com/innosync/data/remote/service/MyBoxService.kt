@@ -10,22 +10,22 @@ import retrofit2.http.GET
 
 interface MyBoxService {
     @GET("/hackathon/all")
-    fun getHackertonHeader(
+    suspend fun getHackertonHeader(
 
     ): BaseResponse<List<HackathonResponse>>
 
-    @GET("/hackathon/all")
-    fun getEatHeader(
+    @GET("/food/get")
+    suspend fun getMealHeader(
 
     ): BaseResponse<List<EatResponse>>
 
-   @GET("/hackathon/all")
-   fun getExerciseHeader(
+   @GET("/exercise/get")
+   suspend fun getExerciseHeader(
 
    ): BaseResponse<List<ExerciseResponse>>
 
-   @GET("/hackathon/all")
-   fun getJobSerchHeader(
+   @GET("/access/get")
+   suspend fun getJobSerchHeader(
 
    ): BaseResponse<List<JobSearchResponse>>
 
