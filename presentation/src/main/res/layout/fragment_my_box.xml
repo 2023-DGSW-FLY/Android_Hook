@@ -49,15 +49,18 @@
        android:layout_height="wrap_content"
        android:text="식사"
        android:textSize="17dp"
+       android:textColor="@color/darkGray"
        app:layout_constraintLeft_toRightOf="@id/tv_contest"
        android:layout_weight="1"
-       android:gravity="center" />
+       android:gravity="center"
+       android:onClick=""/>
     <TextView
         android:id="@+id/tv_contest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="대회"
         android:textSize="17dp"
+        android:textColor="@color/darkGray"
         app:layout_constraintLeft_toRightOf="@id/tv_exercise"
         android:layout_weight="1"
         android:gravity="center"/>
@@ -68,6 +71,7 @@
         android:layout_height="wrap_content"
         android:text="운동"
         android:textSize="17dp"
+        android:textColor="@color/darkGray"
         android:layout_weight="1"
         android:gravity="center"/>
     <TextView
@@ -76,6 +80,7 @@
         android:layout_height="wrap_content"
         android:text="구직"
         android:textSize="17dp"
+        android:textColor="@color/darkGray"
         app:layout_constraintLeft_toRightOf="@id/tv_meal"
         android:layout_weight="1"
         android:gravity="center"/>
@@ -92,6 +97,7 @@
         android:layout_marginTop="220dp"/>
 
     <ImageView
+        android:id="@+id/ic_setting"
         android:layout_width="27dp"
         android:layout_height="27dp"
         android:background="@drawable/setting_icon"
@@ -103,7 +109,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mybox_rv"
+        android:id="@+id/mybox_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
