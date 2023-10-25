@@ -79,7 +79,7 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
                 reallyTechnology.text = it.exercise
                 reallyLocation.text = it.dateTime
                 Glide.with(requireContext())
-                    .load(it.id.toString().toImageUrl())
+                    .load(it.userId.toString().toImageUrl())
                     .into(profile)
             }
         }

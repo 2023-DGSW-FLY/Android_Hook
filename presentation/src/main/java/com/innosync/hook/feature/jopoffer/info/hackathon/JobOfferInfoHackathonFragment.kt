@@ -56,7 +56,7 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
                 reallyTechnology.text = it.stack.toStacks()
                 textLink.text = it.url
                 Glide.with(requireContext())
-                    .load(it.id.toString().toImageUrl())
+                    .load(it.userId.toString().toImageUrl())
                     .into(profile)
             }
         }

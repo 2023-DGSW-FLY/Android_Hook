@@ -82,7 +82,7 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
                 reallyFood.text = it.title
                 reallyLocation.text = it.place
                 Glide.with(requireContext())
-                    .load(it.id.toString().toImageUrl())
+                    .load(it.userId.toString().toImageUrl())
                     .into(profile)
             }
         }

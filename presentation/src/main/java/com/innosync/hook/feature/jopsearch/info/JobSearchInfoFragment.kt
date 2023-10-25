@@ -51,7 +51,7 @@ class JobSearchInfoFragment: BaseFragment<FragmentJobSearchInfoBinding, JobSearc
                 textPortfolio.text = it.url
                 textContent.text = it.content
                 Glide.with(requireContext())
-                    .load(it.id.toString().toImageUrl())
+                    .load(it.userId.toImageUrl())
                     .into(profile)
             }
         }
