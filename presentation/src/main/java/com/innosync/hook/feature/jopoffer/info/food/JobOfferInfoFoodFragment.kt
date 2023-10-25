@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.innosync.domain.model.RoomModel
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferInfoExerciseBinding
@@ -17,6 +18,7 @@ import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseFrag
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel.Companion.ON_CLICK_CHAT
 import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -79,6 +81,9 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
                 nickname.text = it.writer
                 reallyFood.text = it.title
                 reallyLocation.text = it.place
+                Glide.with(requireContext())
+                    .load(it.id.toString().toImageUrl())
+                    .into(profile)
             }
         }
         viewModel.moveChat.observe(this@JobOfferInfoFoodFragment) {
