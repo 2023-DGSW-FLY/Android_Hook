@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/nav_item_home">
+    app:startDestination="@id/profile">
 
     <fragment
         android:id="@+id/exampleFragment"
@@ -146,4 +146,9 @@
         android:id="@+id/jobSearchMakeFragment"
         android:name="com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeFragment"
         android:label="JobSearchMakeFragment" />
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.innosync.hook.feature.profile.ProfileFragment"
+        android:label="profile"/>
 </navigation>
