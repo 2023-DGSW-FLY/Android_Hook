@@ -3,23 +3,17 @@ package com.innosync.hook.feature.fcm
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleService
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.innosync.domain.usecase.firebase.FirebaseTokenInsertUseCase
-import com.innosync.domain.usecase.sharedpreferences.SharedPreferencesGetAlarmUseCase
-import com.innosync.domain.usecase.sharedpreferences.SharedPreferencesGetUseCase
+import com.innosync.domain.usecase.alarm.AlarmGetChatStateUseCase
+import com.innosync.domain.usecase.alarm.AlarmGetStateUseCase
 import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,16 +31,16 @@ class FirebaseMessageService : FirebaseMessagingService() {
     lateinit var firebaseTokenInsertUseCase: FirebaseTokenInsertUseCase
 
     @Inject
-    lateinit var sharedPreferencesGetUseCase: SharedPreferencesGetUseCase
+    lateinit var alarmGetStateUseCase: AlarmGetStateUseCase
 
     @Inject
-    lateinit var sharedPreferencesGetAlarmUseCase: SharedPreferencesGetAlarmUseCase
+    lateinit var alarmGetChatStateUseCase: AlarmGetChatStateUseCase
 
 
     private val serviceScope = CoroutineScope(Dispatchers.IO)
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d("LOG", "onNewToken: $token")
+//        Log.d("LOG", "onNewToken: $token")
         serviceScope.launch {
             firebaseTokenInsertUseCase.invoke(
                 token
@@ -56,7 +50,6 @@ class FirebaseMessageService : FirebaseMessagingService() {
                 Log.d(TAG, "onNewToken: $it")
             }
         }
-        // TODO( "서버에 저장해야함 " )
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
@@ -66,7 +59,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         Log.d(TAG, "onMessageReceived Noti: ${message.notification} ")
         var status: Boolean
         runBlocking {
-            sharedPreferencesGetAlarmUseCase.invoke().let {
+            alarmGetChatStateUseCase.invoke().let {
                 status = it
             }
         }
@@ -75,43 +68,62 @@ class FirebaseMessageService : FirebaseMessagingService() {
         }
         val title = message.notification?.title
         val body = message.notification?.body
-//        Log.d(TAG, "onMessageReceived: ${message.notification?.tag}")
-        var tag = ""
-        runBlocking {
-            sharedPreferencesGetUseCase.invoke().let {
-                tag = it
-                Log.d(TAG, "onMessageReceivedShared: $it")
+        val data = message.data
+        val type = data["type"]
+//        serviceScope.launch {
+//            alarmInsertUseCase.invoke(AlarmModel(
+//                idx = 0,
+//                title = title!!,
+//                body = body!!,
+//                type = type!!
+//            ))
+//        }
+        if (type == "p") {
+            
+        } else {
+
+
+            Log.d(TAG, "onMessageReceived: $body")
+            var tag = ""
+            runBlocking {
+                alarmGetStateUseCase.invoke().let {
+                    tag = it
+                    Log.d(TAG, "onMessageReceivedShared: $it")
+                }
             }
-        }
+
+            Log.d(TAG, "onMessageReceived: $data")
 //        Log.d(TAG, "onMessageReceivedqwewqee: ${message.data["user"]}")
 //        Log.d(TAG, "onMessageReceived: $tag")
 //
 //        Log.d(TAG, "onMessageReceived: $title $body")
-        // 알림 생성 및 표시
-        if (message.data["user"] != tag) {
-            createNotificationChannel()
+            // 알림 생성 및 표시
+            if (message.data["user"] != tag) {
+                createNotificationChannel()
 
-            val intent = Intent(this, MainActivity::class.java) // 알림을 클릭했을 때 열릴 액티비티 지정
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            val pendingIntent = PendingIntent.getActivity(
-                this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
-            )
+                val intent = Intent(this, MainActivity::class.java) // 알림을 클릭했을 때 열릴 액티비티 지정
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                val pendingIntent = PendingIntent.getActivity(
+                    this, 0, intent,
+                    PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+                )
 
-            val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                val defaultSoundUri =
+                    RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-            val notificationBuilder = NotificationCompat.Builder(this, "hook_default_channels")
-                .setSmallIcon(R.drawable.ic_launcher_foreground) // 알림 아이콘
-                .setContentTitle(title) // 알림 제목
-                .setContentText(body) // 알림 내용
-                .setAutoCancel(true) // 알림을 클릭하면 자동으로 닫힘
-                .setSound(defaultSoundUri) // 알림 소리
-                .setContentIntent(pendingIntent) // 알림 클릭 시 실행될 Intent
+                val notificationBuilder = NotificationCompat.Builder(this, "hook_default_channels")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground) // 알림 아이콘
+                    .setContentTitle(title) // 알림 제목
+                    .setContentText(body) // 알림 내용
+                    .setAutoCancel(true) // 알림을 클릭하면 자동으로 닫힘
+                    .setSound(defaultSoundUri) // 알림 소리
+                    .setContentIntent(pendingIntent) // 알림 클릭 시 실행될 Intent
 
-            val notificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                val notificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            notificationManager.notify(0, notificationBuilder.build())
+                notificationManager.notify(0, notificationBuilder.build())
+            }
         }
     }
 

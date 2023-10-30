@@ -5,4 +5,5 @@ object TableEnv {
 
     const val TOKEN = "token_table"
     const val FIREBASE = "firebase_token_table"
+    const val ALARM = "alarm_table"
 }

@@ -34,4 +34,9 @@ internal object Env {
         const val notification = "/api/v1/notification"
 
     }
+
+    object Alarm {
+        private const val notification = "/api/v1/notification"
+        const val get = "${notification}/get"
+    }
 }

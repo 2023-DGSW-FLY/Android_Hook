@@ -6,7 +6,7 @@ import com.innosync.domain.usecase.FirebaseChatListenerUseCase
 import com.innosync.domain.usecase.FirebaseSendMessageUseCase
 import com.innosync.domain.usecase.chat.ChatGetUserNameUseCase
 import com.innosync.domain.usecase.chat.ChatSendUserNotificationUseCase
-import com.innosync.domain.usecase.sharedpreferences.SharedPreferencesInsertUseCase
+import com.innosync.domain.usecase.alarm.AlarmInsertChatStateUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.util.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +21,7 @@ class MessageViewModel @Inject constructor(
     private val firebaseChatListenerUseCase: FirebaseChatListenerUseCase,
     private val firebaseSendMessageUseCase: FirebaseSendMessageUseCase,
     private val userGetUserNameUseCase: ChatGetUserNameUseCase,
-    private val sharedPreferencesInsertUseCase: SharedPreferencesInsertUseCase,
+    private val alarmInsertChatStateUseCase: AlarmInsertChatStateUseCase,
     private val chatSendUserNotificationUseCase: ChatSendUserNotificationUseCase
 ): BaseViewModel() {
 
@@ -77,7 +77,7 @@ class MessageViewModel @Inject constructor(
     fun insertChat(
         targetId: String
     ) = launchIO {
-        sharedPreferencesInsertUseCase(targetId)
+        alarmInsertChatStateUseCase(targetId)
     }
 
     fun onClickSend() =

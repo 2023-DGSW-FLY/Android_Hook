@@ -10,9 +10,9 @@ import com.innosync.data.local.entity.token.TokenEntity
 @Database(
     entities = [
         TokenEntity::class,
-        FirebaseTokenEntity::class
+        FirebaseTokenEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class HookDataBase: RoomDatabase() {

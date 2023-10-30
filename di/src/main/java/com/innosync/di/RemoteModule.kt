@@ -6,6 +6,7 @@ import com.innosync.data.remote.service.CongressService
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
 import com.innosync.data.remote.interceptor.LoggingInterceptor
+import com.innosync.data.remote.service.AlarmService
 import com.innosync.data.remote.service.ChatService
 import com.innosync.data.remote.service.LoginService
 import com.innosync.data.remote.service.TokenService
@@ -156,5 +157,10 @@ class RemoteModule {
     @Singleton
     fun provideChatService(@TokenRetrofit retrofit: Retrofit): ChatService =
         retrofit.create(ChatService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAlarmService(@TokenRetrofit retrofit: Retrofit): AlarmService =
+        retrofit.create(AlarmService::class.java)
 
 }

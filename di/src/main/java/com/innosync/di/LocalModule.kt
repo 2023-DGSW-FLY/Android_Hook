@@ -48,4 +48,5 @@ object LocalModule {
     fun provideFirebaseTokenDao(
         hookDataBase: HookDataBase
     ): FirebaseTokenDao = hookDataBase.firebaseTokenDao()
+
 }
