@@ -56,7 +56,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         Log.d(TAG, "onMessageReceived Data: ${message.data} ")
-        Log.d(TAG, "onMessageReceived Noti: ${message.notification} ")
+        Log.d(TAG, "onMessageReceived Noti: ${message.notification?.title} ${message.notification?.body} ")
         var status: Boolean
         runBlocking {
             alarmGetChatStateUseCase.invoke().let {
@@ -79,7 +79,30 @@ class FirebaseMessageService : FirebaseMessagingService() {
 //            ))
 //        }
         if (type == "p") {
-            
+            createNotificationChannel()
+
+            val intent = Intent(this, MainActivity::class.java) // 알림을 클릭했을 때 열릴 액티비티 지정
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent = PendingIntent.getActivity(
+                this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            val defaultSoundUri =
+                RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+            val notificationBuilder = NotificationCompat.Builder(this, "hook_default_channels")
+                .setSmallIcon(R.drawable.ic_launcher_foreground) // 알림 아이콘
+                .setContentTitle("Hook") // 알림 제목
+                .setContentText("${title}님이 구인에 지원하셨어요!") // 알림 내용
+                .setAutoCancel(true) // 알림을 클릭하면 자동으로 닫힘
+                .setSound(defaultSoundUri) // 알림 소리
+                .setContentIntent(pendingIntent) // 알림 클릭 시 실행될 Intent
+
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            notificationManager.notify(0, notificationBuilder.build())
         } else {
 
 
