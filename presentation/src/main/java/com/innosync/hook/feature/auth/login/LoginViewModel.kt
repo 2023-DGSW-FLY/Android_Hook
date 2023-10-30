@@ -1,5 +1,6 @@
 package com.innosync.hook.feature.auth.login
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.innosync.domain.usecase.auth.LoginUseCase
 import com.innosync.hook.base.BaseViewModel
@@ -25,6 +26,7 @@ class LoginViewModel @Inject constructor(
                 viewEvent(ON_SUCCESS_LOGIN)
             }
         }.onFailure {
+            Log.d("TAG", "basicLogin: $it")
             viewModelScope.launch(Dispatchers.Main) {
                 viewEvent(ON_FAILED_LOGIN)
             }

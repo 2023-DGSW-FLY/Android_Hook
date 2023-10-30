@@ -12,4 +12,6 @@ interface JobSearchRepository {
 
     suspend fun insert(stack: String, content: String, url: String)
 
+    suspend fun getThat(id: Int): JobSearchModel
+
 }

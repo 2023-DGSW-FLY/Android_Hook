@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.RecyclerView
 import com.innosync.di.BuildConfig
 import com.innosync.domain.model.RoomModel
 import kotlinx.coroutines.Dispatchers
@@ -116,4 +117,10 @@ fun Uri.getRealPathFromURI(context: Context): Uri {
     val picturePath = columnIndex?.let { cursor.getString(it) }
     cursor?.close()
     return Uri.fromFile(File(picturePath ?: ""))
+}
+
+fun <T : RecyclerView> T.removeItemDecorations() {
+    while (itemDecorationCount > 0) {
+        removeItemDecorationAt(0)
+    }
 }

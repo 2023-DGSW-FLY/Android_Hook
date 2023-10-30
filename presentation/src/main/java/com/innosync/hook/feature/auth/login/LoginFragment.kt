@@ -1,5 +1,10 @@
 package com.innosync.hook.feature.auth.login
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.innosync.hook.MainActivity
@@ -22,6 +27,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModels()
     override fun observerViewModel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 30)
+            }
+
+//            val isGranted = TedPermission.create()
+//                .setPermissions(Manifest.permission.POST_NOTIFICATIONS)
+//                .check()
+//                .isGranted
+        }
         bindingViewEvent {  event ->
             when(event) {
                 ON_CLICK_LOGIN -> {

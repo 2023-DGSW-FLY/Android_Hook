@@ -1,15 +1,8 @@
 package com.innosync.hook.feature.jopsearch
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.innosync.domain.usecase.jobsearch.JobSearchGetStackUseCase
 import com.innosync.domain.usecase.jobsearch.JobSearchGetUseCase
 import com.innosync.hook.base.BaseViewModel
-import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_ANDROID
-import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_EMBEDDED
-import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_ETC
-import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_GAME
-import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_SERVER
 import com.innosync.hook.util.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class JopSearchViewModel @Inject constructor(
+class JobSearchViewModel @Inject constructor(
     private val jobSearchGetUseCase: JobSearchGetUseCase,
     private val jobSearchGetStackUseCase: JobSearchGetStackUseCase
 ): BaseViewModel() {

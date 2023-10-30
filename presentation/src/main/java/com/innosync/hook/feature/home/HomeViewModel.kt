@@ -1,7 +1,11 @@
 package com.innosync.hook.feature.home
 
 import android.util.Log
+import com.innosync.domain.model.AlarmModel
 import com.innosync.domain.usecase.CongressUseCase
+import com.innosync.domain.usecase.alarm.AlarmGetAllUseCase
+import com.innosync.domain.usecase.alarm.AlarmGetLastTimeUseCase
+import com.innosync.domain.usecase.alarm.AlarmInsertLastCheckUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetEatUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetExerciseUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetHackathonUseCase
@@ -13,6 +17,7 @@ import com.innosync.hook.util.launchMain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +26,10 @@ class HomeViewModel @Inject constructor(
     private val hackathonUseCase: JobOpeningGetHackathonUseCase,
     private val eatUseCase: JobOpeningGetEatUseCase,
     private val exerciseUseCase: JobOpeningGetExerciseUseCase,
-    private val jobSearchGetUseCase: JobSearchGetUseCase
+    private val jobSearchGetUseCase: JobSearchGetUseCase,
+    private val alarmGetAllUseCase: AlarmGetAllUseCase,
+    private val alarmGetLastTimeUseCase: AlarmGetLastTimeUseCase,
+    private val alarmInsertLastCheckUseCase: AlarmInsertLastCheckUseCase
 ): BaseViewModel() {
 
 
@@ -37,6 +45,12 @@ class HomeViewModel @Inject constructor(
     private val _nowView = MutableStateFlow("대회")
     val nowView = _nowView.asStateFlow()
 
+    private val _alarm = MutableStateFlow<List<AlarmModel>>(emptyList())
+    val alarm = _alarm.asStateFlow()
+
+    private val _newAlarm = MutableStateFlow<Boolean>(false)
+    val newAlarm = _newAlarm.asStateFlow()
+
     fun loadCongress() = launchIO {
         congressUseCase.invoke().onSuccess { result ->
             launchMain {
@@ -47,8 +61,24 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun loadAlarm() = launchIO {
+        alarmGetAllUseCase.invoke(
+
+        ).onSuccess {
+            _alarm.value = it
+            if (it.isNotEmpty()) {
+                val time = alarmGetLastTimeUseCase.invoke()
+                Log.d(TAG, "loadAlarm: 로컬 $time\n${it[0].regDate}")
+                _newAlarm.value = time.isBefore(it[0].regDate)
+            }
+        }.onFailures {
+
+        }
+    }
+
     fun onClickHackathon() {
         _nowView.value = "대회"
+        viewEvent(ON_CLICK_BACKGROUND)
         viewEvent(ON_CLICK_HACKATHON)
         launchIO {
             hackathonUseCase.invoke(5).onSuccess {
@@ -64,6 +94,7 @@ class HomeViewModel @Inject constructor(
 
     fun onClickEat() {
         _nowView.value = "음식"
+        viewEvent(ON_CLICK_BACKGROUND)
         viewEvent(ON_CLICK_EAT)
         launchIO {
             eatUseCase.invoke(5).onSuccess {
@@ -79,6 +110,7 @@ class HomeViewModel @Inject constructor(
 
     fun onClickExercise() {
         _nowView.value = "운동"
+        viewEvent(ON_CLICK_BACKGROUND)
         viewEvent(ON_CLICK_EXERCISE)
         launchIO {
             exerciseUseCase.invoke(5).onSuccess {
@@ -92,11 +124,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onClickJobOpening() = viewEvent(ON_CLICK_JOB_OPENING)
+    fun onClickJobOpening() {
+        viewEvent(ON_CLICK_BACKGROUND)
+        viewEvent(ON_CLICK_JOB_OPENING)
+    }
 
     fun onClickJobSearch() {
         _nowView.value = "구직"
         viewEvent(ON_CLICK_JOB_SEARCH)
+        viewEvent(ON_CLICK_BACKGROUND)
         launchIO {
             jobSearchGetUseCase.invoke(5).onSuccess {
                 Log.d(TAG, "onClickJobSearch: $it")
@@ -110,9 +146,23 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onClickAlarm() = viewEvent(ON_CLICK_ALARM)
+    fun onClickAlarm() {
+        viewEvent(ON_CLICK_ALARM)
+        launchIO {
+            Log.d(TAG, "onClickAlarm: ${LocalDateTime.now()}")
+            alarmInsertLastCheckUseCase.invoke(LocalDateTime.now())
+        }
+    }
 
-    fun onClickSeeAll() = viewEvent(ON_CLICK_SEE_ALL)
+    fun onClickSeeAll() {
+        viewEvent(ON_CLICK_BACKGROUND)
+        viewEvent(ON_CLICK_SEE_ALL)
+    }
+
+    fun onClickBackground() {
+        Log.d(TAG, "onClickBackground: click")
+        viewEvent(ON_CLICK_BACKGROUND)
+    }
 
     companion object {
         const val ON_CLICK_HACKATHON = 0
@@ -122,6 +172,7 @@ class HomeViewModel @Inject constructor(
         const val ON_CLICK_JOB_SEARCH = 4
         const val ON_CLICK_ALARM = 5
         const val ON_CLICK_SEE_ALL = 6
+        const val ON_CLICK_BACKGROUND = 7
 
         const val ON_CHANGE_JOB_OPENING_DATA = 100
     }

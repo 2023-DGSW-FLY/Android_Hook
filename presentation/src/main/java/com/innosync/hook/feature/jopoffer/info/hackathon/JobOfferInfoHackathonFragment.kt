@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferInfoExerciseBinding
@@ -16,6 +17,7 @@ import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseView
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel
 import com.innosync.hook.feature.jopoffer.info.hackathon.JobOfferInfoHackathonViewModel.Companion.ON_CLICK_SUPPORT
 import com.innosync.hook.feature.jopoffer.mapper.toTechnology
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -53,6 +55,9 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
                 nickname.text = it.writer
                 reallyTechnology.text = it.stack.toStacks()
                 textLink.text = it.url
+                Glide.with(requireContext())
+                    .load(it.userId.toString().toImageUrl())
+                    .into(profile)
             }
         }
     }

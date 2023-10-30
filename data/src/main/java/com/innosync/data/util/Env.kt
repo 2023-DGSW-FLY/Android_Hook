@@ -21,7 +21,7 @@ internal object Env {
     }
 
     object JobSearch {
-        private const val jobSearch = "/access"
+        const val jobSearch = "/access"
         const val get = "${jobSearch}/get"
         const val getStack = "${jobSearch}/stack"
         const val insert = jobSearch
@@ -30,8 +30,13 @@ internal object Env {
     object User {
         private const val user = "/api/v1/users"
         const val get = "${user}/user"
-
         const val getThese = "${user}/user/all"
+        const val notification = "/api/v1/notification"
 
+    }
+
+    object Alarm {
+        private const val notification = "/api/v1/notification"
+        const val get = "${notification}/get"
     }
 }

@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.innosync.hook.databinding.JopSearchItemBinding
 
 class JobSearchAdapter constructor(
-    private val itemList: List<JobSearchRvModel>
+    private val itemList: List<JobSearchRvModel>,
+    private val action: (JobSearchRvModel) -> Unit
 ): RecyclerView.Adapter<JobSearchAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: JopSearchItemBinding): RecyclerView.ViewHolder(binding.root){
@@ -19,7 +20,9 @@ class JobSearchAdapter constructor(
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(JopSearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)).apply {
-
+            itemView.setOnClickListener {
+                action(itemList[adapterPosition])
+            }
         }
     }
 

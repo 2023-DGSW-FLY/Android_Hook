@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.innosync.domain.model.RoomModel
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferInfoExerciseBinding
@@ -13,6 +14,7 @@ import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseView
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodFragmentDirections
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -76,6 +78,9 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
                 nickname.text = it.writer
                 reallyTechnology.text = it.exercise
                 reallyLocation.text = it.dateTime
+                Glide.with(requireContext())
+                    .load(it.userId.toString().toImageUrl())
+                    .into(profile)
             }
         }
 

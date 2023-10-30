@@ -14,6 +14,7 @@ import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentHomeBinding
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CHANGE_JOB_OPENING_DATA
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_ALARM
+import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_BACKGROUND
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_EAT
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_EXERCISE
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_HACKATHON
@@ -24,6 +25,7 @@ import com.innosync.hook.feature.loading.ImageDialog
 import com.innosync.hook.util.ItemRightSpacingDecoration
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -61,7 +63,20 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
                     }
                 }
-                ON_CLICK_ALARM -> {}
+                ON_CLICK_ALARM -> {
+                    if (mBinding.rvAlarm.visibility == View.GONE) {
+                        viewModel.loadAlarm()
+                        mBinding.rvAlarm.visibility = View.VISIBLE
+                    } else {
+                        mBinding.rvAlarm.visibility = View.GONE
+                    }
+                    mBinding.imageAlarmNew.visibility = View.GONE
+                }
+                ON_CLICK_BACKGROUND -> {
+                    if (mBinding.rvAlarm.visibility == View.VISIBLE) {
+                        mBinding.rvAlarm.visibility = View.GONE
+                    }
+                }
                 ON_CLICK_JOB_SEARCH -> {
                     val context = requireContext()
                     mBinding.layoutCategory.visibility = View.INVISIBLE
@@ -101,13 +116,18 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         initRv()
         observeData()
         viewModel.onClickHackathon()
-
+        viewModel.loadAlarm()
     }
 
     private fun initRv() {
         mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.rvJob.removeItemDecorations()
         mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))
+
+        mBinding.rvAlarm.layoutManager = LinearLayoutManager(requireContext())
     }
+
+
 
     private fun observeData() {
         collectLatestStateFlow(viewModel.jobRvData) {
@@ -120,6 +140,24 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             mBinding.rvJob.adapter = adaptor
             mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
 //            mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))
+        }
+
+        collectLatestStateFlow(viewModel.alarm) {
+            val adaptor = HomeAlarmRvAdaptor(
+                it
+            ) { result ->
+                if (result.type == "p") {
+                    Log.d(TAG, "observeData: dd")
+                }
+                if (result.type == "m") {
+                    Log.d(TAG, "observeData: mm")
+                }
+            }
+            mBinding.rvAlarm.adapter = adaptor
+        }
+
+        collectLatestStateFlow(viewModel.newAlarm) {
+            mBinding.imageAlarmNew.visibility = if (it) View.VISIBLE else View.GONE
         }
 
 //        collectLatestStateFlow(viewModel.jobSearchRvData) {
@@ -144,6 +182,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
             mBinding.rvCongressInfo.adapter = adaptor
             mBinding.rvCongressInfo.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            mBinding.rvCongressInfo.removeItemDecorations()
             mBinding.rvCongressInfo.addItemDecoration(ItemRightSpacingDecoration(16))
         }
     }

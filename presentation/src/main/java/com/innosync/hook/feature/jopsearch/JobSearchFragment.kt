@@ -1,27 +1,26 @@
 package com.innosync.hook.feature.jopsearch
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobSearchBinding
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_ANDROID
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_BACK_BTN
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_EMBEDDED
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_ETC
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_GAME
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_MAKE_BTN
-import com.innosync.hook.feature.jopsearch.JopSearchViewModel.Companion.ON_CLICK_SERVER
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_ANDROID
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_BACK_BTN
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_EMBEDDED
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_ETC
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_GAME
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_MAKE_BTN
+import com.innosync.hook.feature.jopsearch.JobSearchViewModel.Companion.ON_CLICK_SERVER
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
-import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class JopSearchFragment: BaseFragment<FragmentJobSearchBinding, JopSearchViewModel>() {
-    override val viewModel: JopSearchViewModel by viewModels()
+class JobSearchFragment: BaseFragment<FragmentJobSearchBinding, JobSearchViewModel>() {
+    override val viewModel: JobSearchViewModel by viewModels()
     val mData = mutableListOf<JobSearchRvModel>()
 
     val TAG : String = "태그"
@@ -60,7 +59,12 @@ class JopSearchFragment: BaseFragment<FragmentJobSearchBinding, JopSearchViewMod
 
     private fun observeState() {
         collectLatestStateFlow(viewModel.rvData) {
-            val adaptor = JobSearchAdapter(it)
+            val adaptor = JobSearchAdapter(it) { result ->
+                val navigate = JobSearchFragmentDirections.actionJopSearchFragmentToJobSearchInfoFragment(
+                    result.id
+                )
+                findNavController().navigate(navigate)
+            }
             mBinding.jobSearchRv.adapter = adaptor
         }
         collectLatestStateFlow(viewModel.nowButtonData) {
@@ -76,6 +80,7 @@ class JopSearchFragment: BaseFragment<FragmentJobSearchBinding, JopSearchViewMod
         super.onResume()
         observeState()
         mBinding.jobSearchRv.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.jobSearchRv.removeItemDecorations()
         mBinding.jobSearchRv.addItemDecoration(ItemSpacingDecoration(7))
         viewModel.loadData()
     }

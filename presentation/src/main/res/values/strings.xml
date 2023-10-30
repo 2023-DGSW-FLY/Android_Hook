@@ -75,4 +75,6 @@
     <string name="job_search_intro">자기소개</string>
     <string name="job_search_portfolio_hint">자신을 표현할 링크를 첨부해 주세요.</string>
     <string name="job_search_intro_hint">자기 자신에 대한 어필을 해주세요.</string>
+    <string name="job_search_technology">기술\n</string>
+    <string name="job_search_technology_exmaple">안드로이드</string>
 </resources>
