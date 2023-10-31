@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
             launchMain {
                 _congress.value = result.map { it.imgUrl }
             }
-        }.onFailure {
+        }.onFailures {
 
         }
     }
@@ -86,7 +86,7 @@ class HomeViewModel @Inject constructor(
                 launchMain {
                     _jobRvData.value = it.toHomeRvModels()
                 }
-            }.onFailure {
+            }.onFailures {
                 Log.d(TAG, "onClickHackathon: ${it.message}")
             }
         }
@@ -102,7 +102,7 @@ class HomeViewModel @Inject constructor(
                 launchMain {
                     _jobRvData.value = it.toHomeRvModels()
                 }
-            }.onFailure {
+            }.onFailures {
                 Log.d(TAG, "onClickHackathon: ${it.message}")
             }
         }
@@ -118,7 +118,7 @@ class HomeViewModel @Inject constructor(
                 launchMain {
                     _jobRvData.value = it.toHomeRvModels()
                 }
-            }.onFailure {
+            }.onFailures {
                 Log.d(TAG, "onClickHackathon: ${it.message}")
             }
         }
@@ -140,7 +140,7 @@ class HomeViewModel @Inject constructor(
                     _jobSearchRvData.value = it.toHomeRvModels()
                     viewEvent(ON_CHANGE_JOB_OPENING_DATA)
                 }
-            }.onFailure {
+            }.onFailures {
                 Log.d(TAG, "onClickJobSearch: ${it.message}")
             }
         }
