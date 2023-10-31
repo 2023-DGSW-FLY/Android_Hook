@@ -1,5 +1,6 @@
 package com.innosync.data.repository
 
+import android.util.Log
 import com.innosync.data.local.dao.TokenDao
 import com.innosync.data.local.entity.token.TokenEntity
 import com.innosync.data.local.mapper.toModel
@@ -21,6 +22,7 @@ class TokenRepositoryImpl @Inject constructor(
     override suspend fun fetchToken(): Token =
         tokenDao.getToken().refreshToken.let { refreshToken ->
             tokenService.token(TokenRequest(refreshToken)).data.accessToken.let { accessToken ->
+                Log.d("로그", "fetchToken: $accessToken")
                 tokenDao.insert(
                     TokenEntity(
                         token = accessToken,

@@ -16,6 +16,7 @@ import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_CLICK_KA
 import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_CLICK_LOGIN
 import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_FAILED_LOGIN
 import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_SUCCESS_LOGIN
+import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.shortToast
 import com.innosync.hook.util.startActivityWithFinishAll
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModels()
     override fun observerViewModel() {
+        initObserver()
+        viewModel.tokenCheck()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
@@ -124,6 +127,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 //                }
 //            })
 //        }
+    }
+
+    private fun initObserver() {
+        collectLatestStateFlow(viewModel.tokenState) {
+            if (it) {
+                startActivityWithFinishAll(MainActivity::class.java)
+            }
+        }
     }
 }
 
