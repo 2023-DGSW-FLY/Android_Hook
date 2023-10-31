@@ -1,5 +1,6 @@
 package com.innosync.data.remote.interceptor
 
+import android.util.Log
 import com.innosync.domain.exception.ExpiredRefreshTokenException
 import com.innosync.domain.usecase.token.DeleteTokenUseCase
 import com.innosync.domain.usecase.token.FetchTokenUseCase
@@ -19,7 +20,7 @@ class LoggingInterceptor @Inject constructor(
     private val deleteTokenUseCase: DeleteTokenUseCase,
 ) : Interceptor {
 
-    private val TOKEN_ERROR = 403
+    private val TOKEN_ERROR = 401
     private val TOKEN_HEADER = "Authorization"
 
     private lateinit var token: String
@@ -30,6 +31,7 @@ class LoggingInterceptor @Inject constructor(
             getTokenUseCase().onSuccess {
                 token = it.token
             }.onFailure {
+                Log.d("로그", "intercept: $it")
                 throw ExpiredRefreshTokenException()
             }
         }

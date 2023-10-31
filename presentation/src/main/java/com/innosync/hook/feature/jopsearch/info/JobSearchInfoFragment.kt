@@ -6,10 +6,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.innosync.domain.model.RoomModel
+import com.innosync.hook.MainActivity
+import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobSearchBinding
 import com.innosync.hook.databinding.FragmentJobSearchInfoBinding
 import com.innosync.hook.feature.chat.ChatFragment
+import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodFragmentDirections
 import com.innosync.hook.feature.jopsearch.info.JobSearchInfoViewModel.Companion.ON_CLICK_CHAT
 import com.innosync.hook.util.collectLatestStateFlow
@@ -108,6 +111,15 @@ class JobSearchInfoFragment: BaseFragment<FragmentJobSearchInfoBinding, JobSearc
                 )
                 findNavController().navigate(navigate)
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
         }
     }
 

@@ -112,7 +112,7 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
     }
 
     companion object {
-        const val TAG = "LOG"
+        const val TAG = "로그"
     }
 
 }

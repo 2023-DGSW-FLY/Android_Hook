@@ -1,8 +1,10 @@
 package com.innosync.hook.feature.jopsearch
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobSearchBinding
@@ -79,6 +81,11 @@ class JobSearchFragment: BaseFragment<FragmentJobSearchBinding, JobSearchViewMod
     override fun onResume() {
         super.onResume()
         observeState()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
         mBinding.jobSearchRv.layoutManager = LinearLayoutManager(requireContext())
         mBinding.jobSearchRv.removeItemDecorations()
         mBinding.jobSearchRv.addItemDecoration(ItemSpacingDecoration(7))
