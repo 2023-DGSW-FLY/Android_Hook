@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.innosync.hook.MainActivity
+import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferInfoExerciseBinding
 import com.innosync.hook.databinding.FragmentJobOfferInfoHackathonBinding
@@ -75,6 +76,11 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
 
     override fun onResume() {
         super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
         Log.d(TAG, "onResume: gg")
     }
 }

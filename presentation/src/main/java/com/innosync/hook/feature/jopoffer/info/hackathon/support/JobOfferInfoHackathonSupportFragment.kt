@@ -1,10 +1,14 @@
 package com.innosync.hook.feature.jopoffer.info.hackathon.support
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.innosync.hook.MainActivity
+import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferIntoHackathonSupportBinding
+import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.feature.jopoffer.info.hackathon.JobOfferInfoHackathonFragmentArgs
 import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_CLICK_COMPLETE
@@ -57,6 +61,15 @@ class JobOfferInfoHackathonSupportFragment: BaseFragment<FragmentJobOfferIntoHac
                 }
 
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
         }
     }
 }

@@ -82,8 +82,13 @@ class JopOfferFragment :BaseFragment<FragmentJobOfferBinding, JopOfferViewModel>
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as MainActivity).moveHome()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
         observeState()
+//        (requireActivity() as MainActivity).moveHome()
         initRv()
         when(viewModel.nowView.value) {
             "대회" -> {

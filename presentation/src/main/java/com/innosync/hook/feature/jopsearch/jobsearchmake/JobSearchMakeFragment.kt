@@ -1,10 +1,13 @@
 package com.innosync.hook.feature.jopsearch.jobsearchmake
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobSearchMakeBinding
+import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_ANDROID
 import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_BACK_BTN
 import com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeViewModel.Companion.ON_CLICK_EMBEDDED
@@ -80,6 +83,15 @@ class JobSearchMakeFragment: BaseFragment<FragmentJobSearchMakeBinding, JobSearc
             gameBtn.setBackgroundResource(if (button == "게임") R.drawable.ic_game_on else R.drawable.ic_game_off )
             etcBtn.setBackgroundResource(if (button == "기타") R.drawable.ic_etc_on else R.drawable.ic_etc_off )
             embeddedBtn.setBackgroundResource(if (button == "임베디드") R.drawable.ic_embedded_on else R.drawable.ic_embedded_off )
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
         }
     }
 

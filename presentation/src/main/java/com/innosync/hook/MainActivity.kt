@@ -42,18 +42,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     fun moveHome() {
         Log.d(TAG, "moveHome: home called")
-        mBinding.navBottom.selectedItemId = R.id.nav_item_home
-        Log.d(TAG, "moveHome: home called")
+        mBinding.navBottom.menu.findItem(R.id.nav_item_home).isChecked = true
+//        Log.d(TAG, "moveHome: ${R.id.nav_item_home}/${mBinding.navBottom.selectedItemId} called")
     }
     fun moveMessage() {
-        mBinding.navBottom.selectedItemId = R.id.nav_item_message
+        mBinding.navBottom.menu.findItem(R.id.nav_item_message).isChecked = true
     }
     fun moveCalendar() {
-        mBinding.navBottom.selectedItemId = R.id.nav_item_calendar
+        mBinding.navBottom.menu.findItem(R.id.nav_item_calendar).isChecked = true
     }
     fun moveMyBox() {
-        mBinding.navBottom.selectedItemId = R.id.nav_item_myBox
+        mBinding.navBottom.menu.findItem(R.id.nav_item_myBox).isChecked = true
     }
+
+    fun nowSelectItem() =
+        mBinding.navBottom.selectedItemId
+
 
     fun bottomVisible(state: Boolean) {
         mBinding.navBottom.visibility = if (state) View.VISIBLE else View.GONE

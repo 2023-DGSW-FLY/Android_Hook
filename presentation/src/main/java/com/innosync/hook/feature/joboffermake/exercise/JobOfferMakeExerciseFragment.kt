@@ -1,5 +1,6 @@
 package com.innosync.hook.feature.joboffermake.exercise
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.innosync.hook.MainActivity
@@ -7,6 +8,7 @@ import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferMakeExerciseBinding
 import com.innosync.hook.databinding.FragmentJobOfferMakeFoodBinding
+import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseViewModel.Companion.ON_CLICK_COMPLETE
 import com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseViewModel.Companion.ON_FAILED
@@ -76,7 +78,11 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as MainActivity).moveHome()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(ChatFragment.TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
     }
 
 

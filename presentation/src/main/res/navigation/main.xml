@@ -47,10 +47,16 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_nav_item_home_to_jopSearchFragment"
-            app:destination="@id/jopSearchFragment" />
+            app:destination="@id/jopSearchFragment"
+            app:popUpTo="@id/nav_item_home"
+            app:launchSingleTop="true"
+            app:restoreState="true"/>
         <action
             android:id="@+id/action_nav_item_home_to_jopOfferFragment"
-            app:destination="@id/jopOfferFragment" />
+            app:destination="@id/jopOfferFragment"
+            app:popUpTo="@id/nav_item_home"
+            app:launchSingleTop="true"
+            app:restoreState="true"/>
     </fragment>
     <fragment
         android:id="@+id/jopOfferFragment"
@@ -59,22 +65,28 @@
 
         <action
             android:id="@+id/actionJobOfferFragmentToJobOfferMakeFragment"
-            app:destination="@+id/jobOfferMakeFragment"/>
+            app:destination="@+id/jobOfferMakeFragment"
+            app:popUpTo="@id/jopOfferFragment"/>
         <action
             android:id="@+id/action_jopOfferFragment_to_jobOfferMakeExerciseFragment"
-            app:destination="@id/jobOfferMakeExerciseFragment" />
+            app:destination="@id/jobOfferMakeExerciseFragment"
+            app:popUpTo="@id/jopOfferFragment"/>
         <action
             android:id="@+id/action_jopOfferFragment_to_jobOfferMakeFoodFragment"
-            app:destination="@id/jobOfferMakeFoodFragment" />
+            app:destination="@id/jobOfferMakeFoodFragment"
+            app:popUpTo="@id/jopOfferFragment"/>
         <action
             android:id="@+id/action_jopOfferFragment_to_jobOfferInfoExerciseFragment"
-            app:destination="@id/jobOfferInfoExerciseFragment" />
+            app:destination="@id/jobOfferInfoExerciseFragment"
+            app:popUpTo="@id/jopOfferFragment"/>
         <action
             android:id="@+id/action_jopOfferFragment_to_jobOfferInfoHackathonFragment"
-            app:destination="@id/jobOfferInfoHackathonFragment" />
+            app:destination="@id/jobOfferInfoHackathonFragment"
+            app:popUpTo="@id/jopOfferFragment"/>
         <action
             android:id="@+id/action_jopOfferFragment_to_jobOfferInfoFoodFragment"
-            app:destination="@id/jobOfferInfoFoodFragment" />
+            app:destination="@id/jobOfferInfoFoodFragment"
+            app:popUpTo="@id/jopOfferFragment"/>
     </fragment>
 
     <fragment
@@ -83,7 +95,8 @@
         tools:label="JobOfferMakeFragment">
         <action
             android:id="@+id/actionJobOfferMakeFragmentToJobOfferFragment"
-            app:destination="@id/jopOfferFragment"/>
+            app:destination="@id/jopOfferFragment"
+            app:popUpTo="@id/jobOfferMakeFragment"/>
     </fragment>
     <fragment
         android:id="@+id/jopSearchFragment"
