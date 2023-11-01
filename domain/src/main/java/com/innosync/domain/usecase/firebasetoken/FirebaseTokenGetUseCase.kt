@@ -1,4 +1,4 @@
-package com.innosync.domain.usecase.firebase
+package com.innosync.domain.usecase.firebasetoken
 
 import com.innosync.domain.repository.FirebaseTokenRepository
 import javax.inject.Inject

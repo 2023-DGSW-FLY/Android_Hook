@@ -11,7 +11,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.innosync.domain.usecase.firebase.FirebaseTokenInsertUseCase
+import com.innosync.domain.usecase.firebasetoken.FirebaseTokenInsertUseCase
 import com.innosync.domain.usecase.alarm.AlarmGetChatStateUseCase
 import com.innosync.domain.usecase.alarm.AlarmGetStateUseCase
 import com.innosync.hook.MainActivity

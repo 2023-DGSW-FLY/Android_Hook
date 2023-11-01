@@ -24,6 +24,7 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
         setRv(emptyList())
         initRoomName()
         initObserver()
+        initRoom()
         val intent = Intent("current_fragment")
         intent.putExtra("fragment_name", "FragmentB")
         requireContext().sendBroadcast(intent)
@@ -53,6 +54,13 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
                 }
             }
         }
+    }
+
+    private fun initRoom() {
+        viewModel.addRoomEventListener(
+            data.my,
+            data.chatUid
+        )
     }
 
     private fun initObserver() {
