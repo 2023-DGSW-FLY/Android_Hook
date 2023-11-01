@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 interface UserService {
 
-    @GET(Env.My.get)
+    @GET(Env.MyBox.get)
     suspend fun getMyInfo(
 
     ): BaseResponse<UserResponse>

@@ -26,9 +26,16 @@ internal object Env {
         const val getStack = "${jobSearch}/stack"
     }
 
-    object My {
+    object MyBox {
         private const val user = "/api/v1/users"
         const val get = "${user}/user"
 
     }
+    object Applicant{
+        private const val myPost = "/hackathon/"
+        const val myPostClick = "$myPost"
+
+        const val applicants = "/hackathons/join"
+    }
+
 }
