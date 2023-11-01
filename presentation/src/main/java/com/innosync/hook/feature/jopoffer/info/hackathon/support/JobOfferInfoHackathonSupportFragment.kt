@@ -13,6 +13,7 @@ import com.innosync.hook.feature.jopoffer.info.hackathon.JobOfferInfoHackathonFr
 import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_CLICK_COMPLETE
 import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_FAILED
+import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_FAILED_OVERLAPPING
 import com.innosync.hook.feature.jopoffer.info.hackathon.support.JobOfferInfoHackathonSupportViewModel.Companion.ON_SUCCESS
 import com.innosync.hook.util.shortToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,12 +32,15 @@ class JobOfferInfoHackathonSupportFragment: BaseFragment<FragmentJobOfferIntoHac
                 ON_CLICK_COMPLETE -> {
                     with(mBinding) {
                         if (nameEditText.text.isNullOrBlank()) {
+                            viewModel.notTouch()
                             return@bindingViewEvent
                         }
                         if (contactEditText.text.isNullOrBlank()) {
+                            viewModel.notTouch()
                             return@bindingViewEvent
                         }
                         if (selfIntroductionEditText.text.isNullOrBlank()) {
+                            viewModel.notTouch()
                             return@bindingViewEvent
                         }
                         viewModel.createHackathon(
@@ -59,7 +63,9 @@ class JobOfferInfoHackathonSupportFragment: BaseFragment<FragmentJobOfferIntoHac
                 ON_FAILED -> {
                     requireContext().shortToast("지원에 실패하였습니다.")
                 }
-
+                ON_FAILED_OVERLAPPING -> {
+                    requireContext().shortToast("이미 지원한 게시글입니다.")
+                }
             }
         }
     }
