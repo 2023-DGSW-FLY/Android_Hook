@@ -41,4 +41,11 @@ internal object Env {
         private const val notification = "/api/v1/notification"
         const val get = "${notification}/get"
     }
+    object Applicant{
+        private const val myPost = "/hackathon/"
+        const val myPostClick = "$myPost"
+
+        const val applicants = "/hackathons/join"
+    }
+
 }

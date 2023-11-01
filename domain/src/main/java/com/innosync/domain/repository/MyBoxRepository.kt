@@ -14,5 +14,9 @@ interface MyBoxRepository {
     suspend fun getExercise(): List<ExerciseModel>
 
     suspend fun getJobSearch(): List<JobSearchModel>
+
+    suspend fun setStatusComplete(type : String, id : Int): Unit
+
+    suspend fun setStatusMatching(type : String, id: Int) : Unit
 }
 

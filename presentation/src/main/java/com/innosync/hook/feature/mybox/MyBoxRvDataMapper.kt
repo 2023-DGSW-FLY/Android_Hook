@@ -10,7 +10,8 @@ internal fun HackathonModel.toMyBoxRvData() =
         content = content,
         status = status,
         date = regDate,
-        id = id
+        id = id,
+        type = "hackathon"
     )
 
 internal fun List<HackathonModel>.toMyBoxRvDatasHackathon() =
@@ -23,7 +24,8 @@ internal fun EatModel.toMyBoxRvData() =
         content = content,
         status = status,
         date = regDate,
-        id = id
+        id = id,
+        type = "food"
     )
 
 internal fun List<EatModel>.toMyBoxRvDatasEat() =
@@ -36,7 +38,8 @@ internal fun ExerciseModel.toMyBoxRvData() =
         content = content,
         status = status,
         date = regDate,
-        id = id
+        id = id,
+        type = "exercise"
     )
 
 internal fun List<ExerciseModel>.toMyBoxRvDatasExercise() =
@@ -49,7 +52,8 @@ internal fun JobSearchModel.toMyBoxRvData() =
         content = content,
         status = status,
         date = regDate,
-        id = id
+        id = id,
+        type = "access"
     )
 
 internal fun List<JobSearchModel>.toMyBoxRvDatasJobSearch() =
