@@ -45,7 +45,6 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
         super.onResume()
         initRv()
         viewModel.loadInfo()
-
     }
 
     private fun setRv(list: List<RoomModel>, users: Map<String, String>?) {
@@ -96,6 +95,7 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
                 val users = data.map { chat ->
                     chat.getYour(userId)
                 }
+                setRv(chats!!, viewModel.usersData.value)
                 viewModel.getThese(users)
             }
         }
