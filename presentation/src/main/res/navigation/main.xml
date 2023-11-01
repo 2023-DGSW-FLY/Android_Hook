@@ -176,5 +176,13 @@
     <fragment
         android:id="@+id/nav_item_myBox"
         android:name="com.innosync.hook.feature.mybox.MyBoxFragment"
-        android:label="MyBoxFragment" />
+        android:label="MyBoxFragment" >
+        <action
+            android:id="@+id/action_nav_item_myBox_to_myBoxDetailFragment"
+            app:destination="@id/myBoxDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myBoxDetailFragment"
+        android:name="com.innosync.hook.feature.mybox.detail.MyBoxDetailFragment"
+        android:label="MyBoxDetailFragment" />
 </navigation>

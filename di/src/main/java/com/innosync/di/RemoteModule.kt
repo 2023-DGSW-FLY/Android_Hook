@@ -3,6 +3,7 @@ package com.innosync.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.innosync.data.remote.interceptor.LoggingInterceptor
+import com.innosync.data.remote.service.ApplicantService
 import com.innosync.data.remote.service.CongressService
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
@@ -169,4 +170,8 @@ class RemoteModule {
     fun provideMyBoxService(@TokenRetrofit retrofit: Retrofit): MyBoxService =
         retrofit.create(MyBoxService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideApplicantService(@TokenRetrofit retrofit: Retrofit): ApplicantService =
+        retrofit.create(ApplicantService::class.java)
 }

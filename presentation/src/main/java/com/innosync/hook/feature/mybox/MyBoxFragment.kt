@@ -1,21 +1,20 @@
 package com.innosync.hook.feature.mybox
 
+import android.content.ContentValues.TAG
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMyBoxBinding
-import com.innosync.hook.feature.home.HomeViewModel
+import com.innosync.hook.databinding.ItemMyboxBinding
 import com.innosync.hook.util.ItemSpacingDecoration
-import com.innosync.hook.util.RecyclerViewDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.internal.processedrootsentinel.codegen._com_innosync_hook_util_HookApplication
 
@@ -23,7 +22,8 @@ import dagger.hilt.internal.processedrootsentinel.codegen._com_innosync_hook_uti
 @AndroidEntryPoint
 class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
     val MyBoxDataList = mutableListOf<MyBoxRvData>()
-    private lateinit var MyBoxRvAdapter: MyBoxRvAdapter
+    private lateinit var myBoxRvAdapter: MyBoxRvAdapter
+    private lateinit var sbinding: ItemMyboxBinding
 
     override val viewModel: MyBoxViewModel by viewModels()
 
@@ -32,20 +32,17 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        sbinding = ItemMyboxBinding.inflate(inflater, container, false)
         return super.onCreateView(inflater, container, savedInstanceState)
-
-
     }
     override fun observerViewModel() {
+
+
+
         initObserver()
         //livedata인 rvdata의 변경사항을 관찰.
         viewModel.addstatus()
-        val adaptor = MyBoxRvAdapter(
-            emptyList()
-        ) {
 
-        }
-        mBinding.myboxRecyclerview.adapter = adaptor
         mBinding.myboxRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         mBinding.myboxRecyclerview.addItemDecoration(ItemSpacingDecoration(3))
         //text color 변경
@@ -64,7 +61,9 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
                 }
 
                 MyBoxViewModel.ON_CLICK_COLLECT_PEOPLE -> {
+                    Log.d(TAG, "구직 누름")
                     setTextColor("구직")
+
                 }
             }
         }
@@ -75,10 +74,34 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
     private fun initObserver() {
         viewModel.rvData.observe(this@MyBoxFragment) {
             val adaptor = MyBoxRvAdapter(
-                it
-            ) {
+                datalist = it,
+                context = requireContext(),
+                action = { item, type ->
+                // 매칭중 클릭
+                    when (type) {
+                        0 -> {
+                            viewModel.complete(
+                                item.id,
+                                item.type
+                            )
+                        }
+                        1 -> {
+                            viewModel.match(
+                                item.id,
+                                item.type
+                            )
+                        }
+                        // 레이아웃 클릭
+                        else -> {
+                            //네비게이션 연결하세요
+                            findNavController().navigate(
+                                R.id.action_nav_item_myBox_to_myBoxDetailFragment
+                            )
+                        }
+                    }
+                }
+            )
 
-            }
             mBinding.myboxRecyclerview.adapter = adaptor
         }
         viewModel.loadEat()
@@ -98,10 +121,10 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
             mBinding.tvCollectPeople?.isSelected = mBinding.tvCollectPeople?.isSelected != true
             viewModel.loadJobSearch()
         }
-
         mBinding.icSetting.setOnClickListener {
             //설정으로
         }
+
     }
 
     private fun setTextColor(text: String) {
@@ -117,6 +140,10 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
             tvMeal.setTextColor(getTextColor("식사"))
             tvCollectPeople.setTextColor(getTextColor("구직"))
         }
+    }
+
+    private fun observeData() {
+
     }
 }
 
