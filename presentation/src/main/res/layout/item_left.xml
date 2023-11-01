@@ -7,11 +7,10 @@
         android:layoutDirection="rtl"
 
         xmlns:app="http://schemas.android.com/apk/res-auto">
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ic_user"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:scaleType="fitXY"
             android:visibility="gone"
             android:src="@drawable/ic_launcher_foreground"
 
