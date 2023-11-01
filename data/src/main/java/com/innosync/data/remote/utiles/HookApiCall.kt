@@ -98,5 +98,5 @@ fun getErrorMessage(exception: HttpException): String {
         errorStr, ErrorResponse::class.java
     )
 
-    return errorDto?.message ?: UNKNOWN_ERROR_MESSAGE
+    return errorDto?.Fail ?: UNKNOWN_ERROR_MESSAGE
 }

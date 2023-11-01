@@ -32,7 +32,6 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
 
     override fun observerViewModel() {
         observeData()
-        viewModel.loadInfo(data.id)
         bindingViewEvent { event ->
             when(event) {
                 ON_CLICK_SUPPORT -> {
@@ -76,6 +75,7 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
 
     override fun onResume() {
         super.onResume()
+        viewModel.loadInfo(data.id)
         val mainActivity = (requireActivity() as MainActivity)
         if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
             Log.d(TAG, "onResume: ddd")
