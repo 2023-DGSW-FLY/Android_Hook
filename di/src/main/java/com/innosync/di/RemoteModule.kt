@@ -7,7 +7,6 @@ import com.innosync.data.remote.service.ApplicantService
 import com.innosync.data.remote.service.CongressService
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
-import com.innosync.data.remote.interceptor.LoggingInterceptor
 import com.innosync.data.remote.service.AlarmService
 import com.innosync.data.remote.service.ChatService
 import com.innosync.data.remote.service.LoginService

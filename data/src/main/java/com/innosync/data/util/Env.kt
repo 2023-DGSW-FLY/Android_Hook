@@ -35,6 +35,10 @@ internal object Env {
 
     }
 
+    object MyBox {
+        const val get = "/hackathons/join"
+    }
+
     object Alarm {
         private const val notification = "/api/v1/notification"
         const val get = "${notification}/get"

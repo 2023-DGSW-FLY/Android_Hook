@@ -11,7 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.innosync.domain.model.HackathonModel
 import com.innosync.domain.usecase.ApplicantUseCase
-import com.innosync.domain.usecase.JobOpeningGetOneHackathonUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetOneHackathonUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import com.innosync.hook.util.launchMain
