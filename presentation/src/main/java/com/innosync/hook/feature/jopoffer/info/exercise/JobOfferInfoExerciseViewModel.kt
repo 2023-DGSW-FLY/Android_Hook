@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.innosync.domain.model.ExerciseModel
 import com.innosync.domain.model.RoomModel
-import com.innosync.domain.usecase.FirebaseGetListUseCase
-import com.innosync.domain.usecase.FirebaseInsertUseCase
+import com.innosync.domain.usecase.firebase.FirebaseGetListUseCase
+import com.innosync.domain.usecase.firebase.FirebaseInsertUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetOneExerciseUseCase
 import com.innosync.domain.usecase.user.UserGetInfoUseCase
 import com.innosync.hook.base.BaseViewModel

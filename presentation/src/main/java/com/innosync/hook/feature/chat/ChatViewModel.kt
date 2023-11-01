@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.innosync.domain.model.RoomModel
 import com.innosync.domain.model.UserModel
-import com.innosync.domain.usecase.FirebaseGetListUseCase
-import com.innosync.domain.usecase.FirebaseInsertUseCase
+import com.innosync.domain.usecase.firebase.FirebaseGetListUseCase
+import com.innosync.domain.usecase.firebase.FirebaseInsertUseCase
 import com.innosync.domain.usecase.chat.ChatGetTheseInfoUseCase
 import com.innosync.domain.usecase.user.UserGetInfoUseCase
 import com.innosync.hook.base.BaseViewModel

@@ -3,6 +3,7 @@ package com.innosync.hook.feature.chat
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,6 +25,7 @@ class ChatRvAdaptor constructor(
         val thumbnail = binding.icUser
         val name = binding.textUserName
         val message = binding.textUserContent
+        val newImage = binding.imageNew
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +50,9 @@ class ChatRvAdaptor constructor(
             holder.name.text = users[your] ?: ""
         }
         Log.d("TAG", "onBindViewHolder: $your")
+        if (item.users?.get(my) == false) {
+            holder.newImage.visibility = View.VISIBLE
+        }
         Glide.with(context)
             .load(your.toImageUrl())
             .placeholder(R.drawable.ic_launcher_foreground)

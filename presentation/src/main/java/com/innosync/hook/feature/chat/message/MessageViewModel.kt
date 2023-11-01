@@ -2,11 +2,13 @@ package com.innosync.hook.feature.chat.message
 
 import androidx.lifecycle.viewModelScope
 import com.innosync.domain.model.ChatModel
-import com.innosync.domain.usecase.FirebaseChatListenerUseCase
-import com.innosync.domain.usecase.FirebaseSendMessageUseCase
+import com.innosync.domain.model.RoomModel
+import com.innosync.domain.usecase.firebase.FirebaseChatListenerUseCase
+import com.innosync.domain.usecase.firebase.FirebaseSendMessageUseCase
 import com.innosync.domain.usecase.chat.ChatGetUserNameUseCase
 import com.innosync.domain.usecase.chat.ChatSendUserNotificationUseCase
 import com.innosync.domain.usecase.alarm.AlarmInsertChatStateUseCase
+import com.innosync.domain.usecase.firebase.FirebaseRoomListenerUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.util.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +24,8 @@ class MessageViewModel @Inject constructor(
     private val firebaseSendMessageUseCase: FirebaseSendMessageUseCase,
     private val userGetUserNameUseCase: ChatGetUserNameUseCase,
     private val alarmInsertChatStateUseCase: AlarmInsertChatStateUseCase,
-    private val chatSendUserNotificationUseCase: ChatSendUserNotificationUseCase
+    private val chatSendUserNotificationUseCase: ChatSendUserNotificationUseCase,
+    private val firebaseRoomListenerUseCase: FirebaseRoomListenerUseCase
 ): BaseViewModel() {
 
     private val _userIdState = MutableStateFlow<String>("")
@@ -35,6 +38,16 @@ class MessageViewModel @Inject constructor(
         firebaseChatListenerUseCase.invoke(
             chatUid = chatUid,
             action = action
+        )
+    }
+
+    fun addRoomEventListener(
+        userId: String,
+        chatUid: String,
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        firebaseRoomListenerUseCase.invoke(
+            userId = userId,
+            chatUid = chatUid,
         )
     }
 

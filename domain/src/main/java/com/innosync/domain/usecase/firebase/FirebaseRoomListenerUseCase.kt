@@ -1,20 +1,21 @@
-package com.innosync.domain.usecase
+package com.innosync.domain.usecase.firebase
 
 import com.innosync.domain.model.ChatModel
+import com.innosync.domain.model.RoomModel
 import com.innosync.domain.repository.FirebaseRepository
 import javax.inject.Inject
 
-class FirebaseChatListenerUseCase @Inject constructor(
+class FirebaseRoomListenerUseCase @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ) {
 
     suspend operator fun invoke(
+        userId: String,
         chatUid: String,
-        action: (List<ChatModel>) -> Unit
     ) {
-        firebaseRepository.eventChatLister(
-            chatUid = chatUid,
-            action = action
+        firebaseRepository.eventRoomListener(
+            userId = userId,
+            chatUid = chatUid
         )
     }
 }
