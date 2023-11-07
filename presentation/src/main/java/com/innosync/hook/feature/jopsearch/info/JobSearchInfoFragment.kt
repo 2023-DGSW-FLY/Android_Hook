@@ -14,6 +14,7 @@ import com.innosync.hook.databinding.FragmentJobSearchInfoBinding
 import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodFragmentDirections
+import com.innosync.hook.feature.jopsearch.info.JobSearchInfoViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopsearch.info.JobSearchInfoViewModel.Companion.ON_CLICK_CHAT
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.launchIO
@@ -39,6 +40,11 @@ class JobSearchInfoFragment: BaseFragment<FragmentJobSearchInfoBinding, JobSearc
             when(it) {
                 ON_CLICK_CHAT -> {
                     openChat()
+                }
+
+                ON_CLICK_BACK ->{
+                    Log.d(TAG, "observerViewModel: ")
+                    findNavController().popBackStack()
                 }
             }
         }

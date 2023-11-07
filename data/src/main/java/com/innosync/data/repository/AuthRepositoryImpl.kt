@@ -53,6 +53,7 @@ class AuthRepositoryImpl @Inject constructor(
     ): String {
         val image = BitmapRequestBody(profileImage)
         val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("image", "profile.jpeg", image)
+        Log.d("TAG", "join: $bitmapMultipartBody")
         return loginService.join(
             image = bitmapMultipartBody,
             body = UserJoinRequest(

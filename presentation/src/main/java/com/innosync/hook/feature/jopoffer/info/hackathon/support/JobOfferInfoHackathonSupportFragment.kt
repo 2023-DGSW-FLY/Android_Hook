@@ -54,6 +54,7 @@ class JobOfferInfoHackathonSupportFragment: BaseFragment<FragmentJobOfferIntoHac
                     }
                 }
                 ON_CLICK_BACK -> {
+                    Log.d(TAG, "observerViewModel: 뒤로")
                     findNavController().popBackStack()
                 }
                 ON_SUCCESS -> {

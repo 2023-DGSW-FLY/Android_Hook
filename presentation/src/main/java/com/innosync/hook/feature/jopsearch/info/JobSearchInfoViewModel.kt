@@ -85,7 +85,11 @@ class JobSearchInfoViewModel @Inject constructor(
     fun onClickChat() =
         viewEvent(ON_CLICK_CHAT)
 
+    fun onClickBack() =
+        viewEvent(ON_CLICK_BACK)
+
     companion object {
         const val ON_CLICK_CHAT = 0
+        const val ON_CLICK_BACK = 1
     }
 }

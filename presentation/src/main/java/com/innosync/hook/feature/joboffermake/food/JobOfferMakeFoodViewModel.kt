@@ -62,7 +62,7 @@ class JobOfferMakeFoodViewModel @Inject constructor(
     }
 
     fun onClickBack() =
-        viewEvent(JobOfferMakeViewModel.ON_CLICK_BACK)
+        viewEvent(ON_CLICK_BACK)
 
     companion object {
         const val ON_CLICK_COMPLETE = 0

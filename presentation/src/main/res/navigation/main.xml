@@ -57,6 +57,9 @@
             app:popUpTo="@id/nav_item_home"
             app:launchSingleTop="true"
             app:restoreState="true"/>
+        <action
+            android:id="@+id/action_nav_item_home_to_profile"
+            app:destination="@+id/profile"/>
     </fragment>
     <fragment
         android:id="@+id/jopOfferFragment"
@@ -158,6 +161,7 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+
     <fragment
         android:id="@+id/jobSearchMakeFragment"
         android:name="com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeFragment"
@@ -172,5 +176,26 @@
         <action
             android:id="@+id/action_jobSearchInfoFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.innosync.hook.feature.profile.ProfileFragment"
+        android:label="profile">
+        <action
+            android:id="@+id/action_profile_to_profileFix"
+            app:destination="@id/profileFix"/>
+        <action
+            android:id="@+id/action_profile_to_nav_item_home"
+            app:destination="@id/nav_item_home"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFix"
+        android:name="com.innosync.hook.feature.profile.fix.ProfileFixFragment"
+        android:label="profileFix">
+        <action
+            android:id="@+id/action_profileFix_to_profile"
+            app:destination="@id/profile" />
     </fragment>
 </navigation>

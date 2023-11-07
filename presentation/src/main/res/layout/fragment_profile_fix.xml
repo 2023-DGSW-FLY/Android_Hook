@@ -1,0 +1,226 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.innosync.hook.feature.profile.fix.ProfileFixViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:background="@color/white"
+            android:onClick="@{() -> vm.onClickBackBtn()}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="25dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로필"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back_btn"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="23dp"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_fix"
+            app:layout_constraintTop_toBottomOf="@id/back_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="25dp"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fix_btn"
+            android:background="@color/white"
+            android:onClick="@{() -> vm.onClickComplete()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="40dp"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_background"
+            android:layout_width="284dp"
+            android:layout_height="150dp"
+            android:background="@color/sky_blue"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="77dp"
+                android:layout_height="77dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/ic_not_image"
+                app:layout_constraintStart_toStartOf="parent"
+                android:onClick="@{() -> vm.onClickImage()}"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/user_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="23dp"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/profile_image"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nickname"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:text=""
+                android:singleLine="true"
+                android:textColor="@color/blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/profile_image"
+                app:layout_constraintTop_toBottomOf="@id/user_name" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/profile_background"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="27dp"
+            android:layout_marginStart="25dp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/emailImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_email"
+            app:layout_constraintTop_toBottomOf="@id/profile_background"
+            app:layout_constraintStart_toEndOf="@id/email_title"
+            android:layout_marginTop="33dp"
+            android:layout_marginStart="8dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/email"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:singleLine="true"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/email_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/git"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="깃허브"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/email"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="25dp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/gitImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_github"
+            app:layout_constraintTop_toBottomOf="@id/email"
+            app:layout_constraintStart_toEndOf="@id/email_title"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"/>
+        <EditText
+            android:id="@+id/github_url"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12sp"
+            android:inputType="textWebEmailAddress"
+            app:layout_constraintTop_toBottomOf="@id/git"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/portfolio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="포트폴리"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/github_url"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="25dp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/portfolioImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_link"
+            app:layout_constraintTop_toBottomOf="@id/github_url"
+            app:layout_constraintStart_toEndOf="@id/portfolio"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/portfolio_url"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:singleLine="true"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/portfolioImage"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/self_introduction"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/portfolio_url" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/user_info"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:singleLine="true"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/info"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="25dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
