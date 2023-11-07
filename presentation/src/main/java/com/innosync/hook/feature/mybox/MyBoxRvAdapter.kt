@@ -27,7 +27,7 @@ class MyBoxRvAdapter @Inject constructor(
             if (myBoxData.statusName == "매칭완료") {
                 binding.layoutMybox.setBackgroundColor(if (position%2 == 0) Color.parseColor("#F8FBFF") else Color.parseColor("#FBFBFB"))
                 binding.textJobContent.setTextColor(Color.parseColor("#D0D0D0"))
-                binding.textJobStatus.background = context.getDrawable(R.drawable.current_status_round2)
+                binding.textJobStatus.background = context.getDrawable(R.drawable.item_round)
                 binding.textDone.text = "취소"
             } else {
                 binding.layoutMybox.setBackgroundColor(if (position%2 == 0) Color.parseColor("#E9F2FF") else Color.parseColor("#F3F3F3"))

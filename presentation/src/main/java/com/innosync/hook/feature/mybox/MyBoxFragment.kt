@@ -58,7 +58,7 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
             viewModel.loadHackathon()
         }
         mBinding.icSetting.setOnClickListener {
-            //설정으로
+            findNavController().navigate(R.id.action_nav_item_myBox_to_settingFragment)
         }
     }
 
