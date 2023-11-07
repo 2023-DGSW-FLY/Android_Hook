@@ -25,7 +25,7 @@
             android:id="@+id/post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home"
+            android:text="프로필"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/back_btn"
             android:layout_marginTop="22dp"
