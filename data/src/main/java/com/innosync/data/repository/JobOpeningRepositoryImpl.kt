@@ -6,7 +6,6 @@ import com.innosync.data.remote.request.jobopening.JobOpeningEatInsertRequest
 import com.innosync.data.remote.request.jobopening.JobOpeningExerciseInsertRequest
 import com.innosync.data.remote.request.jobopening.JobOpeningHackathonInsertRequest
 import com.innosync.data.remote.request.jobopening.JobOpeningHackathonSupportRequest
-import com.innosync.data.remote.response.jobopening.HackathonResponse
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.utiles.hookApiCall
 import com.innosync.domain.model.EatModel
