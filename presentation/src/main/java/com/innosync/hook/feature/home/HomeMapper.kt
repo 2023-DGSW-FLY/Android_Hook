@@ -41,7 +41,7 @@ internal fun EatModel.toHomeRvModel() =
     HomeRvData(
         status = status,
         writer =  writer,
-        title = title.toSlice(9),
+        title = place.toSlice(9),
         type = 0,
         time = modDate.toStringDate()
     )

@@ -123,6 +123,7 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginStart="18dp">
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/detail"

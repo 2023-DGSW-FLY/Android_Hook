@@ -56,10 +56,11 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
         viewModel.hackathonInfoData.observe(this@JobOfferInfoHackathonFragment) {
             with(mBinding) {
 //                title.text = it.title
-                title.visibility = View.GONE
+                title.text = it.title
                 userName.text = it.username
                 nickname.text = it.writer
                 reallyTechnology.text = it.stack.toStacks()
+                textContent.text = it.content
                 textLink.text = it.url
                 Glide.with(requireContext())
                     .load(it.userId.toString().toImageUrl())

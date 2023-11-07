@@ -83,12 +83,12 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
     private fun observeData() {
         viewModel.eatInfoData.observe(this@JobOfferInfoFoodFragment) {
             with(mBinding) {
-//                title.text = it.title
-                title.visibility = View.GONE
+                title.text = it.title
                 userName.text = it.username
                 nickname.text = it.writer
-                reallyFood.text = it.title
-                reallyLocation.text = it.place
+                reallyFood.text = it.dateTime
+                reallyLocation.text = it.title
+                textContent.text = it.content
                 Glide.with(requireContext())
                     .load(it.userId.toString().toImageUrl())
                     .into(profile)

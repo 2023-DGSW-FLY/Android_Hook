@@ -85,6 +85,7 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
                 nickname.text = it.writer
                 reallyTechnology.text = it.exercise
                 reallyLocation.text = it.dateTime
+                textContent.text = it.content
                 Glide.with(requireContext())
                     .load(it.userId.toString().toImageUrl())
                     .into(profile)

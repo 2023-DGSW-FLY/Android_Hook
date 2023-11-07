@@ -29,7 +29,7 @@ internal fun List<HackathonModel>.toJobOfferModels() =
 internal fun EatModel.toJobOfferModel() =
     JobOfferModel(
         userName = writer,
-        competitionName = title,
+        competitionName = place,
         time = modDate.toStringDate(),
         img = userId.toImageUrl(),
         id = id
