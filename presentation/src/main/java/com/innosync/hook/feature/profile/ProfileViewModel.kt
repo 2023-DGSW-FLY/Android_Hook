@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.innosync.domain.model.UserModel
 import com.innosync.domain.usecase.user.UserGetInfoUseCase
 import com.innosync.hook.base.BaseViewModel
+import com.innosync.hook.feature.profile.fix.ProfileFixViewModel
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,12 +40,16 @@ class ProfileViewModel @Inject constructor(
 
     fun onClickCorrection() =
         viewEvent(ON_CLICK_CORRECTION)
+    fun onClickBackBtn(){
+        viewEvent(ON_CLICK_BACK)
+    }
 
 
     companion object{
         const val ON_CLICK_CORRECTION = 1
         const val ON_SUCCESS = 2
         const val ON_FAILURE = 3
+        const val ON_CLICK_BACK = 4
     }
 }
 
