@@ -3,7 +3,7 @@
     <data>
         <variable
             name="vm"
-            type="com.innosync.hook.feature.mybox.detailInfo.DetailnfoViewModel" />
+            type="com.innosync.hook.feature.mybox.detailInfo.DetailInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,6 +24,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="25dp"
                     android:background="@color/white"
+                    android:onClick="@{() -> vm.onClickBack()}"
                     android:src="@drawable/ic_back"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -176,6 +177,7 @@
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:src="@drawable/ic_call"
+            android:onClick="@{() -> vm.onClickChat()}"
             app:layout_constraintBottom_toBottomOf="parent" />
 <!--        android:onClick="@{() -> vm.onClickComplete()}"-->
 
