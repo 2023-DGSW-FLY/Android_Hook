@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/profile">
+    app:startDestination="@id/nav_item_home">
 
     <fragment
         android:id="@+id/exampleFragment"
@@ -57,6 +57,9 @@
             app:popUpTo="@id/nav_item_home"
             app:launchSingleTop="true"
             app:restoreState="true"/>
+        <action
+            android:id="@+id/action_nav_item_home_to_profile"
+            app:destination="@+id/profile"/>
     </fragment>
     <fragment
         android:id="@+id/jopOfferFragment"
@@ -158,6 +161,7 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+
     <fragment
         android:id="@+id/jobSearchMakeFragment"
         android:name="com.innosync.hook.feature.jopsearch.jobsearchmake.JobSearchMakeFragment"
@@ -177,5 +181,18 @@
     <fragment
         android:id="@+id/profile"
         android:name="com.innosync.hook.feature.profile.ProfileFragment"
-        android:label="profile"/>
+        android:label="profile">
+        <action
+            android:id="@+id/action_profile_to_profileFix"
+            app:destination="@id/profileFix"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFix"
+        android:name="com.innosync.hook.feature.profile.fix.ProfileFixFragment"
+        android:label="profileFix">
+        <action
+            android:id="@+id/action_profileFix_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
 </navigation>
