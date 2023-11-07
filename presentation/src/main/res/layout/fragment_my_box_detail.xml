@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="25dp"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/myBoxTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/chiffonier"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="40dp"
+            app:layout_constraintLeft_toLeftOf="@+id/back_btn"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="29dp"
             android:textSize="17sp"
             android:textStyle="bold"/>
@@ -102,7 +113,7 @@
                 android:layout_marginTop="151dp"
                 android:background="@color/grays">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/textTechnology"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,7 +125,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginStart="18dp"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/reallyTechnology"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +136,8 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toEndOf="@id/textTechnology"
                     app:layout_constraintTop_toTopOf="parent" />
-                <androidx.appcompat.widget.AppCompatTextView
+
+                <TextView
                     android:id="@+id/textTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,7 +148,7 @@
                     android:layout_marginStart="23dp"
                     android:textSize="17sp"
                     android:textStyle="bold"/>
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:text="@string/detail"
@@ -148,11 +160,6 @@
                     android:textStyle="bold"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +185,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="8dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="25dp"/>
+            android:layout_marginEnd="25dp"
+            tools:listitem="@layout/item_applicants"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

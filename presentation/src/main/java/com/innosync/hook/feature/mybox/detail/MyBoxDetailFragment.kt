@@ -2,8 +2,11 @@ package com.innosync.hook.feature.mybox.detail
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMyBoxDetailBinding
 import com.innosync.hook.util.ItemSpacingDecoration
@@ -14,24 +17,35 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailViewModel>() {
 
     override val viewModel: MyBoxDetailViewModel by viewModels()
+    private val data: MyBoxDetailFragmentArgs by navArgs()
 
     override fun observerViewModel() {
-        val dummy = 3
-        viewModel.loadData(dummy)
+        viewModel.loadData(data.id)
         observeState()
 
 
         observeData()
-        viewModel.myPostDataLoadInfo(dummy)
+        viewModel.myPostDataLoadInfo(data.id)
     }
 
     private fun observeState(){
         collectLatestStateFlow(viewModel.rvData){
-            val adapter = ApplicantsAdapter(it) {
+            val adapter = ApplicantsAdapter(
+                itemList = it,
+                action = {
+
+                    findNavController().navigate(
+                        MyBoxDetailFragmentDirections.actionMyBoxDetailFragmentToDetailInfoFragment(
+                            it.name, it.studentId, it.contact,it.introduction, it.portfolioLink?: "" ,it.userId
+                        )
+                    )
+                }
+            )
+
 //                findNavController().navigate()
                 //네비게이션 값 넘기기
 
-            }
+
             mBinding.applicantsRecyclerView.adapter = adapter
         }
     }
@@ -40,11 +54,16 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
         viewModel.myPostData.observe(this@MyBoxDetailFragment) {
             with(mBinding) {
 //                title.text = it.title
-                textTitle.visibility = View.GONE
+//                textTitle.visibility = View.GONE
                 userName.text = it.username
                 nickName.text = it.writer
                 reallyTechnology.text = it.stack.toStacks()
-                matching.text = it.status
+                matching.text = when(it.status) {
+                    "matching" -> "매칭중"
+                    else -> "매칭완료"
+                }
+//                android:id="@+id/textTitle"
+                textTitle.text  = it.title
             }
         }
     }
@@ -61,8 +80,8 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
         super.onResume()
         mBinding.applicantsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         mBinding.applicantsRecyclerView.addItemDecoration(ItemSpacingDecoration(10))
+        mBinding.backBtn.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
-
-
-
 }

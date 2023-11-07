@@ -53,6 +53,7 @@ class MyBoxDetailViewModel @Inject constructor(
         applicantUseCase.invoke(
             id = id
         ).onSuccess { result ->
+            Log.d("TAG", "MyBoxDetailViewModel - loadData() $result called")
             _rvData.value = result.toRvMyBoxModels()
         }.onFailures {
 

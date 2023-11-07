@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
     id ("org.jetbrains.kotlin.kapt") version "1.5.21"
 
+
 }
 
 task("clean", Delete::class) {

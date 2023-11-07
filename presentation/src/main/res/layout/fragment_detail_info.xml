@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.innosync.hook.feature.mybox.detailInfo.DetailnfoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="22dp"
+            android:text="지원자 정보"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/back_btn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/back_btn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/name"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/sky_blue"
+            android:paddingStart="25dp"
+            android:paddingTop="14dp"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/name" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/member_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:text="학번"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_edit_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/member_number_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/sky_blue"
+            android:paddingStart="25dp"
+            android:paddingTop="14dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/member_number" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/member_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:text="연락처"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/member_number_edit_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/member_call_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/sky_blue"
+            android:paddingStart="25dp"
+            android:paddingTop="14dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/member_call" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/self_introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/self_introduction"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/member_call_edit_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/self_introduction_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/sky_blue"
+            android:gravity="top"
+            android:paddingStart="25dp"
+            android:paddingTop="14dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/self_introduction" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/portfolio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:text="포트폴리오"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/self_introduction_edit_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/portfolio_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray"
+            android:drawableLeft="@drawable/ic_portfolio"
+            android:paddingStart="25dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/portfolio" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:src="@drawable/ic_call"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+<!--        android:onClick="@{() -> vm.onClickComplete()}"-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

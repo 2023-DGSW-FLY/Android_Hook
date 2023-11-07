@@ -45,6 +45,7 @@
             android:layout_marginLeft="12dp"
             android:text="마소 해커톤 4명 구합니다."
             android:textSize="10sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_job_status" />
 
@@ -58,6 +59,7 @@
             android:text="완료"
             android:textColor="@color/white"
             android:textSize="10dp"
+            android:textStyle="bold"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
