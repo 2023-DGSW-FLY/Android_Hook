@@ -5,7 +5,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ic_user"
             android:layout_width="40dp"
@@ -38,7 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이예진"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textColor="@color/chatBlue"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_user_content"
@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="이예진"
-                android:textSize="9sp" />
+                android:textSize="9sp"
+                android:textColor="@color/black2"/>
 
 
         </LinearLayout>
@@ -58,6 +59,7 @@
             android:layout_marginEnd="19dp"
             android:text="13:20"
             android:textSize="9sp"
+            android:textColor="@color/black2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
