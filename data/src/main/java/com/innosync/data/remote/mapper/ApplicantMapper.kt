@@ -1,3 +1,4 @@
+    ApplicantModel(
 package com.innosync.data.remote.mapper
 
 import com.innosync.data.remote.response.mybox.ApplicantResponse
