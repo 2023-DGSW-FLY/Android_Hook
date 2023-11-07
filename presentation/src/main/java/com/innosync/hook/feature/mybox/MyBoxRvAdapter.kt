@@ -31,7 +31,7 @@ class MyBoxRvAdapter @Inject constructor(
                 binding.textDone.text = "취소"
             } else {
                 binding.layoutMybox.setBackgroundColor(if (position%2 == 0) Color.parseColor("#E9F2FF") else Color.parseColor("#F3F3F3"))
-                binding.textDone.text = "완료"
+                binding.textDone.text = "완료" 
             }
             binding.textDone.setOnClickListener {
                 Log.d(TAG, myBoxData.id.toString())
