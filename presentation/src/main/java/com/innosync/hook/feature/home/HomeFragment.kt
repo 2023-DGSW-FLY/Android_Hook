@@ -19,6 +19,7 @@ import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_EXERCISE
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_HACKATHON
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_JOB_OPENING
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_JOB_SEARCH
+import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_PROFILE
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_SEE_ALL
 import com.innosync.hook.feature.loading.ImageDialog
 import com.innosync.hook.util.ItemRightSpacingDecoration
@@ -45,6 +46,11 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
                 ON_CLICK_EXERCISE -> {
                     setBtnColor("운동")
+                }
+                ON_CLICK_PROFILE -> {
+                    findNavController().navigate(
+                        R.id.action_nav_item_home_to_profile
+                    )
                 }
                 ON_CLICK_SEE_ALL -> {
                     when(viewModel.nowView.value) {

@@ -22,11 +22,13 @@ class JoinViewModel @Inject constructor(
     private val joinUseCase: JoinUseCase
 ): BaseViewModel() {
 
-    fun onClickJoin() =
+    fun onClickJoin() {
         viewEvent(ON_CLICK_JOIN)
+    }
 
-    fun onClickUpload() =
+    fun onClickUpload() {
         viewEvent(ON_CLICK_UPLOAD)
+    }
 
     fun join(
         userAccount: String,
