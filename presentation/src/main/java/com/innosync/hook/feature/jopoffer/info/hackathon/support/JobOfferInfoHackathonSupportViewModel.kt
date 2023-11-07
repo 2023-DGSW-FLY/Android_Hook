@@ -68,6 +68,8 @@ class JobOfferInfoHackathonSupportViewModel @Inject constructor(
         viewEvent(ON_CLICK_BACK)
     }
 
+
+
     companion object {
         const val ON_CLICK_COMPLETE = 0
         const val ON_CLICK_BACK = 1

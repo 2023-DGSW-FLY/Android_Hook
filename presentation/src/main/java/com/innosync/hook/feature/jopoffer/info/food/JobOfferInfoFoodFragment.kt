@@ -18,6 +18,7 @@ import com.innosync.hook.feature.chat.ChatFragmentDirections
 import com.innosync.hook.feature.chat.message.MessageFragmentDirections
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseFragmentArgs
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel
+import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel.Companion.ON_CLICK_CHAT
 import com.innosync.hook.util.shortToast
 import com.innosync.hook.util.toImageUrl
@@ -39,6 +40,11 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
             when(event) {
                 ON_CLICK_CHAT -> {
                     openChat()
+                }
+
+                ON_CLICK_BACK ->{
+                    Log.d(TAG, "observerViewModel: 뒤로")
+                    findNavController().popBackStack()
                 }
             }
         }
