@@ -1,5 +1,6 @@
 package com.innosync.di
 
+import com.innosync.data.repository.ApplicantRepositoryImpl
 import com.innosync.data.repository.CongressRepositoryImpl
 import com.innosync.data.repository.ExampleGetGetRepositoryImpl
 import com.innosync.data.repository.FirebaseRepositoryImpl
@@ -10,8 +11,10 @@ import com.innosync.data.repository.ChatRepositoryImpl
 import com.innosync.data.repository.FirebaseTokenRepositoryImpl
 import com.innosync.data.repository.AlarmRepositoryImpl
 import com.innosync.data.repository.ProfileRepositoryImpl
+import com.innosync.data.repository.MyBoxRepositoryImpl
 import com.innosync.data.repository.TokenRepositoryImpl
 import com.innosync.data.repository.UserRepositoryImpl
+import com.innosync.domain.repository.ApplicantRepository
 import com.innosync.domain.repository.CongressRepository
 import com.innosync.domain.repository.ExampleGetRepository
 import com.innosync.domain.repository.FirebaseRepository
@@ -22,6 +25,7 @@ import com.innosync.domain.repository.ChatRepository
 import com.innosync.domain.repository.FirebaseTokenRepository
 import com.innosync.domain.repository.AlarmRepository
 import com.innosync.domain.repository.ProfileFixRepository
+import com.innosync.domain.repository.MyBoxRepository
 import com.innosync.domain.repository.TokenRepository
 import com.innosync.domain.repository.UserRepository
 import dagger.Binds
@@ -107,4 +111,16 @@ abstract class RepositoryModule {
     abstract fun providesProfileRepository(
         profileRepositoryImpl: ProfileRepositoryImpl
     ): ProfileFixRepository
+
+    @Singleton
+    @Binds
+    abstract fun provideMyBoxRepository(
+        myBoxRepositoryImpl: MyBoxRepositoryImpl
+    ): MyBoxRepository
+
+    @Singleton
+    @Binds
+    abstract fun provideApplicantRepository(
+        applicantRepositoryImpl: ApplicantRepositoryImpl
+    ): ApplicantRepository
 }
