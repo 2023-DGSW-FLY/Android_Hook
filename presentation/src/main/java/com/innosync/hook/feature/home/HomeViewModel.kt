@@ -176,7 +176,7 @@ class HomeViewModel @Inject constructor(
         const val ON_CLICK_ALARM = 5
         const val ON_CLICK_SEE_ALL = 6
         const val ON_CLICK_BACKGROUND = 7
-        const val ON_CLICK_PROFILE = 7
+        const val ON_CLICK_PROFILE = 8
 
         const val ON_CHANGE_JOB_OPENING_DATA = 100
     }

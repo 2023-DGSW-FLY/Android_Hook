@@ -50,6 +50,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     setBtnColor("운동")
                 }
                 ON_CLICK_PROFILE -> {
+                    Log.d(TAG, "observerViewModel: 프로필 이동")
                     findNavController().navigate(
                         R.id.action_nav_item_home_to_profile
                     )
