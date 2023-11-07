@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.innosync.hook.R
 import com.innosync.hook.databinding.ItemMyboxBinding
+import com.innosync.hook.feature.mybox.detail.ApplicantsRvModel
 import javax.inject.Inject
 
 class MyBoxRvAdapter @Inject constructor(
@@ -36,7 +37,6 @@ class MyBoxRvAdapter @Inject constructor(
                 Log.d(TAG, myBoxData.id.toString())
                 if ( myBoxData.status == "matching") {
                     action(myBoxData, 0)
-                    binding.textDone.text = "취소"
 
                     //완료처리 호출
                 } else  {
@@ -63,4 +63,6 @@ class MyBoxRvAdapter @Inject constructor(
     override fun onBindViewHolder(holder: MyBoxRvAdapter.MyBoxViewHolder, position: Int) {
         holder.bind(datalist[position], position, context)
     }
+
+
 }

@@ -209,5 +209,38 @@
     <fragment
         android:id="@+id/myBoxDetailFragment"
         android:name="com.innosync.hook.feature.mybox.detail.MyBoxDetailFragment"
-        android:label="MyBoxDetailFragment" />
+        android:label="MyBoxDetailFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_myBoxDetailFragment_to_detailInfoFragment"
+            app:destination="@id/detailInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailInfoFragment"
+        android:name="com.innosync.hook.feature.mybox.detailInfo.DetailInfoFragment"
+        android:label="DetailInfoFragment" >
+        <argument
+            android:name="applicantName"
+            app:argType="string" />
+        <argument
+            android:name="studentId"
+            app:argType="string" />
+        <argument
+            android:name="contact"
+            app:argType="string" />
+        <argument
+            android:name="introduction"
+            app:argType="string" />
+        <argument
+            android:name="portfolioLink"
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailInfoFragment_to_myBoxDetailFragment"
+            app:destination="@id/myBoxDetailFragment" />
+    </fragment>
 </navigation>

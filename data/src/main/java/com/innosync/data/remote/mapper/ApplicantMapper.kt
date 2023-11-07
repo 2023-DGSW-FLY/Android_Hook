@@ -6,7 +6,12 @@ import com.innosync.domain.model.ApplicantModel
 internal fun ApplicantResponse.toModel() =
     ApplicantModel(
         id = id,
-        applicantName = applicantName
+        applicantName = applicantName,
+        studentId = studentId,
+        contact = contact,
+        introduction = introduction,
+        portfolioLink = portfolioLink,
+        userId = userId
     )
 
 internal fun List<ApplicantResponse>.toModels() =
