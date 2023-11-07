@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentHomeBinding
@@ -27,6 +29,7 @@ import com.innosync.hook.util.ItemRightSpacingDecoration
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.removeItemDecorations
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -124,6 +127,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         observeData()
         viewModel.onClickHackathon()
         viewModel.loadAlarm()
+        viewModel.loadUserImage()
     }
 
     private fun initRv() {
@@ -191,6 +195,18 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             mBinding.rvCongressInfo.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             mBinding.rvCongressInfo.removeItemDecorations()
             mBinding.rvCongressInfo.addItemDecoration(ItemRightSpacingDecoration(16))
+        }
+
+        collectLatestStateFlow(viewModel.userImage) {
+            if (it.isNotEmpty()) {
+                Log.d(TAG, "observeData: $it")
+                Glide.with(this@HomeFragment)
+                    .load(it.toImageUrl())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(false)
+                    .into(mBinding.imageProfile)
+            }
         }
     }
 

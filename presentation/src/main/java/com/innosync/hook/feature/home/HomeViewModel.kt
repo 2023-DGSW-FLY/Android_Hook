@@ -10,10 +10,12 @@ import com.innosync.domain.usecase.jobopening.JobOpeningGetEatUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetExerciseUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetHackathonUseCase
 import com.innosync.domain.usecase.jobsearch.JobSearchGetUseCase
+import com.innosync.domain.usecase.user.UserGetInfoUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +31,8 @@ class HomeViewModel @Inject constructor(
     private val jobSearchGetUseCase: JobSearchGetUseCase,
     private val alarmGetAllUseCase: AlarmGetAllUseCase,
     private val alarmGetLastTimeUseCase: AlarmGetLastTimeUseCase,
-    private val alarmInsertLastCheckUseCase: AlarmInsertLastCheckUseCase
+    private val alarmInsertLastCheckUseCase: AlarmInsertLastCheckUseCase,
+    private val userGetInfoUseCase: UserGetInfoUseCase
 ): BaseViewModel() {
 
 
@@ -51,6 +54,9 @@ class HomeViewModel @Inject constructor(
     private val _newAlarm = MutableStateFlow<Boolean>(false)
     val newAlarm = _newAlarm.asStateFlow()
 
+    private val _userImage = MutableStateFlow("")
+    val userImage = _userImage.asStateFlow()
+
     fun loadCongress() = launchIO {
         congressUseCase.invoke().onSuccess { result ->
             launchMain {
@@ -71,6 +77,16 @@ class HomeViewModel @Inject constructor(
                 Log.d(TAG, "loadAlarm: 로컬 $time\n${it[0].regDate}")
                 _newAlarm.value = time.isBefore(it[0].regDate)
             }
+        }.onFailures {
+
+        }
+    }
+
+    fun loadUserImage() = launchIO {
+        userGetInfoUseCase.invoke(
+
+        ).onSuccess {
+            _userImage.value = it.id.toString()
         }.onFailures {
 
         }
