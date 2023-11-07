@@ -12,7 +12,8 @@ internal fun HackathonModel.toHomeRvModel() =
         status = status,
         writer = writer,
         title = title.toSlice(9),
-        time = modDate.toStringDate()
+        time = modDate.toStringDate(),
+        type = 0
     )
 
 internal fun List<HackathonModel>.toHomeRvModels() =
@@ -26,7 +27,7 @@ internal fun JobSearchModel.toHomeRvModel() =
         status = status,
         writer =  writer,
         title = content.toSlice(9),
-        type = 0,
+        type = 1,
         time = modDate.toStringDate()
     )
 @JvmName("jobSearchModelToHomeRvModels")

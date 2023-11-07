@@ -41,7 +41,7 @@ class HomeRvAdaptor constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == 0) {
+        return if (viewType != 0) {
             ViewHolder.JobSearchHolder(ItemJobSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
                 itemView.setOnClickListener {
                     action()
