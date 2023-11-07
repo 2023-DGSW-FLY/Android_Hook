@@ -12,6 +12,7 @@ import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentProfileBinding
 import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.loading.LoadingDialog
+import com.innosync.hook.feature.profile.ProfileViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.profile.ProfileViewModel.Companion.ON_CLICK_CORRECTION
 import com.innosync.hook.feature.profile.ProfileViewModel.Companion.ON_FAILURE
 import com.innosync.hook.feature.profile.ProfileViewModel.Companion.ON_SUCCESS
@@ -67,6 +68,9 @@ class ProfileFragment:BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
 
                 ON_FAILURE ->{
 
+                }
+                ON_CLICK_BACK ->{
+                    findNavController().popBackStack()
                 }
 
             }

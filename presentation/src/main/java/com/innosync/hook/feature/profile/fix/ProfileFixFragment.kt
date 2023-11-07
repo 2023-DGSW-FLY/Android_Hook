@@ -19,6 +19,7 @@ import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentProfileFixBinding
 import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.loading.LoadingDialog
+import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_CLICK_COMPLETE
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_CLICK_IMAGE
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_FAILURE
@@ -122,6 +123,9 @@ class ProfileFixFragment : BaseFragment<FragmentProfileFixBinding, ProfileFixVie
                         loadingDialog!!.dismiss()
                     }
                     viewModel.failuresBtn()
+                }
+                ON_CLICK_BACK ->{
+                    findNavController().popBackStack()
                 }
 
             }

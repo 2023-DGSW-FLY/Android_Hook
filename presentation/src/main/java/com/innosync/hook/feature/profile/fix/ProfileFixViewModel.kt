@@ -45,6 +45,10 @@ class ProfileFixViewModel @Inject constructor(
         _btnTrue.value = false
     }
 
+    fun onClickBackBtn(){
+        viewEvent(ON_CLICK_BACK)
+    }
+
     fun loadInfo() = launchIO {
         userGetInfoUseCase.invoke()
             .onSuccess {
@@ -98,6 +102,7 @@ class ProfileFixViewModel @Inject constructor(
         const val ON_CLICK_IMAGE = 2
         const val ON_SUCCESS = 3
         const val ON_FAILURE = 4
+        const val ON_CLICK_BACK = 5
 
     }
 

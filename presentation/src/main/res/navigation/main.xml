@@ -185,6 +185,9 @@
         <action
             android:id="@+id/action_profile_to_profileFix"
             app:destination="@id/profileFix"/>
+        <action
+            android:id="@+id/action_profile_to_nav_item_home"
+            app:destination="@id/nav_item_home"/>
     </fragment>
 
     <fragment
