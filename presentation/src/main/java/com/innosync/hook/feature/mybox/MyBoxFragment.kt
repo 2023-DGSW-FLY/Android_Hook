@@ -14,6 +14,7 @@ import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMyBoxBinding
 import com.innosync.hook.databinding.ItemMyboxBinding
 import com.innosync.hook.util.ItemSpacingDecoration
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -38,7 +39,7 @@ class MyBoxFragment : BaseFragment<FragmentMyBoxBinding, MyBoxViewModel>() {
         super.onResume()
         viewModel.loadEat()
         mBinding.myboxRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-//        mBinding.myboxRecyclerview.removed(ItemSpacingDecoration(3))
+        mBinding.myboxRecyclerview.removeItemDecorations()
         mBinding.myboxRecyclerview.addItemDecoration(ItemSpacingDecoration(3))
 
         mBinding.tvMeal.setOnClickListener {

@@ -16,6 +16,7 @@ import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.jopoffer.model.JobOfferModel
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.removeItemDecorations
 import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,12 +27,7 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
     private val data: MyBoxDetailFragmentArgs by navArgs()
 
     override fun observerViewModel() {
-        viewModel.loadData(data.id)
-        observeState()
-
-
         observeData()
-        viewModel.myPostDataLoadInfo(data.id)
     }
 
     private fun observeState(){
@@ -51,7 +47,9 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
 //                findNavController().navigate()
                 //네비게이션 값 넘기기
 
-
+            mBinding.applicantsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            mBinding.applicantsRecyclerView.removeItemDecorations()
+            mBinding.applicantsRecyclerView.addItemDecoration(ItemSpacingDecoration(10))
             mBinding.applicantsRecyclerView.adapter = adapter
         }
     }
@@ -89,7 +87,11 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
 
     override fun onResume() {
         super.onResume()
+        viewModel.loadData(data.id)
+        viewModel.myPostDataLoadInfo(data.id)
+        observeState()
         mBinding.applicantsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.applicantsRecyclerView.removeItemDecorations()
         mBinding.applicantsRecyclerView.addItemDecoration(ItemSpacingDecoration(10))
         mBinding.backBtn.setOnClickListener{
             findNavController().popBackStack()

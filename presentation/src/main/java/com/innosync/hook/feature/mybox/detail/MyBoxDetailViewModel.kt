@@ -50,6 +50,7 @@ class MyBoxDetailViewModel @Inject constructor(
     fun loadData(
         id: Int
     ) = launchIO{
+        _rvData.value = emptyList()
         applicantUseCase.invoke(
             id = id
         ).onSuccess { result ->
