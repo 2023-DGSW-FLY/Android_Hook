@@ -13,9 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.innosync.domain.model.UserModel
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentProfileFixBinding
+import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.loading.LoadingDialog
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_CLICK_COMPLETE
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_CLICK_IMAGE
@@ -127,9 +129,14 @@ class ProfileFixFragment : BaseFragment<FragmentProfileFixBinding, ProfileFixVie
     }
 
 
-
-
-
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(ChatFragment.TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
+    }
 
 
 

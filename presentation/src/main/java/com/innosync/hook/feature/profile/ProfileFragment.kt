@@ -6,9 +6,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentProfileBinding
+import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.loading.LoadingDialog
 import com.innosync.hook.feature.profile.ProfileViewModel.Companion.ON_CLICK_CORRECTION
 import com.innosync.hook.feature.profile.ProfileViewModel.Companion.ON_FAILURE
@@ -29,6 +31,15 @@ class ProfileFragment:BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
         observeData()
         viewModel.loadInfo()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(ChatFragment.TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
     }
 
     override fun observerViewModel() {
