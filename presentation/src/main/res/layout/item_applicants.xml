@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/layout_item"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@drawable/shape_sky_blue">
+        android:background="@drawable/shape_skyblue_5">
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/applicants_name"
             android:layout_width="wrap_content"

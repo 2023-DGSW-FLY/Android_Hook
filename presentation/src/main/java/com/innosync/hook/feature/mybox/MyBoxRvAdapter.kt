@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.innosync.hook.R
 import com.innosync.hook.databinding.ItemMyboxBinding
 import com.innosync.hook.feature.mybox.detail.ApplicantsRvModel
+import com.innosync.hook.util.toStringDate
 import javax.inject.Inject
 
 class MyBoxRvAdapter @Inject constructor(
@@ -23,7 +24,7 @@ class MyBoxRvAdapter @Inject constructor(
         fun bind(myBoxData: MyBoxRvData, position: Int, context: Context) {
             binding.textJobStatus.text = myBoxData.statusName
             binding.textJobContent.text = myBoxData.content
-            binding.textTime.text = myBoxData.date.toString()
+            binding.textTime.text = myBoxData.date.toStringDate()
             if (myBoxData.statusName == "매칭완료") {
                 binding.layoutMybox.setBackgroundColor(if (position%2 == 0) Color.parseColor("#F8FBFF") else Color.parseColor("#FBFBFB"))
                 binding.textJobContent.setTextColor(Color.parseColor("#D0D0D0"))

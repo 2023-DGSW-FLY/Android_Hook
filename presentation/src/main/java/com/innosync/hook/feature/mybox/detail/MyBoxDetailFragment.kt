@@ -6,11 +6,14 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMyBoxDetailBinding
+import com.innosync.hook.feature.jopoffer.model.JobOfferModel
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,6 +67,9 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
                 }
 //                android:id="@+id/textTitle"
                 textTitle.text  = it.title
+                Glide.with(mBinding.profileImg)
+                    .load(it.userId.toString().toImageUrl())
+                    .into(mBinding.profileImg)
             }
         }
     }
