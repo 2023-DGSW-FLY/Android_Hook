@@ -27,11 +27,12 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="8dp"
                 android:layout_height="15dp"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:onClick="@{() -> vm.onClickBack()}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/ic_back" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"

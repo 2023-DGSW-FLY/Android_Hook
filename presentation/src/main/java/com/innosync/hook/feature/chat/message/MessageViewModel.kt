@@ -96,8 +96,12 @@ class MessageViewModel @Inject constructor(
     fun onClickSend() =
         viewEvent(ON_CLICK_SEND)
 
+    fun onClickBack() =
+        viewEvent(ON_CLICK_BACK)
+
     companion object {
         const val ON_CLICK_SEND = 0
+        const val ON_CLICK_BACK = 1
     }
 
 }

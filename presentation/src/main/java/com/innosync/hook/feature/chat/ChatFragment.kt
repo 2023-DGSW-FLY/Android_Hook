@@ -8,8 +8,12 @@ import com.innosync.domain.model.RoomModel
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentChatBinding
 import com.innosync.hook.feature.chat.ChatViewModel.Companion.ON_CLICK_DUMMY
+import com.innosync.hook.util.ItemSpacingDecoration
+import com.innosync.hook.util.ItemTopSpacingDecoration
+import com.innosync.hook.util.RecyclerViewDecoration
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.getYour
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -49,9 +53,9 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
 
     private fun setRv(list: List<RoomModel>, users: Map<String, String>?) {
         val my = viewModel.myData.value?.id.toString()
-        val there = list.map {
-            it.getYour(my)
-        }
+//        val there = list.map {
+//            it.getYour(my)
+//        }
         val adaptor = ChatRvAdaptor(
             my,
             list,
@@ -67,6 +71,8 @@ class ChatFragment: BaseFragment<FragmentChatBinding, ChatViewModel>() {
         with(mBinding) {
             rvUsers.adapter = adaptor
             rvUsers.layoutManager = LinearLayoutManager(requireContext())
+            rvUsers.removeItemDecorations()
+            rvUsers.addItemDecoration(ItemTopSpacingDecoration(16))
         }
 
     }

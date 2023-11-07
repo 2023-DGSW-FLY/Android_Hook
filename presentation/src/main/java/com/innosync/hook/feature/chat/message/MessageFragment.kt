@@ -2,12 +2,14 @@ package com.innosync.hook.feature.chat.message
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.innosync.domain.model.ChatModel
 import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMessageBinding
+import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_SEND
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.toImageUrl
@@ -51,6 +53,9 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
                         )
                         editSendMessage.text?.clear()
                     }
+                }
+                ON_CLICK_BACK -> {
+                    findNavController().popBackStack()
                 }
             }
         }
