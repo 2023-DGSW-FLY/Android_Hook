@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.innosync.domain.model.UserModel
 import com.innosync.hook.MainActivity
 import com.innosync.hook.R
@@ -25,6 +26,7 @@ import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_CL
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_FAILURE
 import com.innosync.hook.feature.profile.fix.ProfileFixViewModel.Companion.ON_SUCCESS
 import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.IOException
@@ -189,6 +191,13 @@ class ProfileFixFragment : BaseFragment<FragmentProfileFixBinding, ProfileFixVie
                 githubUrl.setText(it.githubURL)
                 portfolioUrl.setText(it.portfolioURL)
                 userInfo.setText(it.userInfo)
+                Glide.with(this@ProfileFixFragment)
+                    .load(it.id.toString().toImageUrl())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(profileImage)
+                Log.d("TAG", "observeData: ${it.id.toString().toImageUrl()}")
 
             }
         }

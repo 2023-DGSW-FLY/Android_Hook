@@ -19,7 +19,7 @@ class ProfileFixUseCase @Inject constructor(
         portfolioURL: String,
         profileImage: Bitmap?
         )= kotlin.runCatching {
-        Log.d("TAG", "invoke: $profileImage")
+        Log.d("TAG", "invoke: ")
             profileRepository.Fix(
                 userAccount = userAccount,
                 userName = userName,
