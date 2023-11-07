@@ -1,5 +1,6 @@
 package com.innosync.hook.feature.mybox.detail
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavArgs
@@ -7,9 +8,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMyBoxDetailBinding
+import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.jopoffer.model.JobOfferModel
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
@@ -74,6 +77,8 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
         }
     }
 
+
+
     private fun List<String>.toStacks(): String {
         var result = ""
         for (i in this) {
@@ -88,6 +93,12 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
         mBinding.applicantsRecyclerView.addItemDecoration(ItemSpacingDecoration(10))
         mBinding.backBtn.setOnClickListener{
             findNavController().popBackStack()
+        }
+
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_myBox) {
+            Log.d(ChatFragment.TAG, "onResume: ddd")
+            mainActivity.moveMyBox()
         }
     }
 }

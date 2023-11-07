@@ -1,11 +1,15 @@
 package com.innosync.hook.feature.mybox.detailInfo
 
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.innosync.hook.MainActivity
+import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentDetailInfoBinding
+import com.innosync.hook.feature.chat.ChatFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -24,6 +28,15 @@ class DetailInfoFragment : BaseFragment<FragmentDetailInfoBinding, DetailnfoView
         mBinding.portfolioEditText.setText(data.portfolioLink)
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_myBox) {
+            Log.d(ChatFragment.TAG, "onResume: ddd")
+            mainActivity.moveMyBox()
+        }
     }
 
     private fun observeState() {
