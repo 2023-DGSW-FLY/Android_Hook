@@ -67,6 +67,7 @@ class JobOfferMakeFoodFragment: BaseFragment<FragmentJobOfferMakeFoodBinding, Jo
                     }
                 }
                 ON_CLICK_BACK -> {
+                    Log.d("TAG", "observerViewModel:qwe ")
                     findNavController().popBackStack()
                 }
                 ON_SUCCESS -> {

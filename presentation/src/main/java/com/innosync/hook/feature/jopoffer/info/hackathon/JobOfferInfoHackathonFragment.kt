@@ -16,6 +16,7 @@ import com.innosync.hook.feature.chat.ChatFragment.Companion.TAG
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseFragmentArgs
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel
+import com.innosync.hook.feature.jopoffer.info.hackathon.JobOfferInfoHackathonViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopoffer.info.hackathon.JobOfferInfoHackathonViewModel.Companion.ON_CLICK_SUPPORT
 import com.innosync.hook.feature.jopoffer.mapper.toTechnology
 import com.innosync.hook.util.toImageUrl
@@ -41,6 +42,11 @@ class JobOfferInfoHackathonFragment: BaseFragment<FragmentJobOfferInfoHackathonB
                     findNavController().navigate(
                         navigate
                     )
+                }
+
+                ON_CLICK_BACK ->{
+                    Log.d(TAG, "observerViewModel: 뒤로")
+                    findNavController().popBackStack()
                 }
             }
         }
