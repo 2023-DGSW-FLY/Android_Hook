@@ -10,28 +10,33 @@ import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentSettingBinding
 import com.innosync.hook.feature.mybox.MyBoxViewModel
+import com.innosync.hook.util.collectLatestStateFlow
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>() {
 
 
     override val viewModel: SettingViewModel by viewModels()
     override fun observerViewModel() {
-
+        observeState()
+        viewModel.load()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
+    override fun onStart() {
+        super.onStart()
+        mBinding.switchNotification.setOnCheckedChangeListener { compoundButton, b ->
+            viewModel.setNotification(b)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+    private fun observeState() {
+        collectLatestStateFlow(viewModel.loadState) {
+            mBinding.layoutSetting.visibility = if(it) View.VISIBLE else View.GONE
+        }
+        collectLatestStateFlow(viewModel.settingState) {
+            mBinding.switchNotification.isChecked = it
+        }
     }
 
 

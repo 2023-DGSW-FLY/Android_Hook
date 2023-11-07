@@ -205,6 +205,9 @@
         <action
             android:id="@+id/action_nav_item_myBox_to_myBoxDetailFragment"
             app:destination="@id/myBoxDetailFragment" />
+        <action
+            android:id="@+id/action_nav_item_myBox_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/myBoxDetailFragment"
@@ -243,4 +246,8 @@
             android:id="@+id/action_detailInfoFragment_to_myBoxDetailFragment"
             app:destination="@id/myBoxDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.innosync.hook.setting.SettingFragment"
+        android:label="SettingFragment" />
 </navigation>

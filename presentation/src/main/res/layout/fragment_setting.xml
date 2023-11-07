@@ -6,6 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
+        android:id="@+id/layout_setting"
         tools:context="com.innosync.hook.feature.mybox.MyBoxAdapter">
 
         <LinearLayout
@@ -137,22 +139,13 @@
             android:textColor="@color/darkGray"/>
         
         <Switch
+            android:id="@+id/switch_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/grayline3"
+            app:layout_constraintTop_toTopOf="@+id/grayline2"
             android:layout_marginTop="22dp"
             android:layout_marginRight="20dp"/>
-
-        <ImageView
-            android:id="@+id/ic_setting"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/setting_icon"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
