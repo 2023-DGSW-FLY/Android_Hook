@@ -9,11 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
+            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:descendantFocusability="blocksDescendants"
                 android:onClick="@{() -> vm.onClickBackground()}"
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatImageView
@@ -177,10 +179,11 @@
                     android:layout_marginTop="7dp"
                     android:visibility="gone"
                     android:background="@drawable/stroke_alarm"
+                    android:nestedScrollingEnabled="false"
                     app:layout_constraintTop_toBottomOf="@id/layout_tap"
                     app:layout_constraintRight_toRightOf="@id/layout_tap"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
 
