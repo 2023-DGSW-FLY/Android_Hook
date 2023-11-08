@@ -18,17 +18,17 @@ interface MyBoxService {
 
     ): BaseResponse<List<HackathonResponse>>
 
-    @GET("/food/get")
+    @GET("/food/all")
     suspend fun getMealHeader(
 
     ): BaseResponse<List<EatResponse>>
 
-   @GET("/exercise/get")
+   @GET("/exercise/all")
    suspend fun getExerciseHeader(
 
    ): BaseResponse<List<ExerciseResponse>>
 
-   @GET("/access/get")
+   @GET("/access/all")
    suspend fun getJobSerchHeader(
 
    ): BaseResponse<List<JobSearchResponse>>
