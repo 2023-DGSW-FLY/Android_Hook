@@ -1,5 +1,7 @@
 package com.innosync.hook.feature.congress
 
+import android.content.Intent
+import android.net.Uri
 import android.widget.GridLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -35,7 +37,11 @@ class CongressFragment: BaseFragment<FragmentCongressBinding, CongressViewModel>
                 mBinding.rvCongress.adapter = CongressAdaptor(
                     it,
                     requireContext()
-                )
+                ) { model ->
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data =  Uri.parse(model.url)
+                    requireContext().startActivity(intent)
+                }
                 mBinding.rvCongress.addItemDecoration(
                     RecyclerViewDecoration(2, 10)
                 )

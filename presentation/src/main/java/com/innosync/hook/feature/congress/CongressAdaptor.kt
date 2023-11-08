@@ -11,8 +11,9 @@ import com.innosync.hook.databinding.ItemChatBinding
 import com.innosync.hook.databinding.ItemCongressBinding
 
 class CongressAdaptor constructor(
-    private val item: List<CongressModel>,
-    private val context: Context
+    private val itemData: List<CongressModel>,
+    private val context: Context,
+    private val action: (CongressModel) -> Unit
 ): RecyclerView.Adapter<CongressAdaptor.ViewHolder>() {
     inner class ViewHolder(binding: ItemCongressBinding): RecyclerView.ViewHolder(binding.root) {
         val thumbnail = binding.imageCongress
@@ -21,13 +22,17 @@ class CongressAdaptor constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemCongressBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(ItemCongressBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
+            itemView.setOnClickListener {
+                action(itemData[adapterPosition])
+            }
+        }
     }
 
-    override fun getItemCount(): Int = item.size
+    override fun getItemCount(): Int = itemData.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = item[position]
+        val item = itemData[position]
         with(holder) {
             Glide.with(context)
                 .load(item.imgUrl)

@@ -11,4 +11,6 @@ data class CongressResponse(
     val imgUrl: String,
     @field:SerializedName("dateTime")
     val dateTime: String,
+    @field:SerializedName("url")
+    val url: String,
 )

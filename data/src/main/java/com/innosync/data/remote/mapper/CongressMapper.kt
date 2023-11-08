@@ -9,7 +9,8 @@ internal fun CongressResponse.toModel() =
         id = id,
         title = title,
         imgUrl = imgUrl,
-        dateTime = dateTime
+        dateTime = dateTime,
+        url = url
     )
 
 internal fun List<CongressResponse>.toModels() =
