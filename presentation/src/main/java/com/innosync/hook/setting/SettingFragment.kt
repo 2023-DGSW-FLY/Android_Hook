@@ -11,9 +11,14 @@ import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentSettingBinding
+import com.innosync.hook.feature.auth.AuthActivity
 import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.mybox.MyBoxViewModel
+import com.innosync.hook.setting.SettingViewModel.Companion.ON_CLICK_LOGOUT
+import com.innosync.hook.setting.SettingViewModel.Companion.ON_CLICK_NOTICE
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.shortToast
+import com.innosync.hook.util.startActivityWithFinishAll
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +29,17 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override fun observerViewModel() {
         observeState()
         viewModel.load()
+
+        bindingViewEvent {
+            when(it) {
+                ON_CLICK_NOTICE -> {
+                    requireContext().shortToast("등록된 공지사항이 없습니다.")
+                }
+                ON_CLICK_LOGOUT -> {
+                    viewModel.logout()
+                }
+            }
+        }
     }
 
     override fun onStart() {
@@ -39,6 +55,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
         collectLatestStateFlow(viewModel.settingState) {
             mBinding.switchNotification.isChecked = it
+        }
+
+        collectLatestStateFlow(viewModel.logoutState) {
+            if (it) {
+                startActivityWithFinishAll(AuthActivity::class.java)
+            }
         }
     }
 

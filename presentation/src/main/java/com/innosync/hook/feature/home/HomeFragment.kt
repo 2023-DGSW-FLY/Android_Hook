@@ -204,7 +204,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     .load(it.toImageUrl())
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(false)
+                    .skipMemoryCache(true)
                     .into(mBinding.imageProfile)
             }
         }

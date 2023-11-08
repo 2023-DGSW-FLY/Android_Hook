@@ -68,5 +68,9 @@ class AuthRepositoryImpl @Inject constructor(
         ).success
     }
 
+    override suspend fun logout() {
+        tokenDao.deleteToken()
+    }
+
 
 }

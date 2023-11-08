@@ -19,4 +19,7 @@ interface AuthRepository  {
         portfolioURL: String,
         profileImage: Bitmap
     ): String
+
+
+    suspend fun logout()
 }
