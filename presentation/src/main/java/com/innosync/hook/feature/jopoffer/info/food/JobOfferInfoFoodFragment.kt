@@ -32,8 +32,13 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
     private val data: JobOfferInfoFoodFragmentArgs by navArgs()
 
     override val viewModel: JobOfferInfoFoodViewModel by viewModels()
-    override fun observerViewModel() {
+
+    override fun onStart() {
+        super.onStart()
         observeData()
+    }
+    override fun observerViewModel() {
+//        observeData()
         viewModel.loadInfo(data.id)
         viewModel.getMyId()
         bindingViewEvent { event ->

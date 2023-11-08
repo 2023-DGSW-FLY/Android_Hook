@@ -28,8 +28,13 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
 
     override val viewModel: JobOfferInfoExerciseViewModel by viewModels()
 
-    override fun observerViewModel() {
+    override fun onStart() {
+        super.onStart()
         observeData()
+    }
+
+    override fun observerViewModel() {
+//        observeData()
         viewModel.loadInfo(data.id)
         viewModel.getMyId()
         bindingViewEvent { event ->

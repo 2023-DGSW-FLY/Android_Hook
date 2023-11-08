@@ -31,10 +31,15 @@ class JobSearchInfoFragment: BaseFragment<FragmentJobSearchInfoBinding, JobSearc
     private val args: JobSearchInfoFragmentArgs by navArgs()
     override val viewModel: JobSearchInfoViewModel by viewModels()
 
+    override fun onStart() {
+        initObserver()
+        super.onStart()
+    }
+
     override fun observerViewModel() {
         viewModel.load(args.id)
         viewModel.getMyId()
-        initObserver()
+//        initObserver()
 
         bindingViewEvent {
             when(it) {
