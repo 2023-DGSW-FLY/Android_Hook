@@ -47,7 +47,7 @@
             android:id="@+id/competition_name"
             android:layout_marginStart="15dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/really_competition_name"
             android:autoSizeMaxTextSize="30sp"
