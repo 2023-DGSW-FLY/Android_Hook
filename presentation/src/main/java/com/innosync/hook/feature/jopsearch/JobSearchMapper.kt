@@ -9,7 +9,8 @@ internal fun JobSearchModel.toRvModel() =
         userName = writer,
         time = modDate.toStringDate(),
         detail = content.toSlice(8),
-        id = id
+        id = id,
+        status = status == "matching"
     )
 
 internal fun List<JobSearchModel>.toRvModels() =

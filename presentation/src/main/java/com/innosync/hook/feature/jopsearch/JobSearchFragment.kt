@@ -61,7 +61,7 @@ class JobSearchFragment: BaseFragment<FragmentJobSearchBinding, JobSearchViewMod
 
     private fun observeState() {
         collectLatestStateFlow(viewModel.rvData) {
-            val adaptor = JobSearchAdapter(it) { result ->
+            val adaptor = JobSearchAdapter(it, requireContext()) { result ->
                 val navigate = JobSearchFragmentDirections.actionJopSearchFragmentToJobSearchInfoFragment(
                     result.id
                 )
