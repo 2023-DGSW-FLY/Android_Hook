@@ -55,7 +55,7 @@ class MyBoxViewModel @Inject constructor(
                 "hackathon" -> {
                     loadHackathon()
                 }
-                "JobSearchModel" -> {
+                "access" -> {
                     loadJobSearch()
                 }
             }
