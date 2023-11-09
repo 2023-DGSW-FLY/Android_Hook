@@ -6,5 +6,6 @@ data class JobOfferModel(
     val technology: String = "",
     val time: String,
     val img: String,
-    val id: Int
+    val id: Int,
+    val status: Boolean
 )

@@ -17,7 +17,8 @@ internal fun HackathonModel.toJobOfferModel() =
         technology = stack.toTechnology(),
         time = modDate.toStringDate(),
         img = userId.toString().toImageUrl(),
-        id = id
+        id = id,
+        status = status == "matching"
     )
 
 @JvmName("HackathonModelToJobOfferModels")
@@ -32,7 +33,8 @@ internal fun EatModel.toJobOfferModel() =
         competitionName = place,
         time = modDate.toStringDate(),
         img = userId.toImageUrl(),
-        id = id
+        id = id,
+        status = status == "matching"
     )
 @JvmName("EatModelToJobOfferModels")
 internal fun List<EatModel>.tooJobOfferModels() =
@@ -46,7 +48,8 @@ internal fun ExerciseModel.tooJobOfferModel() =
         competitionName = exercise,
         time = modDate.toStringDate(),
         img = userId.toImageUrl(),
-        id = id
+        id = id,
+        status = status == "matching"
     )
 @JvmName("ExerciseModelToJobOfferModels")
 internal fun List<ExerciseModel>.toJobOfferModels() =

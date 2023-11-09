@@ -105,7 +105,7 @@ class JopOfferFragment :BaseFragment<FragmentJobOfferBinding, JopOfferViewModel>
 
     private fun observeState() {
         collectLatestStateFlow(viewModel.rvData) {
-            mBinding.jobOfferRecyclerview.adapter = JopOfferAdapter(it) { result ->
+            mBinding.jobOfferRecyclerview.adapter = JopOfferAdapter(it, requireContext()) { result ->
                 val navigate = when(viewModel.nowView.value) {
                     "대회" -> {
                         JopOfferFragmentDirections.actionJopOfferFragmentToJobOfferInfoHackathonFragment(
