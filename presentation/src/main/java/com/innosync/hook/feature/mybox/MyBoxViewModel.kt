@@ -93,7 +93,9 @@ class MyBoxViewModel @Inject constructor(
 
     fun loadHackathon(
     ) {
-        viewEvent(ON_CLICK_HACKATHON)
+        launchMain {
+            viewEvent(ON_CLICK_HACKATHON)
+        }
         viewModelScope.launch(Dispatchers.IO) {
             myBoxHackathonGetUseCase.invoke(
 
@@ -109,7 +111,9 @@ class MyBoxViewModel @Inject constructor(
 
     fun loadEat(
     ) {
-        viewEvent(ON_CLICK_EAT)
+        launchMain {
+            viewEvent(ON_CLICK_EAT)
+        }
         viewModelScope.launch(Dispatchers.IO) {
             myBoxEatGetUseCase.invoke(
 
@@ -129,7 +133,9 @@ class MyBoxViewModel @Inject constructor(
 
     fun loadExercise(
     ) {
-        viewEvent(ON_CLICK_EXERCISE)
+        launchMain {
+            viewEvent(ON_CLICK_EXERCISE)
+        }
         viewModelScope.launch(Dispatchers.IO) {
             myBoxExerciseUseCase.invoke(
 
@@ -145,7 +151,9 @@ class MyBoxViewModel @Inject constructor(
 
     fun loadJobSearch(
     ) {
-        viewEvent(ON_CLICK_COLLECT_PEOPLE)
+        launchMain {
+            viewEvent(ON_CLICK_COLLECT_PEOPLE)
+        }
         viewModelScope.launch(Dispatchers.IO) {
             myBoxJobSearchGetUseCase.invoke(
 
