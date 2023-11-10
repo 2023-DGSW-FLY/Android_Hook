@@ -20,6 +20,7 @@ import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseFrag
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel.Companion.ON_CLICK_CHAT
+import com.innosync.hook.feature.loading.LoadingDialog
 import com.innosync.hook.util.shortToast
 import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
     private val data: JobOfferInfoFoodFragmentArgs by navArgs()
 
     override val viewModel: JobOfferInfoFoodViewModel by viewModels()
+    private var loadingDialog: LoadingDialog? = null
 
     override fun onStart() {
         super.onStart()
@@ -55,6 +57,10 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
         }
     }
     private fun openChat() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog(requireContext())
+        }
+        loadingDialog!!.show()
         val targetId = viewModel.eatInfoData.value!!.userId
         Log.d(TAG, "openChat: $targetId")
         val userId = viewModel.userID.value!!
@@ -80,6 +86,7 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
                 val navigate = JobOfferInfoFoodFragmentDirections.actionJobOfferInfoFoodFragmentToMessageFragment(
                     room.chatRoomUid, room.roomName, userId, targetId
                 )
+                dismissScreen()
                 findNavController().navigate(navigate)
             }
         }
@@ -101,6 +108,7 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
         }
         viewModel.moveChat.observe(this@JobOfferInfoFoodFragment) {
             if (it == true) {
+                viewModel.moveChat()
                 val targetId = viewModel.eatInfoData.value!!.userId
                 val userId = viewModel.userID.value!!
                 viewModel.getRoomInfo(userId) {
@@ -116,10 +124,17 @@ class JobOfferInfoFoodFragment: BaseFragment<FragmentJobOfferInfoFoodBinding, Jo
                         val navigate = JobOfferInfoFoodFragmentDirections.actionJobOfferInfoFoodFragmentToMessageFragment(
                             room.chatRoomUid, room.roomName, userId, targetId
                         )
+                        dismissScreen()
                         findNavController().navigate(navigate)
                     }
                 }
             }
+        }
+    }
+
+    private fun dismissScreen() {
+        if (loadingDialog!=null && loadingDialog!!.isShowing){
+            loadingDialog!!.dismiss()
         }
     }
 

@@ -77,6 +77,10 @@ class JobOfferInfoFoodViewModel @Inject constructor(
         }
     }
 
+    fun moveChat() = launchMain {
+        _moveChat.value = false
+    }
+
     fun onClickChat() =
         viewEvent(ON_CLICK_CHAT)
 

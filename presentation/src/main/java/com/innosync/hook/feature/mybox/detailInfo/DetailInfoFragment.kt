@@ -14,6 +14,7 @@ import com.innosync.hook.databinding.FragmentDetailInfoBinding
 import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodFragmentDirections
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodViewModel
+import com.innosync.hook.feature.loading.LoadingDialog
 import com.innosync.hook.util.shortToast
 import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,7 @@ class DetailInfoFragment : BaseFragment<FragmentDetailInfoBinding, DetailInfoVie
 
     override val viewModel: DetailInfoViewModel by viewModels()
     private val data: DetailInfoFragmentArgs by navArgs()
+    private var loadingDialog: LoadingDialog? = null
 
     override fun observerViewModel() {
         mBinding.nameEditText.text = data.applicantName
@@ -49,6 +51,10 @@ class DetailInfoFragment : BaseFragment<FragmentDetailInfoBinding, DetailInfoVie
         }
     }
     private fun openChat() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog(requireContext())
+        }
+        loadingDialog!!.show()
         val targetId = data.userId
         Log.d(ChatFragment.TAG, "openChat: $targetId")
         val userId = viewModel.userID.value!!
@@ -74,6 +80,7 @@ class DetailInfoFragment : BaseFragment<FragmentDetailInfoBinding, DetailInfoVie
                 val navigate = DetailInfoFragmentDirections.actionDetailInfoFragmentToMessageFragment(
                     room.chatRoomUid, room.roomName, userId, targetId
                 )
+                dismissScreen()
                 findNavController().navigate(navigate)
             }
         }
@@ -82,6 +89,7 @@ class DetailInfoFragment : BaseFragment<FragmentDetailInfoBinding, DetailInfoVie
     private fun observeData() {
         viewModel.moveChat.observe(this@DetailInfoFragment) {
             if (it == true) {
+                viewModel.moveChat()
                 val targetId = data.userId
                 val userId = viewModel.userID.value!!
                 viewModel.getRoomInfo(userId) {
@@ -97,12 +105,19 @@ class DetailInfoFragment : BaseFragment<FragmentDetailInfoBinding, DetailInfoVie
                         val navigate = DetailInfoFragmentDirections.actionDetailInfoFragmentToMessageFragment(
                             room.chatRoomUid, room.roomName, userId, targetId
                         )
+                        dismissScreen()
                         findNavController().navigate(navigate)
                     }
                 }
             }
         }
 
+    }
+
+    private fun dismissScreen() {
+        if (loadingDialog!=null && loadingDialog!!.isShowing){
+            loadingDialog!!.dismiss()
+        }
     }
 
     override fun onResume() {

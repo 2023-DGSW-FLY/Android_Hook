@@ -15,6 +15,7 @@ import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.jopoffer.info.exercise.JobOfferInfoExerciseViewModel.Companion.ON_CLICK_CHAT
 import com.innosync.hook.feature.jopoffer.info.food.JobOfferInfoFoodFragmentDirections
+import com.innosync.hook.feature.loading.LoadingDialog
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.shortToast
 import com.innosync.hook.util.toImageUrl
@@ -27,6 +28,7 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
     private val data: JobOfferInfoExerciseFragmentArgs by navArgs()
 
     override val viewModel: JobOfferInfoExerciseViewModel by viewModels()
+    private var loadingDialog: LoadingDialog? = null
 
     override fun onStart() {
         super.onStart()
@@ -51,6 +53,10 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
     }
 
     private fun openChat() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog(requireContext())
+        }
+        loadingDialog!!.show()
         val targetId = viewModel.exerciseInfoState.value!!.userId
         Log.d(ChatFragment.TAG, "openChat: $targetId")
         val userId = viewModel.userID.value!!
@@ -77,6 +83,7 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
                 val navigate = JobOfferInfoExerciseFragmentDirections.actionJobOfferInfoExerciseFragmentToMessageFragment(
                     room.chatRoomUid, room.roomName, userId, targetId
                 )
+                dismissScreen()
                 findNavController().navigate(navigate)
             }
         }
@@ -99,6 +106,7 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
 
         viewModel.moveChat.observe(this@JobOfferInfoExerciseFragment) {
             if (it == true) {
+                viewModel.moveChat()
                 val targetId = viewModel.exerciseInfoState.value!!.userId
                 val userId = viewModel.userID.value!!
                 viewModel.getRoomInfo(userId) {
@@ -114,12 +122,20 @@ class JobOfferInfoExerciseFragment: BaseFragment<FragmentJobOfferInfoExerciseBin
                         val navigate = JobOfferInfoExerciseFragmentDirections.actionJobOfferInfoExerciseFragmentToMessageFragment(
                             room.chatRoomUid, room.roomName, userId, targetId
                         )
+                        dismissScreen()
                         findNavController().navigate(navigate)
                     }
                 }
             }
         }
     }
+
+    private fun dismissScreen() {
+        if (loadingDialog!=null && loadingDialog!!.isShowing){
+            loadingDialog!!.dismiss()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         val mainActivity = (requireActivity() as MainActivity)
