@@ -14,6 +14,7 @@ import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMyBoxDetailBinding
 import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.jopoffer.model.JobOfferModel
+import com.innosync.hook.feature.mybox.detail.MyBoxDetailViewModel.Companion.ON_CLICK_SETTING
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.removeItemDecorations
@@ -28,6 +29,13 @@ class MyBoxDetailFragment: BaseFragment<FragmentMyBoxDetailBinding, MyBoxDetailV
 
     override fun observerViewModel() {
         observeData()
+        bindingViewEvent {
+            when (it) {
+                ON_CLICK_SETTING -> {
+                    findNavController().navigate(R.id.action_myBoxDetailFragment_to_settingFragment)
+                }
+            }
+        }
     }
 
     private fun observeState(){

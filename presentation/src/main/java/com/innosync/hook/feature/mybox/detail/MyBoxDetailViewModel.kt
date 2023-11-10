@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.innosync.domain.model.HackathonModel
 import com.innosync.domain.usecase.ApplicantUseCase
 import com.innosync.domain.usecase.jobopening.JobOpeningGetOneHackathonUseCase
+import com.innosync.hook.feature.mybox.detailInfo.DetailInfoViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import com.innosync.hook.util.launchMain
@@ -59,6 +60,14 @@ class MyBoxDetailViewModel @Inject constructor(
         }.onFailures {
 
         }
+    }
+
+
+    fun onClickSetting() =
+        viewEvent(ON_CLICK_SETTING)
+
+    companion object {
+        const val ON_CLICK_SETTING = 0
     }
 
 
