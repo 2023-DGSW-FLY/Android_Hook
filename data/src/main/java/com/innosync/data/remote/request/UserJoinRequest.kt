@@ -11,11 +11,11 @@ data class UserJoinRequest(
     val userName: String,
     @SerializedName("email")
     val email: String,
-    @SerializedName("userInfo")
+    @SerializedName("user_info")
     val userInfo: String,
-    @SerializedName("githubURL")
+    @SerializedName("github_url")
     val githubURL: String,
-    @SerializedName("portfolioURL")
+    @SerializedName("portfolio_url")
     val portfolioURL: String
 )
 

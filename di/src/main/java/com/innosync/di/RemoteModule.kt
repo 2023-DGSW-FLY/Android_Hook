@@ -2,11 +2,16 @@ package com.innosync.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.innosync.data.remote.interceptor.LoggingInterceptor
+import com.innosync.data.remote.service.ApplicantService
 import com.innosync.data.remote.service.CongressService
 import com.innosync.data.remote.service.JobOpeningService
 import com.innosync.data.remote.service.JobSearchService
-import com.innosync.data.remote.interceptor.LoggingInterceptor
+import com.innosync.data.remote.service.AlarmService
+import com.innosync.data.remote.service.ChatService
 import com.innosync.data.remote.service.LoginService
+import com.innosync.data.remote.service.ProfileFixService
+import com.innosync.data.remote.service.MyBoxService
 import com.innosync.data.remote.service.TokenService
 import com.innosync.data.remote.service.UserService
 import com.innosync.di.qualifier.BasicOkhttpClient
@@ -21,7 +26,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.time.LocalDateTime
@@ -151,4 +155,33 @@ class RemoteModule {
     fun provideUserService(@TokenRetrofit retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideChatService(@TokenRetrofit retrofit: Retrofit): ChatService =
+        retrofit.create(ChatService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAlarmService(@TokenRetrofit retrofit: Retrofit): AlarmService =
+        retrofit.create(AlarmService::class.java)
+
+
+
+    @Provides
+    @Singleton
+    fun provideProfileFixService(@TokenRetrofit retrofit: Retrofit): ProfileFixService =
+        retrofit.create(ProfileFixService::class.java)
+
+
+
+
+    @Provides
+    @Singleton
+    fun provideMyBoxService(@TokenRetrofit retrofit: Retrofit): MyBoxService =
+        retrofit.create(MyBoxService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApplicantService(@TokenRetrofit retrofit: Retrofit): ApplicantService =
+        retrofit.create(ApplicantService::class.java)
 }

@@ -1,5 +1,10 @@
 package com.innosync.hook.feature.auth.login
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.innosync.hook.MainActivity
@@ -11,6 +16,7 @@ import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_CLICK_KA
 import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_CLICK_LOGIN
 import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_FAILED_LOGIN
 import com.innosync.hook.feature.auth.login.LoginViewModel.Companion.ON_SUCCESS_LOGIN
+import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.shortToast
 import com.innosync.hook.util.startActivityWithFinishAll
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +28,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModels()
     override fun observerViewModel() {
+        initObserver()
+        viewModel.tokenCheck()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 30)
+            }
+
+//            val isGranted = TedPermission.create()
+//                .setPermissions(Manifest.permission.POST_NOTIFICATIONS)
+//                .check()
+//                .isGranted
+        }
         bindingViewEvent {  event ->
             when(event) {
                 ON_CLICK_LOGIN -> {
@@ -105,6 +127,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 //                }
 //            })
 //        }
+    }
+
+    private fun initObserver() {
+        collectLatestStateFlow(viewModel.tokenState) {
+            if (it) {
+                startActivityWithFinishAll(MainActivity::class.java)
+            }
+        }
     }
 }
 

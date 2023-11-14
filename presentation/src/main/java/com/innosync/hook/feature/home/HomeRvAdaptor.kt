@@ -25,6 +25,7 @@ class HomeRvAdaptor constructor(
                 binding.textJobStatus.text = if (item.status == "matching") "매칭중" else "매칭완료"
                 binding.textView.text = item.writer
                 binding.textJobComment.text = item.title
+                binding.textTime.text = item.time
             }
         }
         class JobSearchHolder(
@@ -34,12 +35,13 @@ class HomeRvAdaptor constructor(
                 binding.textJobStatus.text = if (item.status == "matching") "매칭중" else "매칭완료"
                 binding.textUserName.text = item.writer
                 binding.textJobComment.text = item.title
+                binding.textTime.text = item.time
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == 0) {
+        return if (viewType != 0) {
             ViewHolder.JobSearchHolder(ItemJobSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
                 itemView.setOnClickListener {
                     action()

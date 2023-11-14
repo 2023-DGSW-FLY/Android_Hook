@@ -15,7 +15,7 @@ internal data class RoomRequest(
     @field:SerializedName("check")
     val check: Boolean = false,
     @field:SerializedName("lastMessage")
-    val lastMessage: String = "하이",
+    val lastMessage: String = "",
     @field:SerializedName("users")
     val users: Map<String, Boolean>? = emptyMap()
 )

@@ -54,6 +54,7 @@
     <string name="announcement">공지사항</string>
     <string name="android_hook">Android Hook</string>
     <string name="profile">프로필</string>
+    <string name="profile_fix">프로필 수정</string>
     <string name="age">17세</string>
     <string name="email">이메일</string>
     <string name="food">마라탕</string>
@@ -62,7 +63,7 @@
     <string name="what_health">스쿼트</string>
     <string name="where">장소</string>
     <string name="title_food">제목</string>
-    <string name="food_name">음식명</string>
+    <string name="food_name">음식</string>
     <string name="eat_where">1학년1반</string>
     <string name="food_title">마라탕 먹을 사람</string>
     <string name="food_detail">강당에서 10시에 같이 드실분 구합니다.</string>
@@ -71,4 +72,10 @@
     <string name="really_exercise">줄넘기</string>
     <string name="location">장소</string>
     <string name="location_food">먹을 장소\n</string>
+    <string name="jop_search_list_title">나의 기술</string>
+    <string name="job_search_intro">자기소개</string>
+    <string name="job_search_portfolio_hint">자신을 표현할 링크를 첨부해 주세요.</string>
+    <string name="job_search_intro_hint">자기 자신에 대한 어필을 해주세요.</string>
+    <string name="job_search_technology">기술\n</string>
+    <string name="job_search_technology_exmaple">안드로이드</string>
 </resources>

@@ -94,9 +94,18 @@ class FirebaseRepositoryImpl @Inject constructor(
             .addOnSuccessListener {
                 Log.d(TAG, "sendMessage: $userId")
                 var data = it.toObject(RoomResponse::class.java)!!
+                var users = data.users?.toMutableMap()
+                data.users?.keys?.forEach { key ->
+                    if (key == userId) {
+                        users?.set(key, true)
+                        return@forEach
+                    }
+                    users?.set(key, false)
+                }
                 data = data.copy(
                     lastMessage = content,
-                    timestamp = Timestamp.now()//Timestamp.now()
+                    timestamp = Timestamp.now(),//Timestamp.now()
+                    users = users
                 )
                 database.collection("room")
                     .document(chatUid)
@@ -106,6 +115,43 @@ class FirebaseRepositoryImpl @Inject constructor(
                     }
             }.addOnFailureListener {
                 Log.d(TAG, "sendMessage: ${it.message}")
+            }
+    }
+
+    override suspend fun eventRoomListener(userId: String, chatUid: String) {
+        Log.d(TAG, "eventRoomListener: collect")
+        database.collection("room").document(chatUid)
+            .addSnapshotListener { snapshot, exception ->
+                if (exception != null) {
+                    return@addSnapshotListener
+                }
+//                Log.d(TAG, "eventRoomListener: $snapshot")
+//                return@addSnapshotListener
+                var room = snapshot?.toObject(RoomResponse::class.java)?.toModel()!!
+//                chats = chats.sortedBy { it.timestamp }
+                if (room.users?.get(userId) == false) {
+                    database.collection("room")
+                        .document(chatUid)
+                        .get()
+                        .addOnSuccessListener {
+                            Log.d(TAG, "sendMessage: $userId")
+                            var data = it.toObject(RoomResponse::class.java)!!
+                            var users = data.users?.toMutableMap()
+                            users?.set(userId, true)
+                            data = data.copy(
+                                users = users
+                            )
+                            database.collection("room")
+                                .document(chatUid)
+                                .set(data)
+                                .addOnSuccessListener {
+                                    Log.d(TAG, "initSendChat: $it.")
+                                }
+                        }.addOnFailureListener {
+                            Log.d(TAG, "sendMessage: ${it.message}")
+                        }
+                }
+//                Log.d(TAG, "eventRoomListener: $room")
             }
     }
 

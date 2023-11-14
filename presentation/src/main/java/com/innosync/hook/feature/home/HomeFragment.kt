@@ -1,31 +1,37 @@
 package com.innosync.hook.feature.home
 
-import android.graphics.Color
-import android.graphics.Rect
+import android.app.ActionBar
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
+import android.view.Window
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentHomeBinding
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CHANGE_JOB_OPENING_DATA
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_ALARM
+import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_BACKGROUND
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_EAT
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_EXERCISE
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_HACKATHON
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_JOB_OPENING
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_JOB_SEARCH
+import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_PROFILE
 import com.innosync.hook.feature.home.HomeViewModel.Companion.ON_CLICK_SEE_ALL
+import com.innosync.hook.feature.loading.ImageDialog
 import com.innosync.hook.util.ItemRightSpacingDecoration
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
+import com.innosync.hook.util.removeItemDecorations
+import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -46,6 +52,12 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 ON_CLICK_EXERCISE -> {
                     setBtnColor("운동")
                 }
+                ON_CLICK_PROFILE -> {
+                    Log.d(TAG, "observerViewModel: 프로필 이동")
+                    findNavController().navigate(
+                        R.id.action_nav_item_home_to_profile
+                    )
+                }
                 ON_CLICK_SEE_ALL -> {
                     when(viewModel.nowView.value) {
                         "구직" -> {
@@ -61,7 +73,20 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
                     }
                 }
-                ON_CLICK_ALARM -> {}
+                ON_CLICK_ALARM -> {
+                    if (mBinding.rvAlarm.visibility == View.GONE) {
+                        viewModel.loadAlarm()
+                        mBinding.rvAlarm.visibility = View.VISIBLE
+                    } else {
+                        mBinding.rvAlarm.visibility = View.GONE
+                    }
+                    mBinding.imageAlarmNew.visibility = View.GONE
+                }
+                ON_CLICK_BACKGROUND -> {
+                    if (mBinding.rvAlarm.visibility == View.VISIBLE) {
+                        mBinding.rvAlarm.visibility = View.GONE
+                    }
+                }
                 ON_CLICK_JOB_SEARCH -> {
                     val context = requireContext()
                     mBinding.layoutCategory.visibility = View.INVISIBLE
@@ -101,13 +126,19 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         initRv()
         observeData()
         viewModel.onClickHackathon()
-
+        viewModel.loadAlarm()
+        viewModel.loadUserImage()
     }
 
     private fun initRv() {
         mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.rvJob.removeItemDecorations()
         mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))
+
+        mBinding.rvAlarm.layoutManager = LinearLayoutManager(requireContext())
     }
+
+
 
     private fun observeData() {
         collectLatestStateFlow(viewModel.jobRvData) {
@@ -120,6 +151,24 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             mBinding.rvJob.adapter = adaptor
             mBinding.rvJob.layoutManager = LinearLayoutManager(requireContext())
 //            mBinding.rvJob.addItemDecoration(ItemSpacingDecoration(8))
+        }
+
+        collectLatestStateFlow(viewModel.alarm) {
+            val adaptor = HomeAlarmRvAdaptor(
+                it
+            ) { result ->
+                if (result.type == "p") {
+                    Log.d(TAG, "observeData: dd")
+                }
+                if (result.type == "m") {
+                    Log.d(TAG, "observeData: mm")
+                }
+            }
+            mBinding.rvAlarm.adapter = adaptor
+        }
+
+        collectLatestStateFlow(viewModel.newAlarm) {
+            mBinding.imageAlarmNew.visibility = if (it) View.VISIBLE else View.GONE
         }
 
 //        collectLatestStateFlow(viewModel.jobSearchRvData) {
@@ -135,10 +184,29 @@ class HomeFragment :BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             val adaptor = HomeCongressRvAdaptor(
                 it,
                 requireContext()
-            ) {}
+            ) { url ->
+                val myDialog = ImageDialog(requireContext(), url)
+                myDialog.show()
+                myDialog.setCancelable(true)
+                val window: Window = myDialog.window!!
+                window.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
+            }
             mBinding.rvCongressInfo.adapter = adaptor
             mBinding.rvCongressInfo.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            mBinding.rvCongressInfo.removeItemDecorations()
             mBinding.rvCongressInfo.addItemDecoration(ItemRightSpacingDecoration(16))
+        }
+
+        collectLatestStateFlow(viewModel.userImage) {
+            if (it.isNotEmpty()) {
+                Log.d(TAG, "observeData: $it")
+                Glide.with(this@HomeFragment)
+                    .load(it.toImageUrl())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(mBinding.imageProfile)
+            }
         }
     }
 

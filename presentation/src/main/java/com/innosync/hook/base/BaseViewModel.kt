@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.innosync.hook.util.launchMain
 import kotlinx.coroutines.CoroutineScope
 
 abstract class BaseViewModel: ViewModel() {
@@ -20,8 +21,11 @@ abstract class BaseViewModel: ViewModel() {
         action: (Throwable) -> Unit
     ): Result<T> {
         this.onFailure {
-            if (it.message == "token_exception") {
-                tokenErrorEvent.value = "세션이 만료되었습니다."
+            Log.d("TAG", "onFailures: ${it.message}")
+            if (it.message == "HTTP 403 세션이 만료되었습니다.") {
+                launchMain {
+                    tokenErrorEvent.value = "token_exception"
+                }
                 return@onFailure
             }
             action(it)

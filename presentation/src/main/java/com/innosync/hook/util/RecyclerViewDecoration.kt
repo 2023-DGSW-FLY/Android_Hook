@@ -67,3 +67,19 @@ class ItemSpacingDecoration(private val spacing: Int) : RecyclerView.ItemDecorat
         outRect.bottom = spacing
     }
 }
+
+class ItemTopSpacingDecoration(private val spacing: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        // 아이템 간격 설정 (여기서는 모든 아이템 사이에 일정한 간격을 줍니다)
+        outRect.left = 0
+        outRect.right = 0
+        outRect.top = spacing
+        outRect.bottom = spacing
+    }
+}

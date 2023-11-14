@@ -1,11 +1,14 @@
 package com.innosync.hook.feature.joboffermake.exercise
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.innosync.hook.MainActivity
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentJobOfferMakeExerciseBinding
 import com.innosync.hook.databinding.FragmentJobOfferMakeFoodBinding
+import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseViewModel.Companion.ON_CLICK_COMPLETE
 import com.innosync.hook.feature.joboffermake.exercise.JobOfferMakeExerciseViewModel.Companion.ON_FAILED
@@ -27,22 +30,27 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
                         val context = requireContext()
                         if (explanationDetail.text.isNullOrBlank()) {
                             context.shortToast("진행할 운동을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (datetimeDetail.text.isNullOrBlank()) {
                             context.shortToast("시간을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (locationDetail.text.isNullOrBlank()) {
                             context.shortToast("장소를 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (titleDetail.text.isNullOrBlank()) {
                             context.shortToast("제목을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         if (explanationDetail.text.isNullOrBlank()) {
                             context.shortToast("설명을 입력하세요.")
+                            viewModel.failedComplete()
                             return@bindingViewEvent
                         }
                         viewModel.createExercise(
@@ -50,9 +58,8 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
                             content = explanationDetail.text.toString(),
                             place = locationDetail.text.toString(),
                             dateTime = datetimeDetail.text.toString(),
-                            exercise = exercise.text.toString()
+                            exercise = exerciseDetail.text.toString()
                         )
-
                     }
                 }
                 ON_CLICK_BACK -> {
@@ -66,6 +73,15 @@ class JobOfferMakeExerciseFragment: BaseFragment<FragmentJobOfferMakeExerciseBin
                     requireContext().shortToast("게시글 작성에 실패하였습니다.")
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(ChatFragment.TAG, "onResume: ddd")
+            mainActivity.moveHome()
         }
     }
 

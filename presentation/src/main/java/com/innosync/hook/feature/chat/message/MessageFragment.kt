@@ -1,12 +1,17 @@
 package com.innosync.hook.feature.chat.message
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.innosync.domain.model.ChatModel
+import com.innosync.hook.MainActivity
 import com.innosync.hook.base.BaseFragment
 import com.innosync.hook.databinding.FragmentMessageBinding
+import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_BACK
 import com.innosync.hook.feature.chat.message.MessageViewModel.Companion.ON_CLICK_SEND
+import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.toImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +25,11 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
     override fun observerViewModel() {
         setRv(emptyList())
         initRoomName()
+        initObserver()
+        initRoom()
+        val intent = Intent("current_fragment")
+        intent.putExtra("fragment_name", "FragmentB")
+        requireContext().sendBroadcast(intent)
         viewModel.addChatEventListener(
             data.chatUid
         ) {
@@ -36,15 +46,48 @@ class MessageFragment: BaseFragment<FragmentMessageBinding, MessageViewModel>() 
                             chatUid = data.chatUid,
                             content = editSendMessage.text.toString()
                         )
+                        viewModel.sendNotification(
+                            targetId = data.your,
+                            title = "${mBinding.textTopbar.text}",
+                            content = editSendMessage.text.toString()
+                        )
                         editSendMessage.text?.clear()
                     }
+                }
+                ON_CLICK_BACK -> {
+                    findNavController().popBackStack()
                 }
             }
         }
     }
 
+    private fun initRoom() {
+        viewModel.addRoomEventListener(
+            data.my,
+            data.chatUid
+        )
+    }
+
+    private fun initObserver() {
+        collectLatestStateFlow(viewModel.userIdState) {
+            mBinding.textTopbar.text = it
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as? MainActivity)?.bottomVisible(false)
+        viewModel.insertChat(data.your)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as? MainActivity)?.bottomVisible(true)
+        viewModel.insertChat("")
+    }
+
     private fun initRoomName() {
-        mBinding.textTopbar.text = data.roomName
+        viewModel.loadUserName(data.your)
     }
 
     private fun setRv(item: List<ChatModel>) {

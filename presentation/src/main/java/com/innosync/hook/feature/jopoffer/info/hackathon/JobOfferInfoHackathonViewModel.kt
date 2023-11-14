@@ -4,10 +4,10 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.innosync.domain.model.EatModel
 import com.innosync.domain.model.HackathonModel
-import com.innosync.domain.usecase.JobOpeningGetOneHackathonUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningGetOneHackathonUseCase
 import com.innosync.hook.base.BaseViewModel
+import com.innosync.hook.feature.chat.ChatFragment
 import com.innosync.hook.util.launchIO
 import com.innosync.hook.util.launchMain
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,7 +40,14 @@ class JobOfferInfoHackathonViewModel @Inject constructor(
     fun onClickSupport() =
         viewEvent(ON_CLICK_SUPPORT)
 
+    fun onClickBack() {
+
+        Log.d("TAG", "observerViewModel: 뒤로")
+        viewEvent(ON_CLICK_BACK)
+    }
+
     companion object {
         const val ON_CLICK_SUPPORT = 0
+        const val ON_CLICK_BACK = 1
     }
 }

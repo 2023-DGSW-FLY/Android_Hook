@@ -11,7 +11,7 @@ import com.innosync.hook.databinding.ItemCongressInfoBinding
 class HomeCongressRvAdaptor constructor(
     val item: List<String>,
     val context: Context,
-    val action: () -> Unit
+    val action: (String) -> Unit
 ): RecyclerView.Adapter<HomeCongressRvAdaptor.ViewHolder>() {
     inner class ViewHolder(val binding: ItemCongressInfoBinding): RecyclerView.ViewHolder(binding.root) {
         val thumbnail = binding.imageCongressInfo
@@ -20,7 +20,7 @@ class HomeCongressRvAdaptor constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(ItemCongressInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
             itemView.setOnClickListener {
-                action()
+                action(item[adapterPosition])
             }
         }
 

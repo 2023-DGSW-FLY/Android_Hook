@@ -12,7 +12,8 @@ internal fun JobSearchResponse.toModel() =
         status = status,
         writer = writer,
         regDate = regDate,
-        modDate = modDate
+        modDate = modDate,
+        userId = userId
     )
 
 internal fun List<JobSearchResponse>.toModels() =

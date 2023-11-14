@@ -1,6 +1,7 @@
 package com.innosync.hook.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.innosync.hook.util.startActivityWithFinishAll
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
+
 
 abstract class BaseFragment<VB: ViewDataBinding, VM: BaseViewModel> : Fragment() {
     protected lateinit var mBinding: VB
@@ -61,6 +63,7 @@ abstract class BaseFragment<VB: ViewDataBinding, VM: BaseViewModel> : Fragment()
                 action.invoke(event)
             }
             viewModel.tokenErrorEvent.observe(viewLifecycleOwner) {
+                Log.d("TAG", "bindingViewEvent: $it")
                 if (it == Utils.TOKEN_EXCEPTION) {
                     requireContext().shortToast("세션이 만료되었습니다.")
                     startActivityWithFinishAll(AuthActivity::class.java)

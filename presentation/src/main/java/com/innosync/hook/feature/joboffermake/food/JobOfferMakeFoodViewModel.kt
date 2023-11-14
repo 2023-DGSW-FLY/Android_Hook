@@ -1,8 +1,7 @@
 package com.innosync.hook.feature.joboffermake.food
 
 import android.util.Log
-import com.innosync.data.remote.request.jobopening.JobOpeningEatInsertRequest
-import com.innosync.domain.usecase.JobOpeningInsertEatUseCase
+import com.innosync.domain.usecase.jobopening.JobOpeningInsertEatUseCase
 import com.innosync.hook.base.BaseViewModel
 import com.innosync.hook.feature.joboffermake.JobOfferMakeViewModel
 import com.innosync.hook.util.launchIO
@@ -19,6 +18,8 @@ class JobOfferMakeFoodViewModel @Inject constructor(
 
     private val _checkState = MutableStateFlow(false)
     val checkState = _checkState.asStateFlow()
+
+    private val _completeState = MutableStateFlow<Boolean>(false)
 
     fun createFood(
         foodName: String?,
@@ -37,9 +38,14 @@ class JobOfferMakeFoodViewModel @Inject constructor(
             }
         }.onFailures {
             launchMain {
+                _completeState.value = false
                 viewEvent(ON_FAILED)
             }
         }
+    }
+
+    fun failedComplete() {
+        _completeState.value = false
     }
 
     fun onClickCheckBox() {
@@ -48,11 +54,15 @@ class JobOfferMakeFoodViewModel @Inject constructor(
         viewEvent(ON_CLICK_CHECKBOX)
     }
 
-    fun onClickComplete() =
-        viewEvent(ON_CLICK_COMPLETE)
+    fun onClickComplete() {
+        if(_completeState.value.not()) {
+            _completeState.value = true
+            viewEvent(JobOfferMakeViewModel.ON_CLICK_COMPLETE)
+        }
+    }
 
     fun onClickBack() =
-        viewEvent(JobOfferMakeViewModel.ON_CLICK_BACK)
+        viewEvent(ON_CLICK_BACK)
 
     companion object {
         const val ON_CLICK_COMPLETE = 0

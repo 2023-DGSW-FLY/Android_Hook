@@ -26,4 +26,9 @@ interface FirebaseRepository {
         chatUid: String,
         content: String
     )
+
+    suspend fun eventRoomListener(
+        userId: String,
+        chatUid: String
+    )
 }

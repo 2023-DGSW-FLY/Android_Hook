@@ -5,10 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.innosync.hook.MainActivity
 import com.innosync.hook.feature.jopoffer.model.JobOfferModel
 import com.innosync.hook.R
 import com.innosync.hook.base.BaseFragment
-import com.innosync.hook.databinding.FragmentJopOfferBinding
+import com.innosync.hook.databinding.FragmentJobOfferBinding
 import com.innosync.hook.feature.chat.ChatFragmentDirections
 import com.innosync.hook.feature.joboffermake.JobOfferMakeFragmentDirections
 import com.innosync.hook.feature.jopoffer.JopOfferViewModel.Companion.ON_CLICK_BACK_BTN
@@ -19,10 +20,11 @@ import com.innosync.hook.feature.jopoffer.JopOfferViewModel.Companion.ON_CLICK_M
 import com.innosync.hook.util.ItemSpacingDecoration
 import com.innosync.hook.util.collectLatestStateFlow
 import com.innosync.hook.util.getYour
+import com.innosync.hook.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>(){
+class JopOfferFragment :BaseFragment<FragmentJobOfferBinding, JopOfferViewModel>(){
 
     override val viewModel: JopOfferViewModel by viewModels()
 
@@ -80,7 +82,13 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
 
     override fun onResume() {
         super.onResume()
+        val mainActivity = (requireActivity() as MainActivity)
+        if (mainActivity.nowSelectItem() != R.id.nav_item_home) {
+            Log.d(TAG, "onResume: ddd")
+            mainActivity.moveHome()
+        }
         observeState()
+//        (requireActivity() as MainActivity).moveHome()
         initRv()
         when(viewModel.nowView.value) {
             "대회" -> {
@@ -97,7 +105,7 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
 
     private fun observeState() {
         collectLatestStateFlow(viewModel.rvData) {
-            mBinding.jobOfferRecyclerview.adapter = JopOfferAdapter(it) { result ->
+            mBinding.jobOfferRecyclerview.adapter = JopOfferAdapter(it, requireContext()) { result ->
                 val navigate = when(viewModel.nowView.value) {
                     "대회" -> {
                         JopOfferFragmentDirections.actionJopOfferFragmentToJobOfferInfoHackathonFragment(
@@ -126,6 +134,7 @@ class JopOfferFragment :BaseFragment<FragmentJopOfferBinding, JopOfferViewModel>
 
     private fun initRv() {
         mBinding.jobOfferRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        mBinding.jobOfferRecyclerview.removeItemDecorations()
         mBinding.jobOfferRecyclerview.addItemDecoration(ItemSpacingDecoration(10))
     }
     private fun changeColor(

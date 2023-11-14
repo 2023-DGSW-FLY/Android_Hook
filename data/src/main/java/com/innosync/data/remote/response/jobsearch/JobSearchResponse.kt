@@ -14,6 +14,8 @@ data class JobSearchResponse(
     val url: String,
     @field:SerializedName("status")
     val status: String,
+    @field:SerializedName("userId")
+    val userId: String,
     @field:SerializedName("name")
     val writer: String,
     @field:SerializedName("regDate")
